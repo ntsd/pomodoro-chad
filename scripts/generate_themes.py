@@ -595,15 +595,17 @@ def generate_all_themes():
         print(f"   Meme Reference: {spec['meme_reference']}")
 
         raw_wav = SCRATCH_DIR / f"{theme_id}.wav"
-        out_mp3 = OUTPUT_AUDIO_DIR / f"{theme_id}.mp3"
-        out_json = OUTPUT_THEMES_DIR / f"{theme_id}.json"
+        theme_dir = OUTPUT_THEMES_DIR / theme_id
+        theme_dir.mkdir(parents=True, exist_ok=True)
+        out_mp3 = theme_dir / f"{theme_id}.mp3"
+        out_json = theme_dir / f"{theme_id}.json"
 
         # 1. Synthesize instrumental track
         print(f"  [Synthesizer] Rendering {spec['style']} ({spec['bpm']} BPM, {spec['duration']}s)...")
         synthesize_instrumental_theme(spec, raw_wav)
 
         # 2. Encode to MP3
-        print(f"  [Encoder] Writing MP3 to {out_mp3.name}...")
+        print(f"  [Encoder] Writing MP3 to {theme_dir.name}/{out_mp3.name}...")
         convert_wav_to_mp3(raw_wav, out_mp3)
 
         raw_wav.unlink(missing_ok=True)
@@ -620,7 +622,7 @@ def generate_all_themes():
             "key": spec["key"],
             "genre": spec["genre"],
             "instruments": spec["instruments"],
-            "audio_url": f"/vault/audio/{theme_id}.mp3",
+            "audio_url": f"/vault/themes/{theme_id}/{theme_id}.mp3",
             "is_instrumental": True,
             "license": spec["license"],
             "description": spec["description"]
@@ -628,7 +630,7 @@ def generate_all_themes():
 
         with open(out_json, "w", encoding="utf-8") as f:
             json.dump(theme_meta, f, indent=2, ensure_ascii=False)
-        print(f"  📄 Saved Theme JSON Reference: {out_json.name}")
+        print(f"  📄 Saved Theme JSON Reference: {theme_dir.name}/{out_json.name}")
 
         themes_manifest[cat].append(theme_meta)
         print(f"  ✅ Finished: {out_mp3.name} ({out_mp3.stat().st_size} bytes)")

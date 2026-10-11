@@ -1,0 +1,21 @@
+{
+  "id": "theme_break_03",
+  "category": "break",
+  "title": "Breeze of the Meadow (Chillstep Pulse)",
+  "meme_reference": "Meadow Breeze Ambient Lo-Fi",
+  "original_artist_reference": "Chadodoro Originals",
+  "bpm": 100,
+  "duration": 14.4,
+  "key": "D major",
+  "genre": "Chillstep / Ambient",
+  "instruments": [
+    "Reverb Electric Piano",
+    "Mellow Syncopated Sub Pulse",
+    "Ambient Nature Drone",
+    "Gentle High Chimes"
+  ],
+  "audio_url": "/vault/themes/theme_break_03/theme_break_03.mp3",
+  "is_instrumental": true,
+  "license": "CC0 Public Domain",
+  "description": "Tranquil ambient chillstep rhythm with soft piano harmonics and soothing outdoor resonance."
+}

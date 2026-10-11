@@ -18,7 +18,7 @@
         "id": "focus_001",
         "category": "START_FOCUS",
         "text": "Time to grind, Champion. The clock is ticking, and greatness waits for no man.",
-        "audio_url": "/vault/audio/focus_001.mp3",
+        "audio_url": "/vault/scripts/focus_001/focus_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -28,7 +28,7 @@
         "id": "focus_002",
         "category": "START_FOCUS",
         "text": "Lock in, King. The world belongs to those who conquer distraction.",
-        "audio_url": "/vault/audio/focus_002.mp3",
+        "audio_url": "/vault/scripts/focus_002/focus_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -38,7 +38,7 @@
         "id": "focus_003",
         "category": "START_FOCUS",
         "text": "Time to grind, Champion. The clock is ticking, and greatness waits for no man.",
-        "audio_url": "/vault/audio/focus_003.mp3",
+        "audio_url": "/vault/scripts/focus_003/focus_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -48,7 +48,7 @@
         "id": "focus_004",
         "category": "START_FOCUS",
         "text": "Focus, Brother. Weakness seeks excuses, but a Chad executes without hesitation.",
-        "audio_url": "/vault/audio/focus_004.mp3",
+        "audio_url": "/vault/scripts/focus_004/focus_004.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -60,7 +60,7 @@
         "id": "break_touch_grass_001",
         "category": "TOUCH_GRASS",
         "text": "Stand up, Champion! Disconnect from the machine and reconnect with the earth. Touch grass immediately.",
-        "audio_url": "/vault/audio/break_touch_grass_001.mp3",
+        "audio_url": "/vault/scripts/break_touch_grass_001/break_touch_grass_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -70,7 +70,7 @@
         "id": "break_touch_grass_002",
         "category": "TOUCH_GRASS",
         "text": "Time is up, Brother. Your eyes need the horizon and your soul needs raw soil. Step outside and touch grass.",
-        "audio_url": "/vault/audio/break_touch_grass_002.mp3",
+        "audio_url": "/vault/scripts/break_touch_grass_002/break_touch_grass_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -80,7 +80,7 @@
         "id": "break_touch_grass_003",
         "category": "TOUCH_GRASS",
         "text": "Halt the work, King. A true Chad knows when to step into nature. Go outside and feel the grass beneath your shoes.",
-        "audio_url": "/vault/audio/break_touch_grass_003.mp3",
+        "audio_url": "/vault/scripts/break_touch_grass_003/break_touch_grass_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -90,7 +90,7 @@
         "id": "break_touch_grass_004",
         "category": "TOUCH_GRASS",
         "text": "Stand up, Champion! Disconnect from the machine and reconnect with the earth. Touch grass immediately.",
-        "audio_url": "/vault/audio/break_touch_grass_004.mp3",
+        "audio_url": "/vault/scripts/break_touch_grass_004/break_touch_grass_004.mp3",
         "has_audio": true,
         "voice_id": "SOYHLrjzK2X1ezoPC6cr",
         "voice_name": "Harry (Fierce Warrior Chad)",
@@ -102,7 +102,7 @@
         "id": "long_break_001",
         "category": "LONG_BREAK",
         "text": "Step away for an extended recovery, Champion. Walk outside, clear your mind, and let nature restore your focus.",
-        "audio_url": "/vault/audio/long_break_001.mp3",
+        "audio_url": "/vault/scripts/long_break_001/long_break_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -112,7 +112,7 @@
         "id": "long_break_002",
         "category": "LONG_BREAK",
         "text": "Time to roam, Brother. Leave the digital cave behind, walk outside, and breathe deeply under the open sky.",
-        "audio_url": "/vault/audio/long_break_002.mp3",
+        "audio_url": "/vault/scripts/long_break_002/long_break_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -122,7 +122,7 @@
         "id": "long_break_003",
         "category": "LONG_BREAK",
         "text": "Time to roam, Brother. Leave the digital cave behind, walk outside, and breathe deeply under the open sky.",
-        "audio_url": "/vault/audio/long_break_003.mp3",
+        "audio_url": "/vault/scripts/long_break_003/long_break_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -132,7 +132,7 @@
         "id": "long_break_004",
         "category": "LONG_BREAK",
         "text": "Long break granted, Brother. Go for a brisk walk under the open sky and drink cold water like a champion.",
-        "audio_url": "/vault/audio/long_break_004.mp3",
+        "audio_url": "/vault/scripts/long_break_004/long_break_004.mp3",
         "has_audio": true,
         "voice_id": "nPczCjzI2devNBz1zQrb",
         "voice_name": "Brian (Deep Resonant Chad)",
@@ -144,7 +144,7 @@
         "id": "motivation_001",
         "category": "CHAD_MOTIVATION",
         "text": "Comfort is the enemy of glory, King. Embrace the resistance.",
-        "audio_url": "/vault/audio/motivation_001.mp3",
+        "audio_url": "/vault/scripts/motivation_001/motivation_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -154,7 +154,7 @@
         "id": "motivation_002",
         "category": "CHAD_MOTIVATION",
         "text": "Pain is temporary, King. Regret is permanent. Stay stoic and keep moving forward.",
-        "audio_url": "/vault/audio/motivation_002.mp3",
+        "audio_url": "/vault/scripts/motivation_002/motivation_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -164,7 +164,7 @@
         "id": "motivation_003",
         "category": "CHAD_MOTIVATION",
         "text": "Comfort is the enemy of glory, King. Embrace the resistance.",
-        "audio_url": "/vault/audio/motivation_003.mp3",
+        "audio_url": "/vault/scripts/motivation_003/motivation_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -174,7 +174,7 @@
         "id": "motivation_004",
         "category": "CHAD_MOTIVATION",
         "text": "You were not born to scroll endlessly, Brother. You were forged to dominate your craft.",
-        "audio_url": "/vault/audio/motivation_004.mp3",
+        "audio_url": "/vault/scripts/motivation_004/motivation_004.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
@@ -201,7 +201,7 @@
           "Sidechained Saturated Sub-Bass",
           "16th Rolling Hi-Hats & Claps"
         ],
-        "audio_url": "/vault/audio/theme_focus_01.mp3",
+        "audio_url": "/vault/themes/theme_focus_01/theme_focus_01.mp3",
         "is_instrumental": true,
         "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
         "description": "Authentic Phonk House recreation of the viral g3ox_em GigaChad Theme with driving 128 BPM 4-on-the-floor house kick, Bring Me The Horizon cowbell melody, and pumping sidechain bass."
@@ -223,7 +223,7 @@
           "Snappy Memphis Snare",
           "High-Octave Cowbell Fills"
         ],
-        "audio_url": "/vault/audio/theme_focus_02.mp3",
+        "audio_url": "/vault/themes/theme_focus_02/theme_focus_02.mp3",
         "is_instrumental": true,
         "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
         "description": "High-octane Sigma Drift Phonk recreation inspired by DVRST's Close Eyes with syncopated cowbell stabs and deep distorted 808 slides."
@@ -244,7 +244,7 @@
           "Relentless Trap Rolling Hats",
           "Dark Heavy Distorted Bassline"
         ],
-        "audio_url": "/vault/audio/theme_focus_03.mp3",
+        "audio_url": "/vault/themes/theme_focus_03/theme_focus_03.mp3",
         "is_instrumental": true,
         "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
         "description": "Relentless 136 BPM aggressive gym phonk beat engineered for deep focus tunnel vision and PR crushing sessions."
@@ -267,7 +267,7 @@
           "Sparkling Chime Arpeggios",
           "Lush Outdoor Atmospheric Reverb"
         ],
-        "audio_url": "/vault/audio/theme_break_01.mp3",
+        "audio_url": "/vault/themes/theme_break_01/theme_break_01.mp3",
         "is_instrumental": true,
         "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
         "description": "Nostalgic, warm chillwave pads inspired by Home's Resonance, providing a calming sonic backdrop to step outside and touch physical grass."
@@ -288,7 +288,7 @@
           "Playful Whistling Chimes",
           "Warm Vinyl Texture"
         ],
-        "audio_url": "/vault/audio/theme_break_02.mp3",
+        "audio_url": "/vault/themes/theme_break_02/theme_break_02.mp3",
         "is_instrumental": true,
         "license": "Creative Commons / Royalty-Free Tribute",
         "description": "Playful, lighthearted lo-fi bounce that playfully commands you to detach from monitors and breathe fresh air."
@@ -309,7 +309,7 @@
           "Ambient Nature Drone",
           "Gentle High Chimes"
         ],
-        "audio_url": "/vault/audio/theme_break_03.mp3",
+        "audio_url": "/vault/themes/theme_break_03/theme_break_03.mp3",
         "is_instrumental": true,
         "license": "CC0 Public Domain",
         "description": "Tranquil ambient chillstep rhythm with soft piano harmonics and soothing outdoor resonance."
@@ -332,7 +332,7 @@
           "Deep Earth Sub Drone",
           "Open Sky Acoustic Harmonics"
         ],
-        "audio_url": "/vault/audio/theme_long_break_01.mp3",
+        "audio_url": "/vault/themes/theme_long_break_01/theme_long_break_01.mp3",
         "is_instrumental": true,
         "license": "CC0 Public Domain",
         "description": "Paced 92 BPM cadence designed for a long physical walk under the sun with cold water hydration."
@@ -353,7 +353,7 @@
           "Warm Analog Tape Saturation",
           "Forest Breeze Texture"
         ],
-        "audio_url": "/vault/audio/theme_long_break_02.mp3",
+        "audio_url": "/vault/themes/theme_long_break_02/theme_long_break_02.mp3",
         "is_instrumental": true,
         "license": "CC0 Public Domain",
         "description": "Ultra-relaxed 86 BPM lo-fi beats with organic heartbeat rhythm for deep recovery before your next work block."
@@ -376,7 +376,7 @@
           "Thunderous Sub-Bass Drops",
           "Double-Time Trap Hi-Hat Rolls"
         ],
-        "audio_url": "/vault/audio/theme_motivation_01.mp3",
+        "audio_url": "/vault/themes/theme_motivation_01/theme_motivation_01.mp3",
         "is_instrumental": true,
         "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
         "description": "Apex warrior motivation phonk drop featuring heroic brass stabs, screaming cowbells, and thunderous 808s."
@@ -397,7 +397,7 @@
           "Unstoppable Driving Bass",
           "Hard Memphis Claps"
         ],
-        "audio_url": "/vault/audio/theme_motivation_02.mp3",
+        "audio_url": "/vault/themes/theme_motivation_02/theme_motivation_02.mp3",
         "is_instrumental": true,
         "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
         "description": "Dark, heavy bounce drift phonk for instant adrenaline surges and breaking through procrastination barriers."

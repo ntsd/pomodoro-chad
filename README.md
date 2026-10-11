@@ -39,12 +39,12 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
                                  [scripts/generate_vault.py]
                                               │
                                               ▼
-                            ┌───────────────────────────────────┐
-                            │      PUBLIC GIT VOICE VAULT       │
-                            │  public/vault/manifest.json       │
-                            │  public/vault/scripts/*.json      │
-                            │  public/vault/audio/*.mp3         │
-                            └───────────────────────────────────┘
+                            ┌──────────────────────────────────────────────┐
+                            │           PUBLIC GIT VOICE VAULT             │
+                            │  public/vault/manifest.json                  │
+                            │  public/vault/scripts/<id>/<id>.{json,mp3}   │
+                            │  public/vault/themes/<id>/<id>.{json,mp3}    │
+                            └──────────────────────────────────────────────┘
                                               │
                      ═════════════════════════╪═══════════════════════════
                                               │ (Committed to Git)
@@ -53,7 +53,7 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
                   │   - 100% Static HTML / CSS / JS (Astro)                │
                   │   - 0ms API Latency                                    │
                   │   - Zero Runtime Secrets / Zero API Costs              │
-                  │   - Edge Cached Audio Assets (/vault/audio/*)          │
+                  │   - Edge Cached Audio Assets (/vault/*)                │
                   │   - Native Web Speech API Fallback                     │
                   └────────────────────────────────────────────────────────┘
 ```

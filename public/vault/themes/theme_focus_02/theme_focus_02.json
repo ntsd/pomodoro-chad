@@ -1,0 +1,22 @@
+{
+  "id": "theme_focus_02",
+  "category": "focus",
+  "title": "Sigma Drift Phonk - Close Eyes",
+  "meme_reference": "DVRST - Close Eyes (Sigma Chad / Megamind Phonk)",
+  "original_artist_reference": "DVRST",
+  "bpm": 132,
+  "duration": 14.5,
+  "key": "C minor",
+  "genre": "Drift Phonk / Sigma Phonk",
+  "instruments": [
+    "Punchy Drift Kick",
+    "Syncopated Memphis Cowbell Arpeggio",
+    "Gliding 808 Sub-Bass",
+    "Snappy Memphis Snare",
+    "High-Octave Cowbell Fills"
+  ],
+  "audio_url": "/vault/themes/theme_focus_02/theme_focus_02.mp3",
+  "is_instrumental": true,
+  "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+  "description": "High-octane Sigma Drift Phonk recreation inspired by DVRST's Close Eyes with syncopated cowbell stabs and deep distorted 808 slides."
+}

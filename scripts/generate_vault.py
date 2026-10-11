@@ -203,15 +203,18 @@ def generate_clip(category: str, voice_id: str = None, custom_text: str = None, 
     voice_name = get_voice_name(selected_voice_id)
 
     text = custom_text or generate_script_text(category)
-    script_file = SCRIPTS_DIR / f"{clip_id}.json"
-    audio_file = AUDIO_DIR / f"{clip_id}.mp3"
+    clip_dir = SCRIPTS_DIR / clip_id
+    clip_dir.mkdir(parents=True, exist_ok=True)
+    script_file = clip_dir / f"{clip_id}.json"
+    audio_file = clip_dir / f"{clip_id}.mp3"
     
     meta = {
         "id": clip_id,
         "category": category,
         "prefix": prefix,
         "text": text,
-        "audio_file": f"vault/audio/{clip_id}.mp3",
+        "audio_file": f"vault/scripts/{clip_id}/{clip_id}.mp3",
+        "audio_url": f"/vault/scripts/{clip_id}/{clip_id}.mp3",
         "voice_id": selected_voice_id,
         "voice_name": voice_name,
         "model": OPENAI_MODEL,
@@ -219,15 +222,14 @@ def generate_clip(category: str, voice_id: str = None, custom_text: str = None, 
     }
 
     if dry_run:
-        print(f"  [Dry Run] Would create {script_file.name} using {voice_name} ({selected_voice_id})")
+        print(f"  [Dry Run] Would create {script_file.name} in {clip_dir.name}/ using {voice_name} ({selected_voice_id})")
         print(f"            Text: {text}")
         return clip_id
 
     # Write script JSON
-    SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
     with open(script_file, "w", encoding="utf-8") as f:
         json.dump(meta, f, indent=2, ensure_ascii=False)
-    print(f"  [Script Saved] {script_file.name} (Voice: {voice_name})")
+    print(f"  [Script Saved] {clip_dir.name}/{script_file.name} (Voice: {voice_name})")
 
     # Synthesize Audio
     synthesize_audio_elevenlabs(text, audio_file, selected_voice_id)

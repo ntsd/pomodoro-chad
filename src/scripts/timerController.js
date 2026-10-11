@@ -9,7 +9,7 @@ class ChadodoroController {
   constructor() {
     this.manifest = null;
     this.audioPlayer = new Audio();
-    this.bgmPlayer = new Audio('/vault/audio/theme_focus_01.mp3');
+    this.bgmPlayer = new Audio('/vault/themes/theme_focus_01/theme_focus_01.mp3');
     this.bgmPlayer.loop = false;
     this.currentClip = null;
     
@@ -589,7 +589,7 @@ class ChadodoroController {
       CHAD_MOTIVATION: "Discipline equals freedom, Champion. Embrace the grind."
     };
     const text = defaultLines[category] || "Lock in, King.";
-    this.currentClip = { text, category, audio_url: "/vault/audio/focus_001.mp3" };
+    this.currentClip = { text, category, audio_url: "/vault/scripts/focus_001/focus_001.mp3" };
     this.updateQuoteUI(text, category, "synthetic-fallback");
     if (this.settings.voiceEnabled && this.settings.speechFallback) {
       this.speakFallback(text);
@@ -637,12 +637,12 @@ class ChadodoroController {
 
   getRandomThemeForMode(mode) {
     if (!this.manifest || !this.manifest.themes) {
-      return { audio_url: '/vault/audio/theme_focus_01.mp3', title: 'GigaChad Anthem' };
+      return { audio_url: '/vault/themes/theme_focus_01/theme_focus_01.mp3', title: 'GigaChad Anthem' };
     }
     const cat = mode === 'focus' ? 'focus' : (mode === 'break' ? 'break' : (mode === 'long_break' ? 'long_break' : 'motivation'));
     const pool = this.manifest.themes[cat] || this.manifest.themes['focus'] || [];
     if (pool.length === 0) {
-      return { audio_url: '/vault/audio/theme_focus_01.mp3', title: 'GigaChad Anthem' };
+      return { audio_url: '/vault/themes/theme_focus_01/theme_focus_01.mp3', title: 'GigaChad Anthem' };
     }
     // Avoid repeating the same theme consecutively if multiple options exist
     const candidates = (pool.length > 1 && this.currentTheme)

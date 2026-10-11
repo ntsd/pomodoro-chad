@@ -41,7 +41,7 @@ def sync_manifest():
     }
 
     voice_id_set = set()
-    script_files = sorted(glob.glob(str(SCRIPTS_DIR / "*.json")))
+    script_files = sorted(glob.glob(str(SCRIPTS_DIR / "**" / "*.json"), recursive=True))
 
     for script_path in script_files:
         try:
@@ -54,8 +54,19 @@ def sync_manifest():
                 manifest_data["categories"][category] = []
             
             audio_filename = f"{clip_id}.mp3"
-            audio_path = AUDIO_DIR / audio_filename
-            has_audio = audio_path.exists()
+            # Check grouped folder first: scripts/<clip_id>/<clip_id>.mp3, then audio/<clip_id>.mp3
+            grouped_audio_path = Path(script_path).parent / audio_filename
+            legacy_audio_path = AUDIO_DIR / audio_filename
+
+            if grouped_audio_path.exists():
+                audio_url = f"/vault/scripts/{clip_id}/{audio_filename}"
+                has_audio = True
+            elif legacy_audio_path.exists():
+                audio_url = f"/vault/audio/{audio_filename}"
+                has_audio = True
+            else:
+                audio_url = None
+                has_audio = False
 
             voice_id = meta.get("voice_id", "pNInz6obpgDQGcFmaJgB")
             voice_name = meta.get("voice_name") or KNOWN_VOICE_NAMES.get(voice_id, f"Voice {voice_id[:8]}")
@@ -67,7 +78,7 @@ def sync_manifest():
                 "id": clip_id,
                 "category": category,
                 "text": meta.get("text", ""),
-                "audio_url": f"/vault/audio/{audio_filename}" if has_audio else None,
+                "audio_url": audio_url,
                 "has_audio": has_audio,
                 "voice_id": voice_id,
                 "voice_name": voice_name,
@@ -84,12 +95,17 @@ def sync_manifest():
     themes_dir = VAULT_DIR / "themes"
     themes_data = {"focus": [], "break": [], "long_break": [], "motivation": []}
     if themes_dir.exists():
-        theme_files = sorted(glob.glob(str(themes_dir / "*.json")))
+        theme_files = sorted(glob.glob(str(themes_dir / "**" / "*.json"), recursive=True))
         for t_path in theme_files:
             try:
                 with open(t_path, "r", encoding="utf-8") as tf:
                     t_meta = json.load(tf)
                 t_cat = t_meta.get("category", "focus")
+                t_id = t_meta.get("id") or Path(t_path).stem
+                t_audio_filename = f"{t_id}.mp3"
+                grouped_t_audio = Path(t_path).parent / t_audio_filename
+                if grouped_t_audio.exists():
+                    t_meta["audio_url"] = f"/vault/themes/{t_id}/{t_audio_filename}"
                 if t_cat in themes_data:
                     themes_data[t_cat].append(t_meta)
             except Exception as te:

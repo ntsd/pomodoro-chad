@@ -5,7 +5,7 @@ services:
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     headers:
-      - path: /vault/audio/*
+      - path: /vault/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
     routes:
