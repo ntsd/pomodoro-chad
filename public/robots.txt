@@ -1,5 +1,2 @@
 User-agent: *
 Allow: /
-
-Agentmap: https://chadodoro.ntsd.dev/.well-known/ard.json
-Agentmap: https://chadodoro.ntsd.dev/.well-known/ai-catalog.json

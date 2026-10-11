@@ -2,11 +2,11 @@
   "specVersion": "1.0",
   "host": {
     "displayName": "Chadodoro",
-    "identifier": "urn:ai:chadodoro.ntsd.dev"
+    "identifier": "urn:air:chadodoro.ntsd.dev"
   },
   "entries": [
     {
-      "identifier": "urn:ai:chadodoro.ntsd.dev:tools:pomodoro-coach",
+      "identifier": "urn:air:chadodoro.ntsd.dev:tools:pomodoro_coach",
       "displayName": "Chadodoro Stoic Pomodoro & Grass Tracker",
       "type": "application/json",
       "description": "High-performance Pomodoro state machine with GigaChad voice coach, tactile grass tracking, and WebMCP agent tools.",
