@@ -22,16 +22,16 @@ services:
         value: public, max-age=86400
       - path: /llms.txt
         name: Cache-Control
-        value: public, max-age=3600
+        value: public, max-age=60, stale-while-revalidate=300
       - path: /.well-known/*
         name: Cache-Control
-        value: public, max-age=3600
+        value: public, max-age=60, stale-while-revalidate=300
       - path: /ai-catalog.json
         name: Cache-Control
-        value: public, max-age=3600
+        value: public, max-age=60, stale-while-revalidate=300
       - path: /robots.txt
         name: Cache-Control
-        value: public, max-age=3600
+        value: no-cache, no-store, must-revalidate
     routes:
       - type: rewrite
         source: /*
