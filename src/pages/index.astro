@@ -23,14 +23,40 @@ import SettingsModal from '../components/SettingsModal.astro';
 
     <!-- Main Dashboard Grid -->
     <div class="dashboard-grid">
-      <!-- Left Column: Avatar & Stage -->
+      <!-- Left Column: Unified Chad Coach & Avatar Stage -->
       <div class="col-stage">
-        <div class="avatar-box glass-card">
-          <Avatar />
-        </div>
+        <div class="coach-unified-card glass-card">
+          <!-- Card Header -->
+          <div class="coach-header">
+            <div class="coach-header-top">
+              <div class="coach-title-wrap">
+                <span class="coach-icon">👑</span>
+                <h3 class="coach-title">CHADODORO COACH</h3>
+              </div>
+              <button class="btn-audio-replay" id="btn-quote-replay" title="Replay voice audio">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 13c0-4.42-3.58-8-8-8zm-6 8c0-1.01.25-1.97.7-2.8L5.24 8.74A7.93 7.93 0 0 0 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4c-3.31 0-6-2.69-6-6z" />
+                </svg>
+                <span>REPLAY</span>
+              </button>
+            </div>
+            <div class="coach-header-sub">
+              <span class="badge-chad" id="quote-category-badge">START_FOCUS</span>
+              <span class="coach-status-pill">
+                <span class="pulse-emerald"></span>
+                <span>LIVE DISCIPLINE</span>
+              </span>
+            </div>
+          </div>
 
-        <!-- Latest Coach Quote Card (Slimmer) -->
-        <QuoteDisplay />
+          <!-- GigaChad Avatar Stage Area -->
+          <div class="coach-avatar-area">
+            <Avatar />
+          </div>
+
+          <!-- Coach Speech Quote Section -->
+          <QuoteDisplay />
+        </div>
       </div>
 
       <!-- Right Column: Timer & Controls & Provenance -->
@@ -206,11 +232,125 @@ import SettingsModal from '../components/SettingsModal.astro';
     gap: 1.25rem;
   }
 
-  .avatar-box {
-    padding: 1.75rem 1rem;
+  /* Unified Coach Card */
+  .coach-unified-card {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .coach-unified-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--emerald-main) 0%, #38bdf8 50%, var(--gold-main) 100%);
+    opacity: 0.85;
+  }
+
+  .coach-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .coach-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .coach-title-wrap {
     display: flex;
     align-items: center;
+    gap: 0.45rem;
+  }
+
+  .coach-icon {
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  .coach-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .coach-header-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .coach-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--emerald-bright);
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 0.18rem 0.45rem;
+    border-radius: 999px;
+  }
+
+  .pulse-emerald {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--emerald-main);
+    box-shadow: 0 0 8px var(--emerald-bright);
+    animation: pulseDot 2s infinite ease-in-out;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  .btn-audio-replay {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--bg-surface);
+    color: var(--text-sub);
+    border: 1px solid var(--border-subtle);
+    padding: 0.25rem 0.55rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .btn-audio-replay:hover {
+    color: var(--text-main);
+    background: var(--bg-card-hover);
+    border-color: var(--emerald-main);
+  }
+
+  .coach-avatar-area {
+    padding: 0.65rem 0 1.25rem 0;
+    display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   /* Wide Chad Rules of Discipline */
