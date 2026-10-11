@@ -3,16 +3,16 @@
 ---
 <div class="timer-component">
   <!-- Mode Selector Tabs -->
-  <div class="mode-tabs">
-    <button class="mode-tab active" data-mode="focus" id="tab-focus">
+  <div class="mode-tabs" role="tablist" aria-label="Pomodoro mode selector">
+    <button class="mode-tab active" data-mode="focus" id="tab-focus" role="tab" aria-selected="true" aria-label="Deep Work Focus mode">
       <span class="tab-dot"></span>
       <span>LOCK IN</span>
     </button>
-    <button class="mode-tab" data-mode="break" id="tab-break">
+    <button class="mode-tab" data-mode="break" id="tab-break" role="tab" aria-selected="false" aria-label="Short Break mode">
       <span class="tab-dot"></span>
       <span>SHORT BREAK</span>
     </button>
-    <button class="mode-tab" data-mode="long_break" id="tab-long-break">
+    <button class="mode-tab" data-mode="long_break" id="tab-long-break" role="tab" aria-selected="false" aria-label="Touch Grass Long Break mode">
       <span class="tab-dot"></span>
       <span>TOUCH GRASS</span>
     </button>
@@ -20,7 +20,7 @@
 
   <!-- Circular Countdown Ring -->
   <div class="timer-display-wrap">
-    <svg class="progress-ring" viewBox="0 0 280 280">
+    <svg class="progress-ring" viewBox="0 0 280 280" role="img" aria-label="Timer countdown visualizer">
       <defs>
         <linearGradient id="ringEmeraldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#34d399" />
@@ -68,7 +68,7 @@
 
   <!-- Action Controls -->
   <div class="timer-controls">
-    <button class="btn-primary timer-btn-main" id="btn-timer-toggle" title="Press Space to toggle">
+    <button class="btn-primary timer-btn-main" id="btn-timer-toggle" title="Press Space to toggle" aria-label="Toggle Pomodoro Timer">
       <svg class="btn-icon" id="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
         <path d="M8 5v14l11-7z" />
       </svg>
@@ -79,7 +79,7 @@
     </button>
 
     <div class="timer-sub-controls">
-      <button class="btn-secondary timer-btn-sub" id="btn-timer-reset" title="Reset current session">
+      <button class="btn-secondary timer-btn-sub" id="btn-timer-reset" title="Reset current session" aria-label="Reset current timer session">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
           <path d="M3 3v5h5" />
@@ -87,7 +87,7 @@
         <span>RESET</span>
       </button>
 
-      <button class="btn-secondary timer-btn-sub" id="btn-timer-skip" title="Skip to next phase">
+      <button class="btn-secondary timer-btn-sub" id="btn-timer-skip" title="Skip to next phase" aria-label="Skip to next Pomodoro phase">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polygon points="5 4 15 12 5 20 5 4" fill="currentColor" />
           <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" />
@@ -100,7 +100,7 @@
   <!-- Interactive Soundboard & Grass Counter Trigger Section -->
   <div class="chad-interactive-actions">
     <!-- Touch Grass Button -->
-    <button class="btn-grass" id="btn-touch-grass" title="Click to log that you touched physical grass!">
+    <button class="btn-grass" id="btn-touch-grass" title="Click to log that you touched physical grass!" aria-label="Log that you touched physical grass">
       <span class="btn-grass-icon">🌱</span>
       <div class="btn-grass-text">
         <span class="btn-grass-title">I TOUCHED GRASS</span>
@@ -110,7 +110,7 @@
     </button>
 
     <!-- Instant Motivation Soundboard -->
-    <button class="btn-secondary btn-motivation" id="btn-instant-motivation" title="Instant Stoic Chad Motivation">
+    <button class="btn-secondary btn-motivation" id="btn-instant-motivation" title="Instant Stoic Chad Motivation" aria-label="Play instant GigaChad stoic motivation voice line">
       <span class="motivation-icon">⚡</span>
       <div class="motivation-text">
         <span class="motivation-title">INSTANT MOTIVATION</span>

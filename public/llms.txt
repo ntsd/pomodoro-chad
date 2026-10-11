@@ -1,0 +1,44 @@
+# Chadodoro (`pomodoro-chad`)
+> The Uncompromising GigaChad Pomodoro + Zero-Latency Git Voice Vault (Hacktoberfest 2026: "Touch Grass")
+
+Chadodoro is a high-performance, stoic productivity application designed to eliminate developer screen-lock through disciplined focus intervals followed by mandatory outdoor breaks.
+
+- Live Application: https://chadodoro.ntsd.dev/
+- Source Repository: https://github.com/ntsd/pomodoro-chad
+- License: MIT
+- Framework: Astro (Static HTML/CSS/JS)
+- Hosting: Render Static Site
+
+## Architecture & Technology Stack
+- **Open-Source AI Core:** Offline / pipeline voice line synthesis scripted by `google/gemma-4-26B-A4B-it` running on self-hosted inference (`https://spark.ntsd.dev:8001/v1`).
+- **Voice Synthesis:** Synthesized using ElevenLabs baritone voices (Adam, Harry, Brian).
+- **Zero-Latency Git Voice Vault:** Pre-rendered audio clips (`.mp3`) and metadata (`.json`) committed to Git under `/vault/scripts/` and `/vault/themes/`, requiring 0 runtime API calls and 0ms backend delay.
+- **Client Storage:** 100% private in-browser `localStorage` (no user tracking, no backend database).
+- **WebMCP Enabled:** Exposes programmatic tools via Web Model Context Protocol (`/.well-known/webmcp.json`) for autonomous AI agent control.
+
+## Core Features & Mechanics
+1. **Circular Countdown Progress Ring:** Athletic SVG ring displaying `MM:SS` with animated stroke dashoffset.
+2. **Three Reactive Reactive Avatars:**
+   - Focus Mode: Cyberpunk deep-work GigaChad with neon emerald laser eyes and reticle lines.
+   - Short Break: Warm lounge GigaChad with steaming ceramic crown mug.
+   - Long Break: Outdoor meadow GigaChad wearing aviators, caressing lush grass.
+3. **Tactile Grass Counter:** "I Touched Grass" button tracking real-world outdoor visits with haptic chime and clover confetti.
+4. **Hybrid Anthem Engine:** 27 curated viral phonk & meme tracks with exact start offsets, alongside Git Vault instrumentals.
+5. **Keyboard Shortcuts:** Space (Start/Pause), R (Reset), S (Skip), V (Voice Toggle), B (Anthem Toggle), M (Motivation), G (Touch Grass), Esc (Close Settings).
+
+## WebMCP Tools Available
+AI agents with WebMCP support can discover and invoke the following tools:
+- `startTimer`: Start or resume the active countdown.
+- `pauseTimer`: Pause the countdown.
+- `resetTimer`: Reset the countdown to the start of the current phase.
+- `skipPhase`: Skip directly to the next phase (Focus -> Short Break -> Long Break).
+- `setMode`: Change timer mode to `focus`, `shortBreak`, or `longBreak`.
+- `touchGrass`: Increment the physical grass counter and trigger reward confetti.
+- `playMotivation`: Play an instant stoic GigaChad motivational voice line.
+- `toggleVoice`: Toggle GigaChad voice coach audio.
+- `toggleBgm`: Toggle background anthem music.
+- `getTimerState`: Inspect current time remaining, active phase, and grass count.
+
+## Agent Guidelines
+- Respect user focus: do not interrupt during active focus sessions unless requested.
+- Prioritize real-world wellness: encourage taking physical breaks away from screens when intervals complete.

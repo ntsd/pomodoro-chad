@@ -21,20 +21,51 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO Meta Tags -->
+    <!-- Preconnect Google Fonts for 0ms Render-Blocking Elimination -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" />
+
+    <!-- SEO & Canonical -->
+    <link rel="canonical" href="https://chadodoro.ntsd.dev/" />
+    <meta name="theme-color" content="#0a0d12" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Chadodoro Team" />
+    <meta name="author" content="ntsd" />
     <meta name="keywords" content="pomodoro, gigachad, touch grass, hacktoberfest 2026, astro, render, elevenlabs, gemma-4-26b, ai voice vault, productivity" />
+
+    <!-- AI Agentic Browsing & WebMCP Discovery Standards -->
+    <link rel="describedby" href="/llms.txt" type="text/plain" title="Guidance for AI agents" />
+    <link rel="webmcp-manifest" href="/.well-known/webmcp.json" type="application/json" title="WebMCP Manifest" />
 
     <!-- OpenGraph / Social -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chadodoro.ntsd.dev/" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content="/favicon.svg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD Structured Data for WebApplication -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Chadodoro",
+        "url": "https://chadodoro.ntsd.dev/",
+        "description": "The Uncompromising GigaChad Pomodoro + Zero-Latency Git Voice Vault",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "author": {
+          "@type": "Person",
+          "name": "ntsd",
+          "url": "https://github.com/ntsd"
+        }
+      }
+    </script>
   </head>
   <body>
     <!-- Top Navigation Header -->
@@ -65,19 +96,19 @@ const {
           </div>
 
           <!-- GigaChad Voice Quick Toggle -->
-          <button class="btn-icon-header btn-audio-toggle btn-voice-toggle active" id="btn-toggle-voice" title="Toggle GigaChad Voice Coach (Shortkey: V)">
+          <button class="btn-icon-header btn-audio-toggle btn-voice-toggle active" id="btn-toggle-voice" title="Toggle GigaChad Voice Coach (Shortkey: V)" aria-label="Toggle GigaChad Voice Coach">
             <span class="audio-toggle-icon">🎙️</span>
             <span class="audio-toggle-label" id="header-voice-status">VOICE ON</span>
           </button>
 
           <!-- GigaChad Anthem Quick Toggle -->
-          <button class="btn-icon-header btn-audio-toggle btn-bgm-toggle active" id="btn-toggle-bgm" title="Toggle GigaChad Anthem BGM (Shortkey: B)">
+          <button class="btn-icon-header btn-audio-toggle btn-bgm-toggle active" id="btn-toggle-bgm" title="Toggle GigaChad Anthem BGM (Shortkey: B)" aria-label="Toggle GigaChad Anthem BGM">
             <span class="audio-toggle-icon">🎵</span>
             <span class="audio-toggle-label" id="header-bgm-status">ANTHEM ON</span>
           </button>
 
           <!-- Settings Button -->
-          <button class="btn-icon-header" id="btn-open-settings" title="Open Settings (Durations & Audio)">
+          <button class="btn-icon-header" id="btn-open-settings" title="Open Settings (Durations & Audio)" aria-label="Open Settings">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="3"></circle>
               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>

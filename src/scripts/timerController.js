@@ -66,6 +66,133 @@ class ChadodoroController {
 
     // Set initial audio volume
     this.audioPlayer.volume = this.settings.volume / 100;
+
+    // Initialize WebMCP tools for AI Agent discovery
+    this.initWebMCP();
+  }
+
+  initWebMCP() {
+    const tools = [
+      {
+        name: 'getTimerState',
+        description: 'Returns the current state of Chadodoro: mode, remaining seconds, isRunning, cyclesCompleted, and grassCount.',
+        handler: () => ({
+          mode: this.mode,
+          remainingSeconds: this.timeRemaining,
+          formattedTime: this.formatTime(this.timeRemaining),
+          isRunning: this.isRunning,
+          grassCount: this.grassCount,
+          cyclesCompleted: this.cyclesCompleted,
+          voiceEnabled: this.settings.voiceEnabled,
+          bgmEnabled: this.settings.bgmEnabled,
+          anthemSource: this.settings.anthemSource
+        })
+      },
+      {
+        name: 'startTimer',
+        description: 'Starts or resumes the Pomodoro countdown timer.',
+        handler: () => {
+          if (!this.isRunning) this.startTimer();
+          return { success: true, isRunning: this.isRunning };
+        }
+      },
+      {
+        name: 'pauseTimer',
+        description: 'Pauses the active countdown timer.',
+        handler: () => {
+          if (this.isRunning) this.pauseTimer();
+          return { success: true, isRunning: this.isRunning };
+        }
+      },
+      {
+        name: 'resetTimer',
+        description: 'Resets the countdown timer to the phase initial duration.',
+        handler: () => {
+          this.resetTimer();
+          return { success: true, remainingSeconds: this.timeRemaining };
+        }
+      },
+      {
+        name: 'skipPhase',
+        description: 'Skips immediately to the next phase in the Pomodoro cycle.',
+        handler: () => {
+          this.skipPhase();
+          return { success: true, mode: this.mode };
+        }
+      },
+      {
+        name: 'setMode',
+        description: 'Switches the timer mode: focus, break (short break), or long_break.',
+        handler: ({ mode }) => {
+          const normalized = mode === 'shortBreak' ? 'break' : (mode === 'longBreak' ? 'long_break' : mode);
+          if (['focus', 'break', 'long_break'].includes(normalized)) {
+            this.setMode(normalized);
+            return { success: true, mode: this.mode };
+          }
+          return { success: false, error: 'Invalid mode. Use focus, break, or long_break.' };
+        }
+      },
+      {
+        name: 'touchGrass',
+        description: 'Increments the real-world grass counter and triggers reward sound and confetti.',
+        handler: () => {
+          this.handleTouchGrass();
+          return { success: true, grassCount: this.grassCount };
+        }
+      },
+      {
+        name: 'playMotivation',
+        description: 'Plays a stoic GigaChad motivational voice line.',
+        handler: () => {
+          this.handleInstantMotivation();
+          return { success: true };
+        }
+      },
+      {
+        name: 'toggleVoice',
+        description: 'Toggles GigaChad voice coach audio on or off.',
+        handler: () => {
+          this.toggleVoice();
+          return { success: true, voiceEnabled: this.settings.voiceEnabled };
+        }
+      },
+      {
+        name: 'toggleBgm',
+        description: 'Toggles background anthem music on or off.',
+        handler: () => {
+          this.toggleBgm();
+          return { success: true, bgmEnabled: this.settings.bgmEnabled };
+        }
+      }
+    ];
+
+    if (typeof window !== 'undefined') {
+      window.webmcp = {
+        manifestUrl: '/.well-known/webmcp.json',
+        tools,
+        execute: (name, args = {}) => {
+          const tool = tools.find(t => t.name === name);
+          if (!tool) throw new Error(`WebMCP Tool ${name} not found`);
+          return tool.handler(args);
+        }
+      };
+
+      // W3C Web Machine Learning / WebMCP browser-native registration
+      const mc = navigator.modelContext || window.modelContext;
+      if (mc && typeof mc.registerTool === 'function') {
+        tools.forEach(tool => {
+          try {
+            mc.registerTool({
+              name: tool.name,
+              description: tool.description,
+              execute: tool.handler
+            });
+          } catch (e) {
+            console.debug('[WebMCP] Native registration note:', e);
+          }
+        });
+      }
+    }
   }
 
   loadStorage() {
@@ -395,10 +522,19 @@ class ChadodoroController {
     this.timeRemaining = durationMins * 60;
     this.totalDuration = this.timeRemaining;
 
-    // Update active tab styles
-    if (this.domTabFocus) this.domTabFocus.classList.toggle('active', newMode === 'focus');
-    if (this.domTabBreak) this.domTabBreak.classList.toggle('active', newMode === 'break');
-    if (this.domTabLongBreak) this.domTabLongBreak.classList.toggle('active', newMode === 'long_break');
+    // Update active tab styles and accessibility states
+    if (this.domTabFocus) {
+      this.domTabFocus.classList.toggle('active', newMode === 'focus');
+      this.domTabFocus.setAttribute('aria-selected', newMode === 'focus');
+    }
+    if (this.domTabBreak) {
+      this.domTabBreak.classList.toggle('active', newMode === 'break');
+      this.domTabBreak.setAttribute('aria-selected', newMode === 'break');
+    }
+    if (this.domTabLongBreak) {
+      this.domTabLongBreak.classList.toggle('active', newMode === 'long_break');
+      this.domTabLongBreak.setAttribute('aria-selected', newMode === 'long_break');
+    }
 
     this.updateAvatarState();
     this.updateDisplay();
