@@ -79,13 +79,13 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
   - Curated library of 27 viral phonk and motivation tracks on YouTube (including *REVENGE*, *MONTAGEM PEGADORA*, *GigaChad Theme Phonk House*, *MOTIVATION FUNK*, *METAMORPHOSIS*, *DIA DELÍCIA*, *PARA COMEÇAR O FINAL DE SEMANA*, *AURA*, etc.) with precise start timestamps.
   - **Live Song Attribution & Direct Link:** Both the *Now Playing* banner and the *CHADODORO COACH* card display the active song title with direct links to the YouTube video.
   - **30s Burst or Continuous Play:** By default, anthems play for 30s as a high-intensity phase transition, with a **"Keep Song Running"** toggle in Settings for continuous background music.
-  - **Avoid Ads Mode (Vault Audio Only):** Toggleable setting that completely bypasses YouTube embeds and streams exclusively from static zero-latency Git Vault `.mp3` tracks to guarantee 0 ads.
+  - **Anthem Audio Source Selector (Dropdown):** Choose between **Vault Audio Only** (100% ad-free static Git Vault `.mp3` tracks), **Youtube Only** (curated viral phonk & meme tracks), or **Hybrid** (prioritizes YouTube tracks with Git Vault themes as backup).
   - Independent Anthem toggle, volume control, and shuffle per timer phase.
 - **Audio Waveform Visualizer:** Animated speech bars synchronize with coach audio and anthem playback.
 - **"I Touched Grass" Soundboard:** Tactile button increments user grass counter, triggers floating grass/clover confetti, and plays audio feedback.
 - **Instant Motivation Button:** Soundboard trigger for stoic motivation one-liners anytime.
 - **Web Speech API Fallback:** If audio files fail to load or offline, browser synthetic baritone voice takes over.
-- **Customizable Settings Modal:** Configurable focus (default 25m), short break (5m), long break (15m), volume slider, auto-start breaks, keep song running, avoid ads mode, and stats reset.
+- **Customizable Settings Modal:** Configurable focus (default 25m), short break (5m), long break (15m), volume slider, auto-start breaks, keep song running, anthem audio source selector (Vault Only / YouTube Only / Hybrid), and stats reset.
 - **Keyboard Shortcuts:**
   - <kbd>Space</kbd>: Start / Pause
   - <kbd>R</kbd>: Reset timer

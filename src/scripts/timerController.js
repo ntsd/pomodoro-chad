@@ -29,6 +29,7 @@ class ChadodoroController {
       bgmEnabled: true,
       bgmVolume: 35,
       keepSongRunning: false,
+      anthemSource: 'hybrid', // 'vault_only' | 'youtube_only' | 'hybrid'
       avoidAdsMode: false,
       repeatTheme: false,
       autoStartBreak: false,
@@ -71,7 +72,11 @@ class ChadodoroController {
     try {
       const savedSettings = localStorage.getItem('chad_settings');
       if (savedSettings) {
-        this.settings = { ...this.settings, ...JSON.parse(savedSettings) };
+        const parsed = JSON.parse(savedSettings);
+        this.settings = { ...this.settings, ...parsed };
+        if (!parsed.anthemSource && parsed.avoidAdsMode) {
+          this.settings.anthemSource = 'vault_only';
+        }
       }
       const savedGrass = localStorage.getItem('chad_grass_touched');
       if (savedGrass) {
@@ -807,9 +812,14 @@ class ChadodoroController {
     const ytThemes = (this.manifest && this.manifest.youtube_themes && this.manifest.youtube_themes[cat]) || [];
 
     let pool = [];
-    if (this.settings.avoidAdsMode) {
-      // Avoid Ads Mode: Non-YouTube songs only
+    const sourceMode = this.settings.anthemSource || (this.settings.avoidAdsMode ? 'vault_only' : 'hybrid');
+
+    if (sourceMode === 'vault_only') {
+      // Vault Audio Only (Non-YouTube songs only)
       pool = vaultThemes.length > 0 ? vaultThemes : ytThemes;
+    } else if (sourceMode === 'youtube_only') {
+      // YouTube Only
+      pool = ytThemes.length > 0 ? ytThemes : vaultThemes;
     } else {
       // Hybrid Mode: Curated viral YouTube tracks prioritized, with Vault themes included
       pool = ytThemes.length > 0 ? [...ytThemes, ...vaultThemes] : vaultThemes;
@@ -1112,7 +1122,7 @@ class ChadodoroController {
     const elSpeech = document.getElementById('setting-speech-fallback');
     const elRepeatTheme = document.getElementById('setting-repeat-theme');
     const elKeepSongRunning = document.getElementById('setting-keep-song-running');
-    const elAvoidAdsMode = document.getElementById('setting-avoid-ads-mode');
+    const elAnthemSource = document.getElementById('setting-anthem-source');
 
     if (elFocus) elFocus.value = this.settings.focusMinutes;
     if (elBreak) elBreak.value = this.settings.breakMinutes;
@@ -1123,7 +1133,7 @@ class ChadodoroController {
     if (this.domInputVoiceEnabled) this.domInputVoiceEnabled.checked = this.settings.voiceEnabled;
     if (this.domInputBgmEnabled) this.domInputBgmEnabled.checked = this.settings.bgmEnabled;
     if (elKeepSongRunning) elKeepSongRunning.checked = !!this.settings.keepSongRunning;
-    if (elAvoidAdsMode) elAvoidAdsMode.checked = !!this.settings.avoidAdsMode;
+    if (elAnthemSource) elAnthemSource.value = this.settings.anthemSource || (this.settings.avoidAdsMode ? 'vault_only' : 'hybrid');
     if (elRepeatTheme) elRepeatTheme.checked = !!this.settings.repeatTheme;
     if (this.domInputBgmVolume) this.domInputBgmVolume.value = this.settings.bgmVolume;
     if (this.domBgmVolumeDisplay) this.domBgmVolumeDisplay.textContent = `${this.settings.bgmVolume}%`;
@@ -1142,7 +1152,9 @@ class ChadodoroController {
     this.settings.volume = parseInt(formData.get('volume'), 10) || 90;
     this.settings.bgmEnabled = formData.get('bgmEnabled') === 'on';
     this.settings.keepSongRunning = formData.get('keepSongRunning') === 'on';
-    this.settings.avoidAdsMode = formData.get('avoidAdsMode') === 'on';
+    const prevSource = this.settings.anthemSource;
+    this.settings.anthemSource = formData.get('anthemSource') || 'hybrid';
+    this.settings.avoidAdsMode = this.settings.anthemSource === 'vault_only';
     this.settings.repeatTheme = formData.get('repeatTheme') === 'on';
     this.bgmPlayer.loop = this.settings.repeatTheme;
     this.settings.bgmVolume = parseInt(formData.get('bgmVolume'), 10) || 35;
@@ -1159,7 +1171,8 @@ class ChadodoroController {
     }
     this.updateBgmVolume();
     this.updateBgmUI();
-    this.updateBgmPlayback();
+    const sourceChanged = prevSource !== this.settings.anthemSource;
+    this.updateBgmPlayback(sourceChanged);
 
     // If timer is not running, adjust current remaining
     if (!this.isRunning) {

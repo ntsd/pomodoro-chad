@@ -89,14 +89,20 @@
           </div>
         </div>
 
-        <div class="setting-toggle-item">
-          <label class="toggle-switch">
-            <input type="checkbox" id="setting-avoid-ads-mode" name="avoidAdsMode" />
-            <span class="toggle-slider"></span>
-          </label>
-          <div class="toggle-text">
-            <span class="toggle-title">Avoid Ads Mode (Vault Audio Only)</span>
-            <span class="toggle-desc">Only play 100% ad-free static Git Vault audio (skips YouTube tracks)</span>
+        <div class="setting-select-item">
+          <div class="setting-select-header">
+            <label for="setting-anthem-source" class="setting-select-label">Anthem Audio Source</label>
+            <span class="setting-select-desc">Vault, YouTube, or Hybrid mix</span>
+          </div>
+          <div class="select-wrapper">
+            <select id="setting-anthem-source" name="anthemSource" class="custom-select">
+              <option value="hybrid">Hybrid</option>
+              <option value="vault_only">Vault Audio Only</option>
+              <option value="youtube_only">Youtube Only</option>
+            </select>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="select-chevron">
+              <path d="M7 10l5 5 5-5z" />
+            </svg>
           </div>
         </div>
 
@@ -303,6 +309,80 @@
     accent-color: var(--emerald-main);
     cursor: pointer;
     width: 100%;
+  }
+
+  .setting-select-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 0.35rem 0;
+  }
+
+  .setting-select-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .setting-select-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .setting-select-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .select-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .custom-select {
+    width: 100%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 700;
+    padding: 0.65rem 2.2rem 0.65rem 0.85rem;
+    border-radius: var(--radius-sm);
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .custom-select:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: var(--bg-card-hover);
+  }
+
+  .custom-select:focus {
+    border-color: var(--emerald-main);
+    box-shadow: 0 0 10px var(--emerald-glow);
+  }
+
+  .custom-select option {
+    background: #0b1120;
+    color: var(--text-main);
+    font-weight: 600;
+    padding: 0.5rem;
+  }
+
+  .select-chevron {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--emerald-bright);
   }
 
   .setting-toggle-item {
