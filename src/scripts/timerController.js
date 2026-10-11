@@ -149,6 +149,11 @@ class ChadodoroController {
     this.domQuoteBadge = document.getElementById('quote-category-badge');
     this.domQuoteClipId = document.getElementById('quote-clip-id');
     this.domQuoteVoiceTag = document.getElementById('quote-voice-tag');
+    this.domQuoteVaultSource = document.getElementById('quote-vault-source');
+    this.domQuoteClipLink = document.getElementById('quote-clip-link');
+    this.domQuoteClipLabel = document.getElementById('quote-clip-label');
+    this.domQuoteClipTitle = document.getElementById('quote-clip-title');
+    this.domQuoteSourceTag = document.getElementById('quote-source-tag');
     this.domBtnReplay = document.getElementById('btn-quote-replay');
 
     // Grass & Motivation
@@ -336,6 +341,7 @@ class ChadodoroController {
     this.updateToggleBtnUI();
     this.updateDocumentTitle();
     this.updateBgmPlayback();
+    this.updateQuoteAudioSourceUI();
   }
 
   resetTimer() {
@@ -611,9 +617,66 @@ class ChadodoroController {
   updateQuoteUI(text, category, audioSrc, voiceName) {
     if (this.domQuoteText) this.domQuoteText.textContent = text;
     if (this.domQuoteBadge) this.domQuoteBadge.textContent = category;
-    if (this.domQuoteClipId) this.domQuoteClipId.textContent = audioSrc.replace('/vault/', 'vault/');
+    if (audioSrc) this.lastVoiceAudioSrc = audioSrc;
     if (this.domQuoteVoiceTag) {
-      this.domQuoteVoiceTag.textContent = voiceName ? `🎙️ ${voiceName}` : '🎙️ elevenlabs';
+      this.domQuoteVoiceTag.textContent = voiceName ? `🎙️ ElevenLabs (${voiceName})` : '🎙️ ElevenLabs';
+    }
+    this.updateQuoteAudioSourceUI();
+  }
+
+  updateQuoteAudioSourceUI() {
+    const isPlayingYT = this.isRunning && this.settings.bgmEnabled && this.currentTheme && (this.currentTheme.type === 'youtube' || !!this.currentTheme.video_id);
+    const isPlayingVaultTheme = this.isRunning && this.settings.bgmEnabled && this.currentTheme && !this.currentTheme.video_id;
+
+    if (isPlayingYT) {
+      const theme = this.currentTheme;
+      if (this.domQuoteVaultSource) this.domQuoteVaultSource.classList.add('is-youtube');
+      if (this.domQuoteClipLink) {
+        this.domQuoteClipLink.style.display = 'inline-flex';
+        const startParam = theme.start ? `&t=${theme.start}s` : '';
+        this.domQuoteClipLink.href = `https://www.youtube.com/watch?v=${theme.video_id}${startParam}`;
+        this.domQuoteClipLink.title = `Playing YouTube track: ${theme.title} (Click to open)`;
+      }
+      if (this.domQuoteClipTitle) {
+        this.domQuoteClipTitle.textContent = theme.title;
+      }
+      if (this.domQuoteClipLabel) {
+        this.domQuoteClipLabel.textContent = '▶️ YouTube:';
+      }
+      if (this.domQuoteClipId) {
+        this.domQuoteClipId.style.display = 'none';
+      }
+      if (this.domQuoteSourceTag) {
+        this.domQuoteSourceTag.textContent = '▶️ youtube bgm';
+        this.domQuoteSourceTag.classList.remove('zero-latency');
+        this.domQuoteSourceTag.classList.add('yt-badge');
+      }
+    } else if (isPlayingVaultTheme) {
+      const theme = this.currentTheme;
+      if (this.domQuoteVaultSource) this.domQuoteVaultSource.classList.remove('is-youtube');
+      if (this.domQuoteClipLink) this.domQuoteClipLink.style.display = 'none';
+      if (this.domQuoteClipId) {
+        this.domQuoteClipId.style.display = 'inline';
+        this.domQuoteClipId.textContent = theme.audio_url ? theme.audio_url.replace('/vault/', 'vault/') : (theme.title || 'vault/themes');
+      }
+      if (this.domQuoteSourceTag) {
+        this.domQuoteSourceTag.textContent = '⚡ static vault';
+        this.domQuoteSourceTag.classList.remove('yt-badge');
+        this.domQuoteSourceTag.classList.add('zero-latency');
+      }
+    } else {
+      if (this.domQuoteVaultSource) this.domQuoteVaultSource.classList.remove('is-youtube');
+      if (this.domQuoteClipLink) this.domQuoteClipLink.style.display = 'none';
+      if (this.domQuoteClipId) {
+        this.domQuoteClipId.style.display = 'inline';
+        const audioSrc = (this.currentClip && this.currentClip.audio_url) || (this.lastVoiceAudioSrc || 'vault/scripts/focus_001/focus_001.mp3');
+        this.domQuoteClipId.textContent = audioSrc.replace('/vault/', 'vault/');
+      }
+      if (this.domQuoteSourceTag) {
+        this.domQuoteSourceTag.textContent = '⚡ static vault';
+        this.domQuoteSourceTag.classList.remove('yt-badge');
+        this.domQuoteSourceTag.classList.add('zero-latency');
+      }
     }
   }
 
@@ -878,6 +941,7 @@ class ChadodoroController {
   }
 
   updateNowPlayingBanner() {
+    this.updateQuoteAudioSourceUI();
     if (!this.domNowPlayingBanner) return;
 
     const isPlaying = this.isRunning && this.settings.bgmEnabled && this.currentTheme;

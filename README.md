@@ -59,9 +59,9 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
 ```
 
 1. **Open-Weight AI Brain:** Script generation is driven by `google/gemma-4-26B-A4B-it` hosted on an open-weights inference node (`https://spark.ntsd.dev:8001/v1`).
-2. **Deep Baritone Voice Synthesis:** Transcripts are synthesized via ElevenLabs using Adam's commanding baritone voice (`pNInz6obpgDQGcFmaJgB`).
-3. **Committed to Git:** Generated `.json` metadata and `.mp3` audio files are committed directly into Git under `public/vault/`.
-4. **Zero Runtime API Dependency:** The Astro static site serves vault assets locally from `dist/vault/` with instant zero-latency playback.
+2. **ElevenLabs Baritone Voice Synthesis:** Transcripts are pre-synthesized by **ElevenLabs** using multiple deep baritone voices (Adam, Harry, Brian).
+3. **Committed Directly to Git:** Generated `.json` metadata and `.mp3` audio files are committed directly into Git under `public/vault/`.
+4. **Zero Runtime API Dependency:** The Astro static site serves vault assets locally from `dist/vault/` with instant zero-latency playback and zero runtime API bills.
 
 ---
 
@@ -72,14 +72,20 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
   - *Focus Mode (Lock In):* Cyberpunk deep-work GigaChad with neon emerald laser eyes, reticle lines, and focused aura.
   - *Short Break (Hydrate & Rest):* Indoor warm acoustic lounge GigaChad taking a mindful breath, holding a steaming Chad crown ceramic coffee mug with golden ambient lighting.
   - *Long Break (Touch Grass):* Outdoor sunny meadow GigaChad wearing aviator sunglasses, gently caressing lush green grass stalks.
-- **GigaChad Theme Songs & Instrumental BGM:**
-  - Independent audio player featuring royalty-free tracks inspired by viral meme anthems (`g3ox_em - GigaChad Theme (Phonk House)`, `DVRST - Close Eyes`, `Kordhell - Murder In My Mind`, `Home - Resonance`, etc.).
-  - Independent Anthem toggle, volume control, and non-repeating shuffle per timer mode.
-- **Audio Waveform Visualizer:** Animated speech bars synchronize with coach audio playback.
+- **Voice Coach Pre-Synthesized by ElevenLabs:**
+  - 16 high-impact coaching lines across `START_FOCUS`, `SHORT_BREAK`, `LONG_BREAK`, and `CHAD_MOTIVATION`.
+  - Replayable on-demand via the **CHADODORO COACH** card.
+- **Hybrid Anthem BGM Engine (YouTube + Git Vault):**
+  - Curated library of 27 viral phonk and motivation tracks on YouTube (including *REVENGE*, *MONTAGEM PEGADORA*, *GigaChad Theme Phonk House*, *MOTIVATION FUNK*, *METAMORPHOSIS*, *DIA DELÍCIA*, *PARA COMEÇAR O FINAL DE SEMANA*, *AURA*, etc.) with precise start timestamps.
+  - **Live Song Attribution & Direct Link:** Both the *Now Playing* banner and the *CHADODORO COACH* card display the active song title with direct links to the YouTube video.
+  - **30s Burst or Continuous Play:** By default, anthems play for 30s as a high-intensity phase transition, with a **"Keep Song Running"** toggle in Settings for continuous background music.
+  - **Avoid Ads Mode (Vault Audio Only):** Toggleable setting that completely bypasses YouTube embeds and streams exclusively from static zero-latency Git Vault `.mp3` tracks to guarantee 0 ads.
+  - Independent Anthem toggle, volume control, and shuffle per timer phase.
+- **Audio Waveform Visualizer:** Animated speech bars synchronize with coach audio and anthem playback.
 - **"I Touched Grass" Soundboard:** Tactile button increments user grass counter, triggers floating grass/clover confetti, and plays audio feedback.
 - **Instant Motivation Button:** Soundboard trigger for stoic motivation one-liners anytime.
 - **Web Speech API Fallback:** If audio files fail to load or offline, browser synthetic baritone voice takes over.
-- **Customizable Settings Modal:** Configurable focus (default 25m), short break (5m), long break (15m), volume slider, auto-start breaks, and stats reset.
+- **Customizable Settings Modal:** Configurable focus (default 25m), short break (5m), long break (15m), volume slider, auto-start breaks, keep song running, avoid ads mode, and stats reset.
 - **Keyboard Shortcuts:**
   - <kbd>Space</kbd>: Start / Pause
   - <kbd>R</kbd>: Reset timer
