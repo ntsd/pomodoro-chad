@@ -80,10 +80,27 @@ def sync_manifest():
 
     manifest_data["voice_ids"] = sorted(list(voice_id_set))
 
+    # Index Theme metadata files from public/vault/themes
+    themes_dir = VAULT_DIR / "themes"
+    themes_data = {"focus": [], "break": [], "long_break": [], "motivation": []}
+    if themes_dir.exists():
+        theme_files = sorted(glob.glob(str(themes_dir / "*.json")))
+        for t_path in theme_files:
+            try:
+                with open(t_path, "r", encoding="utf-8") as tf:
+                    t_meta = json.load(tf)
+                t_cat = t_meta.get("category", "focus")
+                if t_cat in themes_data:
+                    themes_data[t_cat].append(t_meta)
+            except Exception as te:
+                print(f"Warning: Failed to parse theme {t_path}: {te}")
+    manifest_data["themes"] = themes_data
+
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(manifest_data, f, indent=2, ensure_ascii=False)
 
-    print(f"✅ Manifest synced: {manifest_data['total_clips']} clips indexed across voices: {manifest_data['voice_ids']}")
+    total_themes = sum(len(v) for v in themes_data.values())
+    print(f"✅ Manifest synced: {manifest_data['total_clips']} voice clips and {total_themes} themes indexed across voices: {manifest_data['voice_ids']}")
     return manifest_data
 
 if __name__ == "__main__":

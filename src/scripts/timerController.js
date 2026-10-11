@@ -636,7 +636,8 @@ class ChadodoroController {
     if (this.domBtnToggleBgm) {
       this.domBtnToggleBgm.classList.toggle('active', this.settings.bgmEnabled);
       if (this.currentTheme) {
-        this.domBtnToggleBgm.title = `Theme: ${this.currentTheme.title} (Shortkey: B) - Currently ${this.settings.bgmEnabled ? 'ON' : 'OFF'}`;
+        const ref = this.currentTheme.meme_reference ? ` [${this.currentTheme.meme_reference}]` : '';
+        this.domBtnToggleBgm.title = `Theme: ${this.currentTheme.title}${ref} (Shortkey: B) - Currently ${this.settings.bgmEnabled ? 'ON' : 'OFF'}`;
       }
     }
     if (this.domHeaderBgmStatus) {

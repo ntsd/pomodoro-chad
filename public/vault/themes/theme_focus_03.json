@@ -1,0 +1,21 @@
+{
+  "id": "theme_focus_03",
+  "category": "focus",
+  "title": "Titan Hyper-Focus Phonk",
+  "meme_reference": "Kordhell - Murder In My Mind / Live Another Day",
+  "original_artist_reference": "Kordhell",
+  "bpm": 136,
+  "duration": 14.1,
+  "key": "F# minor",
+  "genre": "Aggressive Gym Phonk",
+  "instruments": [
+    "Hardstyle Punch Kick",
+    "Resonant 808 Cowbell Hooks",
+    "Relentless Trap Rolling Hats",
+    "Dark Heavy Distorted Bassline"
+  ],
+  "audio_url": "/vault/audio/theme_focus_03.mp3",
+  "is_instrumental": true,
+  "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+  "description": "Relentless 136 BPM aggressive gym phonk beat engineered for deep focus tunnel vision and PR crushing sessions."
+}

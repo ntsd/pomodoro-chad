@@ -187,58 +187,132 @@
       {
         "id": "theme_focus_01",
         "category": "focus",
-        "title": "GigaChad Anthem - Can You Feel My Heart (Phonk Drop)",
-        "audio_url": "/vault/audio/theme_focus_01.mp3",
+        "title": "GigaChad Anthem - Can You Feel My Heart (Phonk House)",
+        "meme_reference": "g3ox_em - GigaChad Theme (Phonk House Version)",
+        "original_artist_reference": "g3ox_em / Bring Me The Horizon",
         "bpm": 128,
         "duration": 15.0,
-        "is_instrumental": true
+        "key": "E minor",
+        "genre": "Phonk House / Drift House",
+        "instruments": [
+          "4-on-the-floor House Kick",
+          "Bring Me The Horizon 808 Cowbell Melody",
+          "Supersaw Chord Stabs (Em - C - G - D)",
+          "Sidechained Saturated Sub-Bass",
+          "16th Rolling Hi-Hats & Claps"
+        ],
+        "audio_url": "/vault/audio/theme_focus_01.mp3",
+        "is_instrumental": true,
+        "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+        "description": "Authentic Phonk House recreation of the viral g3ox_em GigaChad Theme with driving 128 BPM 4-on-the-floor house kick, Bring Me The Horizon cowbell melody, and pumping sidechain bass."
       },
       {
         "id": "theme_focus_02",
         "category": "focus",
-        "title": "Deep Work Lock-In (Dark Synthwave Pulse)",
-        "audio_url": "/vault/audio/theme_focus_02.mp3",
+        "title": "Sigma Drift Phonk - Close Eyes",
+        "meme_reference": "DVRST - Close Eyes (Sigma Chad / Megamind Phonk)",
+        "original_artist_reference": "DVRST",
         "bpm": 132,
         "duration": 14.5,
-        "is_instrumental": true
+        "key": "C minor",
+        "genre": "Drift Phonk / Sigma Phonk",
+        "instruments": [
+          "Punchy Drift Kick",
+          "Syncopated Memphis Cowbell Arpeggio",
+          "Gliding 808 Sub-Bass",
+          "Snappy Memphis Snare",
+          "High-Octave Cowbell Fills"
+        ],
+        "audio_url": "/vault/audio/theme_focus_02.mp3",
+        "is_instrumental": true,
+        "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+        "description": "High-octane Sigma Drift Phonk recreation inspired by DVRST's Close Eyes with syncopated cowbell stabs and deep distorted 808 slides."
       },
       {
         "id": "theme_focus_03",
         "category": "focus",
-        "title": "Hyper-Focus Titan Rhythm (Aggressive Phonk)",
-        "audio_url": "/vault/audio/theme_focus_03.mp3",
+        "title": "Titan Hyper-Focus Phonk",
+        "meme_reference": "Kordhell - Murder In My Mind / Live Another Day",
+        "original_artist_reference": "Kordhell",
         "bpm": 136,
         "duration": 14.1,
-        "is_instrumental": true
+        "key": "F# minor",
+        "genre": "Aggressive Gym Phonk",
+        "instruments": [
+          "Hardstyle Punch Kick",
+          "Resonant 808 Cowbell Hooks",
+          "Relentless Trap Rolling Hats",
+          "Dark Heavy Distorted Bassline"
+        ],
+        "audio_url": "/vault/audio/theme_focus_03.mp3",
+        "is_instrumental": true,
+        "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+        "description": "Relentless 136 BPM aggressive gym phonk beat engineered for deep focus tunnel vision and PR crushing sessions."
       }
     ],
     "break": [
       {
         "id": "theme_break_01",
         "category": "break",
-        "title": "Sunlit Meadow - Touch Grass Serenade",
-        "audio_url": "/vault/audio/theme_break_01.mp3",
+        "title": "Sunlit Meadow - Resonance Chillwave",
+        "meme_reference": "Home - Resonance (Sunset Walk Meme)",
+        "original_artist_reference": "Home",
         "bpm": 96,
         "duration": 15.0,
-        "is_instrumental": true
+        "key": "C major / G major",
+        "genre": "Synthwave / Chillwave",
+        "instruments": [
+          "Warm Analog Synth Swells (Cmaj9 - D9 - Gmaj7 - Em7)",
+          "Vintage Lo-Fi Acoustic Drums",
+          "Sparkling Chime Arpeggios",
+          "Lush Outdoor Atmospheric Reverb"
+        ],
+        "audio_url": "/vault/audio/theme_break_01.mp3",
+        "is_instrumental": true,
+        "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+        "description": "Nostalgic, warm chillwave pads inspired by Home's Resonance, providing a calming sonic backdrop to step outside and touch physical grass."
       },
       {
         "id": "theme_break_02",
         "category": "break",
         "title": "Outdoor Oxygen Lo-Fi Groove",
-        "audio_url": "/vault/audio/theme_break_02.mp3",
+        "meme_reference": "Kevin MacLeod - Carefree / Elevator Meme",
+        "original_artist_reference": "Kevin MacLeod (Incompetech)",
         "bpm": 104,
         "duration": 13.8,
-        "is_instrumental": true
+        "key": "F major",
+        "genre": "Meme Lo-Fi / Chillhop",
+        "instruments": [
+          "Bouncy Acoustic Kick & Snare",
+          "Rhodes Electric Piano",
+          "Playful Whistling Chimes",
+          "Warm Vinyl Texture"
+        ],
+        "audio_url": "/vault/audio/theme_break_02.mp3",
+        "is_instrumental": true,
+        "license": "Creative Commons / Royalty-Free Tribute",
+        "description": "Playful, lighthearted lo-fi bounce that playfully commands you to detach from monitors and breathe fresh air."
       },
       {
         "id": "theme_break_03",
         "category": "break",
         "title": "Breeze of the Meadow (Chillstep Pulse)",
-        "audio_url": "/vault/audio/theme_break_03.mp3",
+        "meme_reference": "Meadow Breeze Ambient Lo-Fi",
+        "original_artist_reference": "Chadodoro Originals",
         "bpm": 100,
         "duration": 14.4,
-        "is_instrumental": true
+        "key": "D major",
+        "genre": "Chillstep / Ambient",
+        "instruments": [
+          "Reverb Electric Piano",
+          "Mellow Syncopated Sub Pulse",
+          "Ambient Nature Drone",
+          "Gentle High Chimes"
+        ],
+        "audio_url": "/vault/audio/theme_break_03.mp3",
+        "is_instrumental": true,
+        "license": "CC0 Public Domain",
+        "description": "Tranquil ambient chillstep rhythm with soft piano harmonics and soothing outdoor resonance."
       }
     ],
     "long_break": [
@@ -246,19 +320,43 @@
         "id": "theme_long_break_01",
         "category": "long_break",
         "title": "Titan Outdoor Walk & Hydration",
-        "audio_url": "/vault/audio/theme_long_break_01.mp3",
+        "meme_reference": "Open Sky March & Nature Reverie",
+        "original_artist_reference": "Chadodoro Originals",
         "bpm": 92,
         "duration": 15.6,
-        "is_instrumental": true
+        "key": "A minor",
+        "genre": "Ambient March / Downtempo",
+        "instruments": [
+          "Steadfast Marching Percussion",
+          "Hydration Water-Drop Chimes",
+          "Deep Earth Sub Drone",
+          "Open Sky Acoustic Harmonics"
+        ],
+        "audio_url": "/vault/audio/theme_long_break_01.mp3",
+        "is_instrumental": true,
+        "license": "CC0 Public Domain",
+        "description": "Paced 92 BPM cadence designed for a long physical walk under the sun with cold water hydration."
       },
       {
         "id": "theme_long_break_02",
         "category": "long_break",
         "title": "Forest Canopy Reverie (Lush Lo-Fi)",
-        "audio_url": "/vault/audio/theme_long_break_02.mp3",
+        "meme_reference": "Forest Lo-Fi Girl / Sunlight Walk",
+        "original_artist_reference": "Chadodoro Originals",
         "bpm": 86,
         "duration": 16.7,
-        "is_instrumental": true
+        "key": "G major",
+        "genre": "Lush Lo-Fi / Nature Beats",
+        "instruments": [
+          "Slow Organic Heartbeat Kick",
+          "Gentle Electric Piano Swells",
+          "Warm Analog Tape Saturation",
+          "Forest Breeze Texture"
+        ],
+        "audio_url": "/vault/audio/theme_long_break_02.mp3",
+        "is_instrumental": true,
+        "license": "CC0 Public Domain",
+        "description": "Ultra-relaxed 86 BPM lo-fi beats with organic heartbeat rhythm for deep recovery before your next work block."
       }
     ],
     "motivation": [
@@ -266,19 +364,43 @@
         "id": "theme_motivation_01",
         "category": "motivation",
         "title": "Warrior Ascendance - Pure GigaChad Phonk",
-        "audio_url": "/vault/audio/theme_motivation_01.mp3",
+        "meme_reference": "g3ox_em & Hensonn - Sahara / Warrior Gym Edit",
+        "original_artist_reference": "g3ox_em / Hensonn",
         "bpm": 130,
         "duration": 14.8,
-        "is_instrumental": true
+        "key": "E minor",
+        "genre": "Warrior Workout Phonk",
+        "instruments": [
+          "Triumphant Brass-Style Synth Lead",
+          "Distorted 808 Memphis Cowbells",
+          "Thunderous Sub-Bass Drops",
+          "Double-Time Trap Hi-Hat Rolls"
+        ],
+        "audio_url": "/vault/audio/theme_motivation_01.mp3",
+        "is_instrumental": true,
+        "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+        "description": "Apex warrior motivation phonk drop featuring heroic brass stabs, screaming cowbells, and thunderous 808s."
       },
       {
         "id": "theme_motivation_02",
         "category": "motivation",
         "title": "Iron Discipline Apex (Titan War Stabs)",
-        "audio_url": "/vault/audio/theme_motivation_02.mp3",
+        "meme_reference": "Ghostface Playa - Why Not / Chad Drift Meme",
+        "original_artist_reference": "Ghostface Playa",
         "bpm": 134,
         "duration": 14.3,
-        "is_instrumental": true
+        "key": "D minor",
+        "genre": "Hard Drift Phonk",
+        "instruments": [
+          "Heavy Distorted War Kick",
+          "Menacing Cowbell Hooks",
+          "Unstoppable Driving Bass",
+          "Hard Memphis Claps"
+        ],
+        "audio_url": "/vault/audio/theme_motivation_02.mp3",
+        "is_instrumental": true,
+        "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+        "description": "Dark, heavy bounce drift phonk for instant adrenaline surges and breaking through procrastination barriers."
       }
     ]
   }

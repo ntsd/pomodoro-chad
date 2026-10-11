@@ -1,0 +1,22 @@
+{
+  "id": "theme_focus_01",
+  "category": "focus",
+  "title": "GigaChad Anthem - Can You Feel My Heart (Phonk House)",
+  "meme_reference": "g3ox_em - GigaChad Theme (Phonk House Version)",
+  "original_artist_reference": "g3ox_em / Bring Me The Horizon",
+  "bpm": 128,
+  "duration": 15.0,
+  "key": "E minor",
+  "genre": "Phonk House / Drift House",
+  "instruments": [
+    "4-on-the-floor House Kick",
+    "Bring Me The Horizon 808 Cowbell Melody",
+    "Supersaw Chord Stabs (Em - C - G - D)",
+    "Sidechained Saturated Sub-Bass",
+    "16th Rolling Hi-Hats & Claps"
+  ],
+  "audio_url": "/vault/audio/theme_focus_01.mp3",
+  "is_instrumental": true,
+  "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
+  "description": "Authentic Phonk House recreation of the viral g3ox_em GigaChad Theme with driving 128 BPM 4-on-the-floor house kick, Bring Me The Horizon cowbell melody, and pumping sidechain bass."
+}
