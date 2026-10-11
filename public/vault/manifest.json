@@ -403,5 +403,240 @@
         "description": "Dark, heavy bounce drift phonk for instant adrenaline surges and breaking through procrastination barriers."
       }
     ]
+  },
+  "youtube_themes": {
+    "START_FOCUS": [
+      {
+        "id": "yt_focus_01",
+        "category": "START_FOCUS",
+        "title": "REVENGE (Super Slowed) - 1HXSX, wnorg17",
+        "video_id": "mbSp4gsKaU0",
+        "start": 10,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_focus_02",
+        "category": "START_FOCUS",
+        "title": "MONTAGEM PEGADORA (Slowed)",
+        "video_id": "4E4VaL5krv8",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_focus_03",
+        "category": "START_FOCUS",
+        "title": "NO BATIDÃO (Extended)",
+        "video_id": "B3FKjqB7j7w",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      }
+    ],
+    "CHAD_MOTIVATION": [
+      {
+        "id": "yt_motivation_01",
+        "category": "CHAD_MOTIVATION",
+        "title": "g3ox_em - GigaChad Theme (Phonk House Version)",
+        "video_id": "OVh0bMNSFss",
+        "start": 15,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_motivation_02",
+        "category": "CHAD_MOTIVATION",
+        "title": "DJ RITMO DIVINO, SlowlyDying, limbee - MOTIVATION FUNK",
+        "video_id": "xbpuPCbRCWQ",
+        "start": 20,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_motivation_03",
+        "category": "CHAD_MOTIVATION",
+        "title": "Dxrk ダーク - RAVE (Official Audio)",
+        "video_id": "PTZgxW_3LIQ",
+        "start": 5,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_motivation_04",
+        "category": "CHAD_MOTIVATION",
+        "title": "Ogryzek - AURA (Official Music Video)",
+        "video_id": "AYeLloU1qjI",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_motivation_05",
+        "category": "CHAD_MOTIVATION",
+        "title": "INTERWORLD - METAMORPHOSIS",
+        "video_id": "317RHaFF7Xk",
+        "start": 5,
+        "duration": 30,
+        "type": "youtube"
+      }
+    ],
+    "SHORT_BREAK": [
+      {
+        "id": "yt_break_01",
+        "category": "SHORT_BREAK",
+        "title": "MONTAGEM XONADA",
+        "video_id": "JjPtDl6EJ3o",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_02",
+        "category": "SHORT_BREAK",
+        "title": "sma$her & MXZI - ACELERADA",
+        "video_id": "ADUis5-M15Y",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_03",
+        "category": "SHORT_BREAK",
+        "title": "ATLXS - PASSO BEM SOLTO (SLOWED)",
+        "video_id": "KgayxOF4Y7E",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_04",
+        "category": "SHORT_BREAK",
+        "title": "ANDROMEDA - MONTAGEM COMA",
+        "video_id": "icszzYxHuAg",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_05",
+        "category": "SHORT_BREAK",
+        "title": "MONTAGEM MIAU (Slowed)",
+        "video_id": "4PSNNk0C5JY",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_06",
+        "category": "SHORT_BREAK",
+        "title": "CLIMA LINDO (SLOWED)",
+        "video_id": "P12jBX75B48",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_07",
+        "category": "SHORT_BREAK",
+        "title": "TIKI TIKI",
+        "video_id": "xVS4zgb9AuU",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_08",
+        "category": "SHORT_BREAK",
+        "title": "MXZI - MONTAGEM TOMADA (Slowed + Extended)",
+        "video_id": "dmur3cBdUHo",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_09",
+        "category": "SHORT_BREAK",
+        "title": "Ba Fang Lai Cai (八方来财)",
+        "video_id": "tq5257HTKdI",
+        "start": 10,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_10",
+        "category": "SHORT_BREAK",
+        "title": "大展鴻圖 (Blueprint Supreme)",
+        "video_id": "yWT-UopFlAs",
+        "start": 10,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_11",
+        "category": "SHORT_BREAK",
+        "title": "TWISTED - WORTH NOTHING (ft. Oliver Tree)",
+        "video_id": "neOQ8s60sHU",
+        "start": 15,
+        "duration": 30,
+        "type": "youtube"
+      }
+    ],
+    "LONG_BREAK": [
+      {
+        "id": "yt_long_01",
+        "category": "LONG_BREAK",
+        "title": "DR MØB & ZODIVK - Ainsi Bas La Vida Funk (Super Slowed)",
+        "video_id": "8SfaaSpjuY4",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_long_02",
+        "category": "LONG_BREAK",
+        "title": "MONTAGEM ALQUIMIA",
+        "video_id": "CQZ-XIgyEUg",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_long_03",
+        "category": "LONG_BREAK",
+        "title": "弥渡山歌 (Midu Echoing)",
+        "video_id": "eIQqtWOA12c",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_long_04",
+        "category": "LONG_BREAK",
+        "title": "Joyful - Chess",
+        "video_id": "_ON0MJEIzSE",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_long_05",
+        "category": "LONG_BREAK",
+        "title": "Oliver Tree - Life Goes On",
+        "video_id": "8F2s8ivKXNY",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_long_06",
+        "category": "LONG_BREAK",
+        "title": "Crazy Frog - Axel F",
+        "video_id": "k85mRPqvMbE",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      }
+    ]
   }
 }

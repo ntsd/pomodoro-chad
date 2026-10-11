@@ -12,6 +12,11 @@ class ChadodoroController {
     this.bgmPlayer = new Audio('/vault/themes/theme_focus_01/theme_focus_01.mp3');
     this.bgmPlayer.loop = false;
     this.currentClip = null;
+    this.currentTheme = null;
+    this.currentThemeCategory = null;
+    this.ytPlayer = null;
+    this.ytReady = false;
+    this.bgmStopTimer = null;
     
     // Default Settings
     this.settings = {
@@ -23,6 +28,8 @@ class ChadodoroController {
       volume: 90,
       bgmEnabled: true,
       bgmVolume: 35,
+      keepSongRunning: false,
+      avoidAdsMode: false,
       repeatTheme: false,
       autoStartBreak: false,
       autoStartFocus: false,
@@ -46,6 +53,7 @@ class ChadodoroController {
     await this.fetchManifest();
     this.cacheDom();
     this.bindEvents();
+    this.initYouTubePlayer();
     this.applySettingsToUI();
     this.updateDisplay();
     this.updateAvatarState();
@@ -535,8 +543,7 @@ class ChadodoroController {
     if (this.settings.bgmEnabled) {
       this.currentTheme = this.getRandomThemeForMode('CHAD_MOTIVATION');
       this.currentThemeCategory = 'CHAD_MOTIVATION';
-      this.bgmPlayer.src = this.currentTheme.audio_url;
-      this.bgmPlayer.play().catch(() => {});
+      this.startThemeAudio(this.currentTheme);
       this.updateBgmUI();
     }
   }
@@ -610,9 +617,14 @@ class ChadodoroController {
     }
 
     // Duck BGM during speech so the commanding voice is crystal clear
-    if (this.bgmPlayer && this.settings.bgmEnabled) {
+    if (this.settings.bgmEnabled) {
       if (isSpeaking) {
-        this.bgmPlayer.volume = Math.max(0, (this.settings.bgmVolume * 0.2) / 100);
+        if (this.bgmPlayer) {
+          this.bgmPlayer.volume = Math.max(0, (this.settings.bgmVolume * 0.2) / 100);
+        }
+        if (this.ytPlayer && typeof this.ytPlayer.setVolume === 'function') {
+          this.ytPlayer.setVolume(Math.round(this.settings.bgmVolume * 0.2));
+        }
       } else {
         this.updateBgmVolume();
       }
@@ -630,12 +642,85 @@ class ChadodoroController {
     if (this.bgmPlayer) {
       this.bgmPlayer.volume = Math.max(0, Math.min(1, this.settings.bgmVolume / 100));
     }
+    if (this.ytPlayer && typeof this.ytPlayer.setVolume === 'function') {
+      this.ytPlayer.setVolume(this.settings.bgmVolume);
+    }
+  }
+
+  initYouTubePlayer() {
+    if (typeof window === 'undefined') return;
+
+    const setupPlayer = () => {
+      const container = document.getElementById('youtube-bgm-player');
+      if (!container || this.ytPlayer) return;
+      try {
+        this.ytPlayer = new window.YT.Player('youtube-bgm-player', {
+          height: '1',
+          width: '1',
+          playerVars: {
+            autoplay: 0,
+            controls: 0,
+            disablekb: 1,
+            fs: 0,
+            modestbranding: 1,
+            rel: 0,
+            origin: window.location.origin
+          },
+          events: {
+            onReady: () => {
+              this.ytReady = true;
+              if (this.ytPlayer && typeof this.ytPlayer.setVolume === 'function') {
+                this.ytPlayer.setVolume(this.settings.bgmVolume);
+              }
+            },
+            onStateChange: (event) => {
+              // 0 means ENDED
+              if (event.data === 0) {
+                if (this.isRunning && this.settings.bgmEnabled && this.settings.keepSongRunning) {
+                  if (this.settings.repeatTheme && this.currentTheme) {
+                    this.ytPlayer.seekTo(this.currentTheme.start || 0);
+                    this.ytPlayer.playVideo();
+                  } else {
+                    this.updateBgmPlayback(true);
+                  }
+                }
+              }
+            },
+            onError: (e) => {
+              console.warn('[YouTube BGM] Audio embed restricted or error:', e.data);
+              this.playVaultFallbackTheme();
+            }
+          }
+        });
+      } catch (err) {
+        console.warn('Could not initialize YT.Player:', err);
+      }
+    };
+
+    if (window.YT && window.YT.Player) {
+      setupPlayer();
+    } else {
+      const existingScript = document.getElementById('yt-iframe-api');
+      if (!existingScript) {
+        const tag = document.createElement('script');
+        tag.id = 'yt-iframe-api';
+        tag.src = 'https://www.youtube.com/iframe_api';
+        const firstScript = document.getElementsByTagName('script')[0];
+        if (firstScript && firstScript.parentNode) {
+          firstScript.parentNode.insertBefore(tag, firstScript);
+        } else {
+          document.head.appendChild(tag);
+        }
+      }
+      const prevCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (typeof prevCallback === 'function') prevCallback();
+        setupPlayer();
+      };
+    }
   }
 
   getRandomThemeForMode(mode) {
-    if (!this.manifest || !this.manifest.themes) {
-      return { audio_url: '/vault/themes/theme_focus_01/theme_focus_01.mp3', title: 'GigaChad Anthem' };
-    }
     const modeToCat = {
       focus: 'START_FOCUS',
       START_FOCUS: 'START_FOCUS',
@@ -647,10 +732,22 @@ class ChadodoroController {
       CHAD_MOTIVATION: 'CHAD_MOTIVATION'
     };
     const cat = modeToCat[mode] || 'START_FOCUS';
-    const pool = this.manifest.themes[cat] || this.manifest.themes['START_FOCUS'] || [];
-    if (pool.length === 0) {
-      return { audio_url: '/vault/themes/theme_focus_01/theme_focus_01.mp3', title: 'GigaChad Anthem' };
+    const vaultThemes = (this.manifest && this.manifest.themes && this.manifest.themes[cat]) || [];
+    const ytThemes = (this.manifest && this.manifest.youtube_themes && this.manifest.youtube_themes[cat]) || [];
+
+    let pool = [];
+    if (this.settings.avoidAdsMode) {
+      // Avoid Ads Mode: Non-YouTube songs only
+      pool = vaultThemes.length > 0 ? vaultThemes : ytThemes;
+    } else {
+      // Hybrid Mode: Curated viral YouTube tracks prioritized, with Vault themes included
+      pool = ytThemes.length > 0 ? [...ytThemes, ...vaultThemes] : vaultThemes;
     }
+
+    if (pool.length === 0) {
+      return { type: 'vault', audio_url: '/vault/themes/theme_focus_01/theme_focus_01.mp3', title: 'GigaChad Anthem' };
+    }
+
     // Avoid repeating the same theme consecutively if multiple options exist
     const candidates = (pool.length > 1 && this.currentTheme)
       ? pool.filter(t => t.id !== this.currentTheme.id)
@@ -658,12 +755,107 @@ class ChadodoroController {
     return candidates[Math.floor(Math.random() * candidates.length)];
   }
 
+  startThemeAudio(theme) {
+    if (!theme) return;
+
+    if (this.bgmStopTimer) {
+      clearTimeout(this.bgmStopTimer);
+      this.bgmStopTimer = null;
+    }
+
+    const isYT = theme.type === 'youtube' || !!theme.video_id;
+
+    if (isYT) {
+      if (this.bgmPlayer) this.bgmPlayer.pause();
+
+      const playYT = () => {
+        if (this.ytPlayer && typeof this.ytPlayer.loadVideoById === 'function') {
+          this.ytPlayer.loadVideoById({
+            videoId: theme.video_id,
+            startSeconds: theme.start || 0
+          });
+          this.ytPlayer.setVolume(this.settings.bgmVolume);
+          this.ytPlayer.playVideo();
+        }
+      };
+
+      if (this.ytReady && this.ytPlayer) {
+        playYT();
+      } else {
+        setTimeout(playYT, 800);
+      }
+    } else {
+      if (this.ytPlayer && typeof this.ytPlayer.pauseVideo === 'function') {
+        this.ytPlayer.pauseVideo();
+      }
+
+      if (this.bgmPlayer && theme.audio_url) {
+        this.bgmPlayer.src = theme.audio_url;
+        this.bgmPlayer.currentTime = 0;
+        this.updateBgmVolume();
+        this.bgmPlayer.play().catch(() => {});
+      }
+    }
+
+    // Default: Every song ends in 30s unless keepSongRunning is enabled
+    if (!this.settings.keepSongRunning) {
+      const durationMs = (theme.duration || 30) * 1000;
+      this.bgmStopTimer = setTimeout(() => {
+        if (!this.settings.keepSongRunning) {
+          this.pauseThemeAudio();
+        }
+      }, durationMs);
+    }
+  }
+
+  resumeThemeAudio(theme) {
+    if (!theme) return;
+    const isYT = theme.type === 'youtube' || !!theme.video_id;
+    if (isYT) {
+      if (this.ytPlayer && typeof this.ytPlayer.playVideo === 'function') {
+        this.ytPlayer.setVolume(this.settings.bgmVolume);
+        this.ytPlayer.playVideo();
+      }
+    } else {
+      if (this.bgmPlayer) {
+        this.updateBgmVolume();
+        this.bgmPlayer.play().catch(() => {});
+      }
+    }
+  }
+
+  pauseThemeAudio() {
+    if (this.bgmStopTimer) {
+      clearTimeout(this.bgmStopTimer);
+      this.bgmStopTimer = null;
+    }
+    if (this.bgmPlayer) {
+      this.bgmPlayer.pause();
+    }
+    if (this.ytPlayer && typeof this.ytPlayer.pauseVideo === 'function') {
+      this.ytPlayer.pauseVideo();
+    }
+  }
+
+  playVaultFallbackTheme() {
+    const cat = this.currentThemeCategory || 'START_FOCUS';
+    const vaultThemes = (this.manifest && this.manifest.themes && this.manifest.themes[cat]) || [];
+    if (vaultThemes.length > 0) {
+      const fallback = vaultThemes[Math.floor(Math.random() * vaultThemes.length)];
+      this.currentTheme = fallback;
+      this.startThemeAudio(fallback);
+      this.updateBgmUI();
+    }
+  }
+
   updateBgmUI() {
     if (this.domBtnToggleBgm) {
       this.domBtnToggleBgm.classList.toggle('active', this.settings.bgmEnabled);
       if (this.currentTheme) {
-        const ref = this.currentTheme.meme_reference ? ` [${this.currentTheme.meme_reference}]` : '';
-        this.domBtnToggleBgm.title = `Theme: ${this.currentTheme.title}${ref} (Shortkey: B) - Currently ${this.settings.bgmEnabled ? 'ON' : 'OFF'}`;
+        const isYT = this.currentTheme.type === 'youtube' || !!this.currentTheme.video_id;
+        const tag = isYT ? ' [YouTube]' : ' [Vault]';
+        const dur = this.settings.keepSongRunning ? 'Full' : '30s';
+        this.domBtnToggleBgm.title = `Anthem: ${this.currentTheme.title}${tag} (${dur}) (Shortkey: B) - Currently ${this.settings.bgmEnabled ? 'ON' : 'OFF'}`;
       }
     }
     if (this.domHeaderBgmStatus) {
@@ -675,20 +867,18 @@ class ChadodoroController {
   }
 
   updateBgmPlayback(forceNew = false) {
-    if (!this.bgmPlayer) return;
     if (this.isRunning && this.settings.bgmEnabled) {
       const targetCat = this.mode === 'focus' ? 'START_FOCUS' : (this.mode === 'break' ? 'SHORT_BREAK' : 'LONG_BREAK');
       if (forceNew || !this.currentTheme || this.currentThemeCategory !== targetCat) {
         this.currentTheme = this.getRandomThemeForMode(targetCat);
         this.currentThemeCategory = targetCat;
-        this.bgmPlayer.src = this.currentTheme.audio_url;
+        this.startThemeAudio(this.currentTheme);
         this.updateBgmUI();
+      } else {
+        this.resumeThemeAudio(this.currentTheme);
       }
-      this.bgmPlayer.play().catch(e => {
-        // Autoplay may be restricted until initial user click
-      });
     } else {
-      this.bgmPlayer.pause();
+      this.pauseThemeAudio();
     }
   }
 
@@ -793,6 +983,8 @@ class ChadodoroController {
     const elAutoFocus = document.getElementById('setting-autostart-focus');
     const elSpeech = document.getElementById('setting-speech-fallback');
     const elRepeatTheme = document.getElementById('setting-repeat-theme');
+    const elKeepSongRunning = document.getElementById('setting-keep-song-running');
+    const elAvoidAdsMode = document.getElementById('setting-avoid-ads-mode');
 
     if (elFocus) elFocus.value = this.settings.focusMinutes;
     if (elBreak) elBreak.value = this.settings.breakMinutes;
@@ -802,6 +994,8 @@ class ChadodoroController {
     if (this.domVolumeValDisplay) this.domVolumeValDisplay.textContent = `${this.settings.volume}%`;
     if (this.domInputVoiceEnabled) this.domInputVoiceEnabled.checked = this.settings.voiceEnabled;
     if (this.domInputBgmEnabled) this.domInputBgmEnabled.checked = this.settings.bgmEnabled;
+    if (elKeepSongRunning) elKeepSongRunning.checked = !!this.settings.keepSongRunning;
+    if (elAvoidAdsMode) elAvoidAdsMode.checked = !!this.settings.avoidAdsMode;
     if (elRepeatTheme) elRepeatTheme.checked = !!this.settings.repeatTheme;
     if (this.domInputBgmVolume) this.domInputBgmVolume.value = this.settings.bgmVolume;
     if (this.domBgmVolumeDisplay) this.domBgmVolumeDisplay.textContent = `${this.settings.bgmVolume}%`;
@@ -819,6 +1013,8 @@ class ChadodoroController {
     this.settings.voiceEnabled = formData.get('voiceEnabled') === 'on';
     this.settings.volume = parseInt(formData.get('volume'), 10) || 90;
     this.settings.bgmEnabled = formData.get('bgmEnabled') === 'on';
+    this.settings.keepSongRunning = formData.get('keepSongRunning') === 'on';
+    this.settings.avoidAdsMode = formData.get('avoidAdsMode') === 'on';
     this.settings.repeatTheme = formData.get('repeatTheme') === 'on';
     this.bgmPlayer.loop = this.settings.repeatTheme;
     this.settings.bgmVolume = parseInt(formData.get('bgmVolume'), 10) || 35;

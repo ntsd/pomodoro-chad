@@ -94,7 +94,8 @@ def sync_manifest():
         json.dump(manifest_data, f, indent=2, ensure_ascii=False)
 
     total_themes = sum(len(v) for v in manifest_data["themes"].values())
-    print(f"✅ Manifest verified: {manifest_data['total_clips']} clips across {len(manifest_data['categories'])} categories and {total_themes} themes across {len(manifest_data['themes'])} theme categories.")
+    total_yt = sum(len(v) for v in manifest_data.get("youtube_themes", {}).values())
+    print(f"✅ Manifest verified: {manifest_data['total_clips']} clips across {len(manifest_data['categories'])} categories, {total_themes} vault themes, and {total_yt} hybrid YouTube anthems.")
     return manifest_data
 
 if __name__ == "__main__":

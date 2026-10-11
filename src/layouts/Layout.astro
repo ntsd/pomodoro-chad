@@ -146,6 +146,11 @@ const {
       </div>
     </footer>
 
+    <!-- YouTube Audio Player Embed (Audio Mode, Hidden Video) -->
+    <div id="youtube-audio-host" class="youtube-audio-host" aria-hidden="true">
+      <div id="youtube-bgm-player"></div>
+    </div>
+
     <!-- Client Script -->
     <script src="../scripts/timerController.js"></script>
   </body>
@@ -444,5 +449,18 @@ const {
     .header-actions {
       gap: 0.25rem;
     }
+  }
+
+  /* Audio-only YouTube Player Container */
+  .youtube-audio-host {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    height: 1px;
+    opacity: 0.001;
+    pointer-events: none;
+    z-index: -9999;
+    overflow: hidden;
   }
 </style>
