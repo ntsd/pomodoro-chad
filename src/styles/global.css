@@ -239,8 +239,9 @@ button:active {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(4, 7, 12, 0.82);
-  backdrop-filter: blur(8px);
+  background: rgba(4, 7, 12, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,6 +249,10 @@ button:active {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
+  padding: 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
 }
 
 .modal-overlay.active {
@@ -256,19 +261,34 @@ button:active {
 }
 
 .modal-content {
-  width: 90%;
+  width: 100%;
   max-width: 520px;
+  max-height: min(90vh, 90dvh);
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 2rem;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(16, 185, 129, 0.15);
-  transform: translateY(20px) scale(0.97);
+  padding: 0;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(16, 185, 129, 0.15);
+  transform: translateY(15px) scale(0.98);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .modal-overlay.active .modal-content {
   transform: translateY(0) scale(1);
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 0.5rem;
+  }
+  .modal-content {
+    max-height: calc(100dvh - 1rem);
+    border-radius: var(--radius-md);
+  }
 }
 
 /* Custom Scrollbar */

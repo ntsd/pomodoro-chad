@@ -383,4 +383,33 @@ import SettingsModal from '../components/SettingsModal.astro';
     font-size: 0.68rem;
     font-weight: 800;
   }
+
+  @media (max-width: 680px) {
+    .hero-section {
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+      gap: 1.15rem;
+    }
+
+    .challenge-strip {
+      padding: 0.5rem 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .challenge-tag {
+      font-size: 0.68rem;
+    }
+
+    .timer-card {
+      padding: 1.5rem 0.85rem;
+    }
+
+    .rules-card, .vault-info-card {
+      padding: 1.15rem 1rem;
+    }
+
+    .shortcuts-bar {
+      display: none;
+    }
+  }
 </style>

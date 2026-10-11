@@ -360,4 +360,74 @@ const {
       display: inline-flex;
     }
   }
+
+  @media (max-width: 680px) {
+    .header-container {
+      padding-top: 0.65rem;
+      padding-bottom: 0.65rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .brand-link {
+      gap: 0.5rem;
+    }
+
+    .brand-title {
+      font-size: 1rem;
+    }
+
+    .brand-subtitle {
+      display: none;
+    }
+
+    .header-actions {
+      gap: 0.4rem;
+    }
+
+    .chad-stats-pill {
+      padding: 0.3rem 0.55rem;
+      gap: 0;
+    }
+
+    .rank-badge {
+      display: none;
+    }
+
+    .grass-stat {
+      border-left: none;
+      padding-left: 0;
+      font-size: 0.75rem;
+    }
+
+    .btn-audio-toggle {
+      padding: 0;
+      width: 36px;
+      height: 36px;
+      justify-content: center;
+    }
+
+    .btn-audio-toggle .audio-toggle-label {
+      display: none;
+    }
+
+    .btn-audio-toggle .audio-toggle-icon {
+      font-size: 0.95rem;
+    }
+
+    .btn-icon-header {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .brand-title {
+      font-size: 0.88rem;
+    }
+    .header-actions {
+      gap: 0.25rem;
+    }
+  }
 </style>

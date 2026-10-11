@@ -382,15 +382,71 @@
   }
 
   @media (max-width: 600px) {
+    .mode-tabs {
+      width: 100%;
+      max-width: 360px;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.25rem;
+    }
+
+    .mode-tab {
+      padding: 0.45rem 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      gap: 0.35rem;
+    }
+
     .chad-interactive-actions {
       grid-template-columns: 1fr;
+      gap: 0.65rem;
     }
+
+    .btn-grass, .btn-motivation {
+      padding: 0.75rem 0.85rem;
+    }
+
     .timer-display-wrap {
-      width: 260px;
-      height: 260px;
+      width: 250px;
+      height: 250px;
     }
+
     .timer-time {
-      font-size: 3.6rem;
+      font-size: 3.5rem;
+    }
+
+    .timer-btn-main {
+      padding: 0.85rem 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .timer-sub-controls {
+      gap: 0.5rem;
+    }
+
+    .timer-btn-sub {
+      padding: 0.55rem 0.75rem;
+      font-size: 0.78rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .mode-tab .tab-dot {
+      display: none;
+    }
+
+    .mode-tab {
+      padding: 0.4rem 0.5rem;
+      font-size: 0.66rem;
+    }
+
+    .timer-display-wrap {
+      width: 230px;
+      height: 230px;
+    }
+
+    .timer-time {
+      font-size: 3.1rem;
     }
   }
 </style>
