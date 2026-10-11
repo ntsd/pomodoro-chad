@@ -9,7 +9,7 @@ class ChadodoroController {
   constructor() {
     this.manifest = null;
     this.audioPlayer = new Audio();
-    this.bgmPlayer = new Audio('/vault/audio/gigachad_theme.mp3');
+    this.bgmPlayer = new Audio('/vault/audio/theme_focus_01.mp3');
     this.bgmPlayer.loop = true;
     this.currentClip = null;
     
@@ -622,12 +622,12 @@ class ChadodoroController {
 
   getRandomThemeForMode(mode) {
     if (!this.manifest || !this.manifest.themes) {
-      return { audio_url: '/vault/audio/gigachad_theme.mp3', title: 'GigaChad Anthem' };
+      return { audio_url: '/vault/audio/theme_focus_01.mp3', title: 'GigaChad Anthem' };
     }
     const cat = mode === 'focus' ? 'focus' : (mode === 'break' ? 'break' : (mode === 'long_break' ? 'long_break' : 'motivation'));
     const pool = this.manifest.themes[cat] || this.manifest.themes['focus'] || [];
     if (pool.length === 0) {
-      return { audio_url: '/vault/audio/gigachad_theme.mp3', title: 'GigaChad Anthem' };
+      return { audio_url: '/vault/audio/theme_focus_01.mp3', title: 'GigaChad Anthem' };
     }
     return pool[Math.floor(Math.random() * pool.length)];
   }
