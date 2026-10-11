@@ -10,7 +10,7 @@ class ChadodoroController {
     this.manifest = null;
     this.audioPlayer = new Audio();
     this.bgmPlayer = new Audio('/vault/audio/theme_focus_01.mp3');
-    this.bgmPlayer.loop = true;
+    this.bgmPlayer.loop = false;
     this.currentClip = null;
     
     // Default Settings
@@ -23,6 +23,7 @@ class ChadodoroController {
       volume: 90,
       bgmEnabled: true,
       bgmVolume: 35,
+      repeatTheme: false,
       autoStartBreak: false,
       autoStartFocus: false,
       speechFallback: true
@@ -61,6 +62,7 @@ class ChadodoroController {
     this.updateVoiceUI();
     this.updateBgmVolume();
     this.updateBgmUI();
+    this.bgmPlayer.loop = !!this.settings.repeatTheme;
 
     // Set initial audio volume
     this.audioPlayer.volume = this.settings.volume / 100;
@@ -629,7 +631,11 @@ class ChadodoroController {
     if (pool.length === 0) {
       return { audio_url: '/vault/audio/theme_focus_01.mp3', title: 'GigaChad Anthem' };
     }
-    return pool[Math.floor(Math.random() * pool.length)];
+    // Avoid repeating the same theme consecutively if multiple options exist
+    const candidates = (pool.length > 1 && this.currentTheme)
+      ? pool.filter(t => t.id !== this.currentTheme.id)
+      : pool;
+    return candidates[Math.floor(Math.random() * candidates.length)];
   }
 
   updateBgmUI() {
@@ -777,6 +783,7 @@ class ChadodoroController {
     const elAutoBreak = document.getElementById('setting-autostart-break');
     const elAutoFocus = document.getElementById('setting-autostart-focus');
     const elSpeech = document.getElementById('setting-speech-fallback');
+    const elRepeatTheme = document.getElementById('setting-repeat-theme');
 
     if (elFocus) elFocus.value = this.settings.focusMinutes;
     if (elBreak) elBreak.value = this.settings.breakMinutes;
@@ -786,6 +793,7 @@ class ChadodoroController {
     if (this.domVolumeValDisplay) this.domVolumeValDisplay.textContent = `${this.settings.volume}%`;
     if (this.domInputVoiceEnabled) this.domInputVoiceEnabled.checked = this.settings.voiceEnabled;
     if (this.domInputBgmEnabled) this.domInputBgmEnabled.checked = this.settings.bgmEnabled;
+    if (elRepeatTheme) elRepeatTheme.checked = !!this.settings.repeatTheme;
     if (this.domInputBgmVolume) this.domInputBgmVolume.value = this.settings.bgmVolume;
     if (this.domBgmVolumeDisplay) this.domBgmVolumeDisplay.textContent = `${this.settings.bgmVolume}%`;
     if (elAutoBreak) elAutoBreak.checked = this.settings.autoStartBreak;
@@ -802,6 +810,8 @@ class ChadodoroController {
     this.settings.voiceEnabled = formData.get('voiceEnabled') === 'on';
     this.settings.volume = parseInt(formData.get('volume'), 10) || 90;
     this.settings.bgmEnabled = formData.get('bgmEnabled') === 'on';
+    this.settings.repeatTheme = formData.get('repeatTheme') === 'on';
+    this.bgmPlayer.loop = this.settings.repeatTheme;
     this.settings.bgmVolume = parseInt(formData.get('bgmVolume'), 10) || 35;
     this.settings.autoStartBreak = formData.get('autoStartBreak') === 'on';
     this.settings.autoStartFocus = formData.get('autoStartFocus') === 'on';
