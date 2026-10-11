@@ -305,9 +305,9 @@ class ChadodoroController {
     if (this.timeRemaining === this.totalDuration) {
       if (this.mode === 'focus') {
         this.playCategoryClip('START_FOCUS');
-      } else if (this.mode === 'break') {
-        this.playCategoryClip('TOUCH_GRASS');
       } else if (this.mode === 'long_break') {
+        this.playCategoryClip('TOUCH_GRASS');
+      } else if (this.mode === 'break') {
         this.playCategoryClip('LONG_BREAK');
       }
     }
@@ -354,10 +354,10 @@ class ChadodoroController {
       // Check if long break interval reached
       if (this.cyclesCompleted % this.settings.longBreakInterval === 0) {
         this.setMode('long_break');
-        if (!isSkipped) this.playCategoryClip('LONG_BREAK');
+        if (!isSkipped) this.playCategoryClip('TOUCH_GRASS');
       } else {
         this.setMode('break');
-        if (!isSkipped) this.playCategoryClip('TOUCH_GRASS');
+        if (!isSkipped) this.playCategoryClip('LONG_BREAK');
       }
 
       if (this.settings.autoStartBreak) {
@@ -417,7 +417,7 @@ class ChadodoroController {
       this.domProgress.style.strokeDashoffset = offset;
 
       // Ring stroke color
-      if (this.mode === 'focus') {
+      if (this.mode === 'focus' || this.mode === 'long_break') {
         this.domProgress.setAttribute('stroke', 'url(#ringEmeraldGradient)');
       } else {
         this.domProgress.setAttribute('stroke', 'url(#ringBreakGradient)');
@@ -430,11 +430,11 @@ class ChadodoroController {
         this.domModeTag.textContent = 'LOCK-IN FOCUS // DEEP WORK';
         this.domModeTag.style.color = 'var(--emerald-bright)';
       } else if (this.mode === 'break') {
-        this.domModeTag.textContent = 'TOUCH GRASS // RADICAL BREAK';
+        this.domModeTag.textContent = 'SHORT BREAK // QUICK RESET';
         this.domModeTag.style.color = '#fde047';
       } else {
-        this.domModeTag.textContent = 'LONG OUTDOOR RECOVERY';
-        this.domModeTag.style.color = '#38bdf8';
+        this.domModeTag.textContent = 'TOUCH GRASS // RADICAL RECOVERY';
+        this.domModeTag.style.color = 'var(--emerald-bright)';
       }
     }
 
@@ -458,7 +458,12 @@ class ChadodoroController {
     const minutes = Math.floor(this.timeRemaining / 60);
     const seconds = this.timeRemaining % 60;
     const timeStr = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    const modeLabel = this.mode === 'focus' ? 'Lock In ⚡' : 'Touch Grass 🌿';
+    let modeLabel = 'Lock In ⚡';
+    if (this.mode === 'break') {
+      modeLabel = 'Short Break ☕';
+    } else if (this.mode === 'long_break') {
+      modeLabel = 'Touch Grass 🌿';
+    }
     const stateIcon = this.isRunning ? '▶' : '⏸';
     document.title = `${stateIcon} (${timeStr}) Chadodoro - ${modeLabel}`;
   }
@@ -472,7 +477,13 @@ class ChadodoroController {
       if (this.isRunning) {
         this.domToggleLabel.textContent = 'PAUSE';
       } else {
-        this.domToggleLabel.textContent = this.mode === 'focus' ? 'LOCK IN NOW' : 'START BREAK';
+        if (this.mode === 'focus') {
+          this.domToggleLabel.textContent = 'LOCK IN NOW';
+        } else if (this.mode === 'long_break') {
+          this.domToggleLabel.textContent = 'TOUCH GRASS NOW';
+        } else {
+          this.domToggleLabel.textContent = 'START BREAK';
+        }
       }
     }
   }
