@@ -26,6 +26,12 @@ services:
       - path: /.well-known/*
         name: Cache-Control
         value: public, max-age=3600
+      - path: /ai-catalog.json
+        name: Cache-Control
+        value: public, max-age=3600
+      - path: /robots.txt
+        name: Cache-Control
+        value: public, max-age=3600
     routes:
       - type: rewrite
         source: /*

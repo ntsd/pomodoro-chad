@@ -1,0 +1,23 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Chadodoro",
+    "identifier": "urn:ai:chadodoro.ntsd.dev"
+  },
+  "entries": [
+    {
+      "identifier": "urn:ai:chadodoro.ntsd.dev:tools:pomodoro-coach",
+      "displayName": "Chadodoro Stoic Pomodoro & Grass Tracker",
+      "type": "application/json",
+      "description": "High-performance Pomodoro state machine with GigaChad voice coach, tactile grass tracking, and WebMCP agent tools.",
+      "url": "https://chadodoro.ntsd.dev/.well-known/webmcp.json",
+      "representativeQueries": [
+        "start pomodoro focus timer",
+        "pause or resume timer",
+        "log that user touched physical grass",
+        "play stoic GigaChad motivation clip",
+        "check remaining time"
+      ]
+    }
+  ]
+}
