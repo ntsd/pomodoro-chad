@@ -3,7 +3,7 @@
 ---
 <div class="avatar-container" id="chad-avatar-wrapper">
   <!-- Glowing border ring -->
-  <div class="avatar-ring-glow"></div>
+  <div class="avatar-ring-glow" id="avatar-ring-glow"></div>
   
   <div class="avatar-card" id="avatar-card">
     <!-- State 1: Focus Mode (GigaChad Deep Work Silhouette) -->
@@ -89,8 +89,113 @@
       </svg>
     </div>
 
-    <!-- State 2: Break Mode ("Touch Grass" Outdoors In Sunny Meadow) -->
+    <!-- State 2: Short Break Mode (Indoor Recovery / Coffee / Hydration Lounge) -->
     <div class="avatar-state state-break" id="avatar-break">
+      <svg class="avatar-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="shortBreakBg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#140f07" />
+            <stop offset="45%" stop-color="#1f160a" />
+            <stop offset="100%" stop-color="#090d14" />
+          </linearGradient>
+          <linearGradient id="warmAmberGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3" />
+            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="chadWarmSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fed7aa" />
+            <stop offset="50%" stop-color="#fcd34d" />
+            <stop offset="100%" stop-color="#d97706" />
+          </linearGradient>
+          <linearGradient id="mugGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#334155" />
+            <stop offset="100%" stop-color="#0f172a" />
+          </linearGradient>
+        </defs>
+
+        <!-- Background Warm Lounge -->
+        <rect width="320" height="320" rx="24" fill="url(#shortBreakBg)" />
+
+        <!-- Ambient Warm Light Dome from top-right -->
+        <circle cx="260" cy="50" r="110" fill="url(#warmAmberGlow)" />
+        <circle cx="260" cy="50" r="18" fill="#fde047" opacity="0.3" />
+
+        <!-- Architectural Vertical Acoustic Lounge Panels -->
+        <line x1="30" y1="20" x2="30" y2="240" stroke="#2a1d0d" stroke-width="2" opacity="0.6" />
+        <line x1="60" y1="20" x2="60" y2="240" stroke="#2a1d0d" stroke-width="2" opacity="0.6" />
+        <line x1="90" y1="20" x2="90" y2="240" stroke="#2a1d0d" stroke-width="2" opacity="0.6" />
+        <line x1="230" y1="20" x2="230" y2="240" stroke="#2a1d0d" stroke-width="2" opacity="0.6" />
+        <line x1="260" y1="20" x2="260" y2="240" stroke="#2a1d0d" stroke-width="2" opacity="0.6" />
+        <line x1="290" y1="20" x2="290" y2="240" stroke="#2a1d0d" stroke-width="2" opacity="0.6" />
+
+        <!-- Warm recovery aura -->
+        <circle cx="160" cy="150" r="90" fill="#f59e0b" opacity="0.1" filter="blur(20px)" />
+
+        <!-- Relaxed GigaChad Torso in Charcoal & Gold Loungewear -->
+        <path d="M 45 320 C 50 265, 80 238, 115 228 C 135 224, 185 224, 205 228 C 240 238, 270 265, 275 320 Z" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+        <path d="M 125 230 L 160 268 L 195 230" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.75" />
+
+        <!-- Massive Neck in Warm Ambient Light -->
+        <path d="M 122 230 L 130 172 L 190 172 L 198 230 Z" fill="#fcd34d" />
+        <path d="M 136 178 L 142 225 M 184 178 L 178 225" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" />
+
+        <!-- Iconic Chad Head & Jaw in Warm Light -->
+        <path d="M 106 130 C 106 85, 126 65, 160 65 C 194 65, 214 85, 214 130 C 214 160, 200 180, 186 198 L 160 208 L 134 198 C 120 180, 106 160, 106 130 Z" fill="url(#chadWarmSkin)" stroke="#d97706" stroke-width="1.5" />
+
+        <!-- Razor-sharp Jawline Contour -->
+        <path d="M 112 142 L 134 195 L 160 205 L 186 195 L 208 142" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        <line x1="160" y1="198" x2="160" y2="204" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" />
+
+        <!-- Serene Chad Hair with Golden Highlights -->
+        <path d="M 101 110 C 97 70, 128 38, 160 38 C 192 38, 223 70, 219 110 C 209 85, 185 75, 160 75 C 135 75, 111 85, 101 110 Z" fill="#090d16" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.5" />
+
+        <!-- Cheekbones -->
+        <path d="M 116 138 C 130 144, 140 146, 148 146" stroke="#b45309" stroke-width="1.8" stroke-linecap="round" />
+        <path d="M 204 138 C 190 144, 180 146, 172 146" stroke="#b45309" stroke-width="1.8" stroke-linecap="round" />
+
+        <!-- Stoic Nose -->
+        <path d="M 160 120 L 157 155 L 165 156" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" />
+
+        <!-- Mindful Closed Eyes (Serene Recovery / Deep Breath) -->
+        <g stroke="#92400e" stroke-width="2.5" stroke-linecap="round" fill="none">
+          <path d="M 126 126 Q 138 133 150 126" />
+          <path d="M 170 126 Q 182 133 194 126" />
+        </g>
+        <path d="M 124 116 Q 137 112 150 117" stroke="#78350f" stroke-width="2" stroke-linecap="round" fill="none" />
+        <path d="M 170 117 Q 183 112 196 116" stroke="#78350f" stroke-width="2" stroke-linecap="round" fill="none" />
+
+        <!-- Relaxed Stoic Smirk -->
+        <path d="M 148 174 Q 160 179 174 171" fill="none" stroke="#78350f" stroke-width="3" stroke-linecap="round" />
+
+        <!-- Chad's Hand Holding Steaming Coffee/Hydration Mug (Foreground Right) -->
+        <!-- Arm & Hand -->
+        <path d="M 215 320 C 215 275, 235 255, 255 255 C 265 260, 268 275, 265 320 Z" fill="#fcd34d" stroke="#b45309" stroke-width="1.8" />
+        <!-- Fingers grasping handle/mug -->
+        <path d="M 240 262 Q 248 252 255 258" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" />
+        
+        <!-- Matte Ceramic Chad Mug -->
+        <rect x="224" y="234" width="42" height="48" rx="8" fill="url(#mugGrad)" stroke="#f59e0b" stroke-width="1.5" />
+        <path d="M 266 242 C 280 242, 280 270, 266 270" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Golden Chad Crown Insignia on Mug -->
+        <polygon points="238,252 241,257 245,253 249,257 252,252 251,260 239,260" fill="#f59e0b" />
+
+        <!-- Steaming Coffee Wisps -->
+        <path d="M 238 226 Q 232 212 238 198 Q 244 184 238 172" fill="none" stroke="#fef08a" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+        <path d="M 252 228 Q 258 214 252 200 Q 246 186 254 174" fill="none" stroke="#fde047" stroke-width="1.8" stroke-linecap="round" opacity="0.5" />
+
+        <!-- Ambient golden rest motes -->
+        <circle cx="265" cy="162" r="2" fill="#fbbf24" opacity="0.8" />
+        <circle cx="228" cy="180" r="1.5" fill="#fef08a" opacity="0.7" />
+        <circle cx="70" cy="140" r="2" fill="#f59e0b" opacity="0.5" />
+
+        <!-- Status watermark badge -->
+        <rect x="55" y="275" width="210" height="28" rx="14" fill="#78350f" stroke="#f59e0b" stroke-width="1.5" />
+        <text x="160" y="293" fill="#ffffff" font-size="11" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle" letter-spacing="2">SHORT BREAK // HYDRATE ☕</text>
+      </svg>
+    </div>
+
+    <!-- State 3: Touch Grass Mode ("Touch Grass" Outdoors In Sunny Meadow) -->
+    <div class="avatar-state state-long-break" id="avatar-long-break">
       <svg class="avatar-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="sunnySky" x1="0%" y1="0%" x2="0%" y2="100%">

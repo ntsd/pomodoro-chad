@@ -140,6 +140,8 @@ class ChadodoroController {
     // Avatar DOM
     this.domAvatarFocus = document.getElementById('avatar-focus');
     this.domAvatarBreak = document.getElementById('avatar-break');
+    this.domAvatarLongBreak = document.getElementById('avatar-long-break');
+    this.domAvatarGlow = document.getElementById('avatar-ring-glow');
     this.domAvatarSpeech = document.getElementById('avatar-speech-status');
     this.domSpeechLabel = document.getElementById('speech-label');
 
@@ -489,9 +491,19 @@ class ChadodoroController {
   }
 
   updateAvatarState() {
-    const isFocus = this.mode === 'focus';
-    if (this.domAvatarFocus) this.domAvatarFocus.classList.toggle('active', isFocus);
-    if (this.domAvatarBreak) this.domAvatarBreak.classList.toggle('active', !isFocus);
+    if (this.domAvatarFocus) this.domAvatarFocus.classList.toggle('active', this.mode === 'focus');
+    if (this.domAvatarBreak) this.domAvatarBreak.classList.toggle('active', this.mode === 'break');
+    if (this.domAvatarLongBreak) this.domAvatarLongBreak.classList.toggle('active', this.mode === 'long_break');
+
+    if (this.domAvatarGlow) {
+      if (this.mode === 'focus') {
+        this.domAvatarGlow.style.background = 'radial-gradient(circle, var(--emerald-glow-strong) 0%, rgba(16, 185, 129, 0) 70%)';
+      } else if (this.mode === 'break') {
+        this.domAvatarGlow.style.background = 'radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(245, 158, 11, 0) 70%)';
+      } else {
+        this.domAvatarGlow.style.background = 'radial-gradient(circle, rgba(52, 211, 153, 0.55) 0%, rgba(16, 185, 129, 0) 70%)';
+      }
+    }
   }
 
   playCategoryClip(category) {
