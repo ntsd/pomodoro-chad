@@ -582,23 +582,33 @@ def convert_wav_to_mp3(wav_path: Path, mp3_path: Path):
 def generate_all_themes():
     print("👑 GigaChad Theme Generator Starting (with Meme References & JSON Vault)...")
     themes_manifest = {
-        "focus": [],
-        "break": [],
-        "long_break": [],
-        "motivation": []
+        "START_FOCUS": [],
+        "SHORT_BREAK": [],
+        "LONG_BREAK": [],
+        "CHAD_MOTIVATION": []
+    }
+
+    cat_map = {
+        "focus": "START_FOCUS",
+        "START_FOCUS": "START_FOCUS",
+        "break": "SHORT_BREAK",
+        "SHORT_BREAK": "SHORT_BREAK",
+        "long_break": "LONG_BREAK",
+        "LONG_BREAK": "LONG_BREAK",
+        "motivation": "CHAD_MOTIVATION",
+        "CHAD_MOTIVATION": "CHAD_MOTIVATION"
     }
 
     for spec in THEME_SPECS:
         theme_id = spec["id"]
-        cat = spec["category"]
-        print(f"\n⚡ Generating Theme: [{cat.upper()}] {spec['title']}")
+        cat = cat_map.get(spec["category"], "START_FOCUS")
+        print(f"\n⚡ Generating Theme: [{cat}] {spec['title']}")
         print(f"   Meme Reference: {spec['meme_reference']}")
 
         raw_wav = SCRATCH_DIR / f"{theme_id}.wav"
         theme_dir = OUTPUT_THEMES_DIR / theme_id
         theme_dir.mkdir(parents=True, exist_ok=True)
         out_mp3 = theme_dir / f"{theme_id}.mp3"
-        out_json = theme_dir / f"{theme_id}.json"
 
         # 1. Synthesize instrumental track
         print(f"  [Synthesizer] Rendering {spec['style']} ({spec['bpm']} BPM, {spec['duration']}s)...")
@@ -610,7 +620,6 @@ def generate_all_themes():
 
         raw_wav.unlink(missing_ok=True)
 
-        # 3. Create individual metadata JSON for this theme
         theme_meta = {
             "id": theme_id,
             "category": cat,
@@ -628,14 +637,10 @@ def generate_all_themes():
             "description": spec["description"]
         }
 
-        with open(out_json, "w", encoding="utf-8") as f:
-            json.dump(theme_meta, f, indent=2, ensure_ascii=False)
-        print(f"  📄 Saved Theme JSON Reference: {theme_dir.name}/{out_json.name}")
-
         themes_manifest[cat].append(theme_meta)
         print(f"  ✅ Finished: {out_mp3.name} ({out_mp3.stat().st_size} bytes)")
 
-    # 4. Update manifest.json with full themes registry
+    # 3. Update manifest.json with full themes registry
     if MANIFEST_FILE.exists():
         with open(MANIFEST_FILE, "r", encoding="utf-8") as f:
             manifest_data = json.load(f)

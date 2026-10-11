@@ -16,7 +16,7 @@ SCRIPTS_DIR = VAULT_DIR / "scripts"
 AUDIO_DIR = VAULT_DIR / "audio"
 MANIFEST_FILE = VAULT_DIR / "manifest.json"
 
-CATEGORY_KEYS = ["START_FOCUS", "TOUCH_GRASS", "LONG_BREAK", "CHAD_MOTIVATION"]
+CATEGORY_KEYS = ["START_FOCUS", "SHORT_BREAK", "LONG_BREAK", "CHAD_MOTIVATION"]
 
 KNOWN_VOICE_NAMES = {
     "pNInz6obpgDQGcFmaJgB": "Adam (Dominant Chad)",
@@ -29,94 +29,72 @@ KNOWN_VOICE_NAMES = {
 
 def sync_manifest():
     SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
-    AUDIO_DIR.mkdir(parents=True, exist_ok=True)
 
-    manifest_data = {
-        "version": "1.1.0",
-        "description": "Chadodoro Git Voice Vault - Pre-rendered GigaChad audio coaching clips",
-        "total_clips": 0,
-        "voice_ids": [],
-        "voice_names": {},
-        "categories": {cat: [] for cat in CATEGORY_KEYS}
-    }
+    if MANIFEST_FILE.exists():
+        with open(MANIFEST_FILE, "r", encoding="utf-8") as f:
+            manifest_data = json.load(f)
+    else:
+        manifest_data = {
+            "version": "1.2.0",
+            "description": "Chadodoro Git Voice Vault - Pre-rendered GigaChad audio coaching clips and instrumental themes",
+            "total_clips": 0,
+            "voice_ids": [],
+            "voice_names": {},
+            "categories": {cat: [] for cat in CATEGORY_KEYS},
+            "themes": {cat: [] for cat in CATEGORY_KEYS}
+        }
 
+    # Ensure standardized categories exist
+    if "categories" not in manifest_data:
+        manifest_data["categories"] = {}
+    for cat in CATEGORY_KEYS:
+        if cat not in manifest_data["categories"]:
+            manifest_data["categories"][cat] = []
+
+    # Ensure standardized themes exist
+    if "themes" not in manifest_data:
+        manifest_data["themes"] = {}
+    for cat in CATEGORY_KEYS:
+        if cat not in manifest_data["themes"]:
+            manifest_data["themes"][cat] = []
+
+    # Verify and update audio status for all clips
+    total_clips = 0
     voice_id_set = set()
-    script_files = sorted(glob.glob(str(SCRIPTS_DIR / "**" / "*.json"), recursive=True))
+    for cat, clips in manifest_data["categories"].items():
+        for clip in clips:
+            total_clips += 1
+            cid = clip.get("id")
+            vid = clip.get("voice_id", "pNInz6obpgDQGcFmaJgB")
+            voice_id_set.add(vid)
+            if vid in KNOWN_VOICE_NAMES and not clip.get("voice_name"):
+                clip["voice_name"] = KNOWN_VOICE_NAMES[vid]
 
-    for script_path in script_files:
-        try:
-            with open(script_path, "r", encoding="utf-8") as f:
-                meta = json.load(f)
-            
-            clip_id = meta.get("id") or Path(script_path).stem
-            category = meta.get("category", "START_FOCUS")
-            if category not in manifest_data["categories"]:
-                manifest_data["categories"][category] = []
-            
-            audio_filename = f"{clip_id}.mp3"
-            # Check grouped folder first: scripts/<clip_id>/<clip_id>.mp3, then audio/<clip_id>.mp3
-            grouped_audio_path = Path(script_path).parent / audio_filename
-            legacy_audio_path = AUDIO_DIR / audio_filename
+            # Check audio file
+            audio_path = SCRIPTS_DIR / cid / f"{cid}.mp3"
+            has_audio = audio_path.exists()
+            clip["has_audio"] = has_audio
+            if has_audio:
+                clip["audio_url"] = f"/vault/scripts/{cid}/{cid}.mp3"
 
-            if grouped_audio_path.exists():
-                audio_url = f"/vault/scripts/{clip_id}/{audio_filename}"
-                has_audio = True
-            elif legacy_audio_path.exists():
-                audio_url = f"/vault/audio/{audio_filename}"
-                has_audio = True
-            else:
-                audio_url = None
-                has_audio = False
-
-            voice_id = meta.get("voice_id", "pNInz6obpgDQGcFmaJgB")
-            voice_name = meta.get("voice_name") or KNOWN_VOICE_NAMES.get(voice_id, f"Voice {voice_id[:8]}")
-            
-            voice_id_set.add(voice_id)
-            manifest_data["voice_names"][voice_id] = voice_name
-
-            clip_entry = {
-                "id": clip_id,
-                "category": category,
-                "text": meta.get("text", ""),
-                "audio_url": audio_url,
-                "has_audio": has_audio,
-                "voice_id": voice_id,
-                "voice_name": voice_name,
-                "model": meta.get("model", "google/gemma-4-26B-A4B-it")
-            }
-            manifest_data["categories"][category].append(clip_entry)
-            manifest_data["total_clips"] += 1
-        except Exception as e:
-            print(f"Warning: Failed to parse {script_path}: {e}")
-
+    manifest_data["total_clips"] = total_clips
     manifest_data["voice_ids"] = sorted(list(voice_id_set))
+    manifest_data["voice_names"] = {vid: KNOWN_VOICE_NAMES.get(vid, f"Voice {vid[:8]}") for vid in manifest_data["voice_ids"]}
 
-    # Index Theme metadata files from public/vault/themes
+    # Verify themes
     themes_dir = VAULT_DIR / "themes"
-    themes_data = {"focus": [], "break": [], "long_break": [], "motivation": []}
-    if themes_dir.exists():
-        theme_files = sorted(glob.glob(str(themes_dir / "**" / "*.json"), recursive=True))
-        for t_path in theme_files:
-            try:
-                with open(t_path, "r", encoding="utf-8") as tf:
-                    t_meta = json.load(tf)
-                t_cat = t_meta.get("category", "focus")
-                t_id = t_meta.get("id") or Path(t_path).stem
-                t_audio_filename = f"{t_id}.mp3"
-                grouped_t_audio = Path(t_path).parent / t_audio_filename
-                if grouped_t_audio.exists():
-                    t_meta["audio_url"] = f"/vault/themes/{t_id}/{t_audio_filename}"
-                if t_cat in themes_data:
-                    themes_data[t_cat].append(t_meta)
-            except Exception as te:
-                print(f"Warning: Failed to parse theme {t_path}: {te}")
-    manifest_data["themes"] = themes_data
+    for t_cat, t_list in manifest_data["themes"].items():
+        for theme in t_list:
+            tid = theme.get("id")
+            t_audio = themes_dir / tid / f"{tid}.mp3"
+            if t_audio.exists():
+                theme["audio_url"] = f"/vault/themes/{tid}/{tid}.mp3"
 
     with open(MANIFEST_FILE, "w", encoding="utf-8") as f:
         json.dump(manifest_data, f, indent=2, ensure_ascii=False)
 
-    total_themes = sum(len(v) for v in themes_data.values())
-    print(f"✅ Manifest synced: {manifest_data['total_clips']} voice clips and {total_themes} themes indexed across voices: {manifest_data['voice_ids']}")
+    total_themes = sum(len(v) for v in manifest_data["themes"].values())
+    print(f"✅ Manifest verified: {manifest_data['total_clips']} clips across {len(manifest_data['categories'])} categories and {total_themes} themes across {len(manifest_data['themes'])} theme categories.")
     return manifest_data
 
 if __name__ == "__main__":

@@ -66,16 +66,15 @@ CATEGORY_CONFIG = {
             "Time to grind, Champion. The clock is ticking, and greatness waits for no man."
         ]
     },
-    "TOUCH_GRASS": {
-        "prefix": "break_touch_grass",
-        "description": "Urgent commands to step away from monitors and touch physical grass",
-        "user_prompt": "Time is up! Order the user urgently to stand up, close their laptop, and go outside to touch physical grass.",
+    "SHORT_BREAK": {
+        "prefix": "break",
+        "description": "Urgent commands to step away from monitors, rest eyes, and hydrate",
+        "user_prompt": "Time is up! Order the user urgently to stand up, close their laptop, hydrate with cold water, and take a quick physical reset.",
         "fallback_pool": [
-            "Screen time is over, King. Drop everything, step into the sunlight, and touch physical grass right now.",
-            "Stand up, Champion! Disconnect from the machine and reconnect with the earth. Touch grass immediately.",
-            "Time is up, Brother. Your eyes need the horizon and your soul needs raw soil. Step outside and touch grass.",
-            "Halt the work, King. A true Chad knows when to step into nature. Go outside and feel the grass beneath your shoes.",
-            "Step away from that monitor, Champion! Hydrate, breathe real oxygen, and plant your feet in physical grass."
+            "Time for a quick reset, Champion. Step away, drink cold water, and stretch your body.",
+            "Short break granted, King. Close your eyes, hydrate, and prepare for the next round.",
+            "Rest your vision, Brother. A five-minute pause keeps the sword razor sharp.",
+            "Stand up, Champion! Hydrate with clean water and take five deep breaths."
         ]
     },
     "LONG_BREAK": {
@@ -222,17 +221,23 @@ def generate_clip(category: str, voice_id: str = None, custom_text: str = None, 
     }
 
     if dry_run:
-        print(f"  [Dry Run] Would create {script_file.name} in {clip_dir.name}/ using {voice_name} ({selected_voice_id})")
-        print(f"            Text: {text}")
-        return clip_id
-
-    # Write script JSON
-    with open(script_file, "w", encoding="utf-8") as f:
-        json.dump(meta, f, indent=2, ensure_ascii=False)
-    print(f"  [Script Saved] {clip_dir.name}/{script_file.name} (Voice: {voice_name})")
-
     # Synthesize Audio
     synthesize_audio_elevenlabs(text, audio_file, selected_voice_id)
+
+    # Update manifest.json directly
+    manifest_file = VAULT_DIR / "manifest.json"
+    if manifest_file.exists():
+        with open(manifest_file, "r", encoding="utf-8") as f:
+            m_data = json.load(f)
+        if "categories" not in m_data:
+            m_data["categories"] = {}
+        if category not in m_data["categories"]:
+            m_data["categories"][category] = []
+        m_data["categories"][category].append(meta)
+        m_data["total_clips"] = sum(len(v) for v in m_data["categories"].values())
+        with open(manifest_file, "w", encoding="utf-8") as f:
+            json.dump(m_data, f, indent=2, ensure_ascii=False)
+        print(f"  [Manifest Updated] Added {clip_id} to category {category}")
 
     return clip_id
 
@@ -251,7 +256,7 @@ def commit_vault(message: str = "feat(vault): update Chadodoro voice clips"):
 
 def main():
     parser = argparse.ArgumentParser(description="Chadodoro Voice Vault Generator")
-    parser.add_argument("--category", choices=["all", "START_FOCUS", "TOUCH_GRASS", "LONG_BREAK", "CHAD_MOTIVATION"], default="all", help="Category to generate")
+    parser.add_argument("--category", choices=["all", "START_FOCUS", "SHORT_BREAK", "LONG_BREAK", "CHAD_MOTIVATION"], default="all", help="Category to generate")
     parser.add_argument("--count", type=int, default=1, help="Number of clips per category")
     parser.add_argument("--voice-id", type=str, default=None, help="Explicit ElevenLabs Voice ID override")
     parser.add_argument("--commit", action="store_true", help="Stage and commit generated clips to Git")

@@ -297,9 +297,9 @@ class ChadodoroController {
     if (this.timeRemaining === this.totalDuration) {
       if (this.mode === 'focus') {
         this.playCategoryClip('START_FOCUS');
-      } else if (this.mode === 'long_break') {
-        this.playCategoryClip('TOUCH_GRASS');
       } else if (this.mode === 'break') {
+        this.playCategoryClip('SHORT_BREAK');
+      } else if (this.mode === 'long_break') {
         this.playCategoryClip('LONG_BREAK');
       }
     }
@@ -346,10 +346,10 @@ class ChadodoroController {
       // Check if long break interval reached
       if (this.cyclesCompleted % this.settings.longBreakInterval === 0) {
         this.setMode('long_break');
-        if (!isSkipped) this.playCategoryClip('TOUCH_GRASS');
+        if (!isSkipped) this.playCategoryClip('LONG_BREAK');
       } else {
         this.setMode('break');
-        if (!isSkipped) this.playCategoryClip('LONG_BREAK');
+        if (!isSkipped) this.playCategoryClip('SHORT_BREAK');
       }
 
       if (this.settings.autoStartBreak) {
@@ -533,14 +533,11 @@ class ChadodoroController {
   handleInstantMotivation() {
     this.playCategoryClip('CHAD_MOTIVATION');
     if (this.settings.bgmEnabled) {
-      const motThemes = (this.manifest && this.manifest.themes && this.manifest.themes.motivation) || [];
-      if (motThemes.length > 0) {
-        this.currentTheme = motThemes[Math.floor(Math.random() * motThemes.length)];
-        this.currentThemeCategory = 'motivation';
-        this.bgmPlayer.src = this.currentTheme.audio_url;
-        this.bgmPlayer.play().catch(() => {});
-        this.updateBgmUI();
-      }
+      this.currentTheme = this.getRandomThemeForMode('CHAD_MOTIVATION');
+      this.currentThemeCategory = 'CHAD_MOTIVATION';
+      this.bgmPlayer.src = this.currentTheme.audio_url;
+      this.bgmPlayer.play().catch(() => {});
+      this.updateBgmUI();
     }
   }
 
@@ -584,8 +581,8 @@ class ChadodoroController {
   triggerSyntheticFallback(category) {
     const defaultLines = {
       START_FOCUS: "Lock in, King. The world belongs to those who conquer distraction.",
-      TOUCH_GRASS: "Screen time is over, King. Step outside and touch physical grass right now.",
-      LONG_BREAK: "Take a long walk under the open sky, Brother. Drink cold water and recharge.",
+      SHORT_BREAK: "Take five, Champion. Hydrate with cold water and reset your vision.",
+      LONG_BREAK: "Step away and touch physical grass, Brother. Walk outside under the open sky.",
       CHAD_MOTIVATION: "Discipline equals freedom, Champion. Embrace the grind."
     };
     const text = defaultLines[category] || "Lock in, King.";
@@ -639,8 +636,18 @@ class ChadodoroController {
     if (!this.manifest || !this.manifest.themes) {
       return { audio_url: '/vault/themes/theme_focus_01/theme_focus_01.mp3', title: 'GigaChad Anthem' };
     }
-    const cat = mode === 'focus' ? 'focus' : (mode === 'break' ? 'break' : (mode === 'long_break' ? 'long_break' : 'motivation'));
-    const pool = this.manifest.themes[cat] || this.manifest.themes['focus'] || [];
+    const modeToCat = {
+      focus: 'START_FOCUS',
+      START_FOCUS: 'START_FOCUS',
+      break: 'SHORT_BREAK',
+      SHORT_BREAK: 'SHORT_BREAK',
+      long_break: 'LONG_BREAK',
+      LONG_BREAK: 'LONG_BREAK',
+      motivation: 'CHAD_MOTIVATION',
+      CHAD_MOTIVATION: 'CHAD_MOTIVATION'
+    };
+    const cat = modeToCat[mode] || 'START_FOCUS';
+    const pool = this.manifest.themes[cat] || this.manifest.themes['START_FOCUS'] || [];
     if (pool.length === 0) {
       return { audio_url: '/vault/themes/theme_focus_01/theme_focus_01.mp3', title: 'GigaChad Anthem' };
     }
@@ -670,9 +677,10 @@ class ChadodoroController {
   updateBgmPlayback(forceNew = false) {
     if (!this.bgmPlayer) return;
     if (this.isRunning && this.settings.bgmEnabled) {
-      if (forceNew || !this.currentTheme || this.currentThemeCategory !== this.mode) {
-        this.currentTheme = this.getRandomThemeForMode(this.mode);
-        this.currentThemeCategory = this.mode;
+      const targetCat = this.mode === 'focus' ? 'START_FOCUS' : (this.mode === 'break' ? 'SHORT_BREAK' : 'LONG_BREAK');
+      if (forceNew || !this.currentTheme || this.currentThemeCategory !== targetCat) {
+        this.currentTheme = this.getRandomThemeForMode(targetCat);
+        this.currentThemeCategory = targetCat;
         this.bgmPlayer.src = this.currentTheme.audio_url;
         this.updateBgmUI();
       }

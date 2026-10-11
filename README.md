@@ -191,8 +191,8 @@ OPENAI_MODEL="google/gemma-4-26B-A4B-it"
 # Generate 1 clip for each category
 python3 scripts/generate_vault.py --count 1
 
-# Generate specifically for TOUCH_GRASS category
-python3 scripts/generate_vault.py --category TOUCH_GRASS --count 2
+# Generate specifically for SHORT_BREAK category
+python3 scripts/generate_vault.py --category SHORT_BREAK --count 2
 
 # Preview generation without writing files
 python3 scripts/generate_vault.py --dry-run

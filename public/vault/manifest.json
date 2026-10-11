@@ -8,9 +8,9 @@
     "pNInz6obpgDQGcFmaJgB"
   ],
   "voice_names": {
-    "pNInz6obpgDQGcFmaJgB": "Adam (Dominant Chad)",
     "SOYHLrjzK2X1ezoPC6cr": "Harry (Fierce Warrior Chad)",
-    "nPczCjzI2devNBz1zQrb": "Brian (Deep Resonant Chad)"
+    "nPczCjzI2devNBz1zQrb": "Brian (Deep Resonant Chad)",
+    "pNInz6obpgDQGcFmaJgB": "Adam (Dominant Chad)"
   },
   "categories": {
     "START_FOCUS": [
@@ -55,10 +55,10 @@
         "model": "google/gemma-4-26B-A4B-it"
       }
     ],
-    "TOUCH_GRASS": [
+    "SHORT_BREAK": [
       {
         "id": "break_touch_grass_001",
-        "category": "TOUCH_GRASS",
+        "category": "SHORT_BREAK",
         "text": "Stand up, Champion! Disconnect from the machine and reconnect with the earth. Touch grass immediately.",
         "audio_url": "/vault/scripts/break_touch_grass_001/break_touch_grass_001.mp3",
         "has_audio": true,
@@ -68,7 +68,7 @@
       },
       {
         "id": "break_touch_grass_002",
-        "category": "TOUCH_GRASS",
+        "category": "SHORT_BREAK",
         "text": "Time is up, Brother. Your eyes need the horizon and your soul needs raw soil. Step outside and touch grass.",
         "audio_url": "/vault/scripts/break_touch_grass_002/break_touch_grass_002.mp3",
         "has_audio": true,
@@ -78,7 +78,7 @@
       },
       {
         "id": "break_touch_grass_003",
-        "category": "TOUCH_GRASS",
+        "category": "SHORT_BREAK",
         "text": "Halt the work, King. A true Chad knows when to step into nature. Go outside and feel the grass beneath your shoes.",
         "audio_url": "/vault/scripts/break_touch_grass_003/break_touch_grass_003.mp3",
         "has_audio": true,
@@ -88,7 +88,7 @@
       },
       {
         "id": "break_touch_grass_004",
-        "category": "TOUCH_GRASS",
+        "category": "SHORT_BREAK",
         "text": "Stand up, Champion! Disconnect from the machine and reconnect with the earth. Touch grass immediately.",
         "audio_url": "/vault/scripts/break_touch_grass_004/break_touch_grass_004.mp3",
         "has_audio": true,
@@ -183,10 +183,10 @@
     ]
   },
   "themes": {
-    "focus": [
+    "START_FOCUS": [
       {
         "id": "theme_focus_01",
-        "category": "focus",
+        "category": "START_FOCUS",
         "title": "GigaChad Anthem - Can You Feel My Heart (Phonk House)",
         "meme_reference": "g3ox_em - GigaChad Theme (Phonk House Version)",
         "original_artist_reference": "g3ox_em / Bring Me The Horizon",
@@ -208,7 +208,7 @@
       },
       {
         "id": "theme_focus_02",
-        "category": "focus",
+        "category": "START_FOCUS",
         "title": "Sigma Drift Phonk - Close Eyes",
         "meme_reference": "DVRST - Close Eyes (Sigma Chad / Megamind Phonk)",
         "original_artist_reference": "DVRST",
@@ -230,7 +230,7 @@
       },
       {
         "id": "theme_focus_03",
-        "category": "focus",
+        "category": "START_FOCUS",
         "title": "Titan Hyper-Focus Phonk",
         "meme_reference": "Kordhell - Murder In My Mind / Live Another Day",
         "original_artist_reference": "Kordhell",
@@ -250,10 +250,10 @@
         "description": "Relentless 136 BPM aggressive gym phonk beat engineered for deep focus tunnel vision and PR crushing sessions."
       }
     ],
-    "break": [
+    "SHORT_BREAK": [
       {
         "id": "theme_break_01",
-        "category": "break",
+        "category": "SHORT_BREAK",
         "title": "Sunlit Meadow - Resonance Chillwave",
         "meme_reference": "Home - Resonance (Sunset Walk Meme)",
         "original_artist_reference": "Home",
@@ -274,7 +274,7 @@
       },
       {
         "id": "theme_break_02",
-        "category": "break",
+        "category": "SHORT_BREAK",
         "title": "Outdoor Oxygen Lo-Fi Groove",
         "meme_reference": "Kevin MacLeod - Carefree / Elevator Meme",
         "original_artist_reference": "Kevin MacLeod (Incompetech)",
@@ -295,7 +295,7 @@
       },
       {
         "id": "theme_break_03",
-        "category": "break",
+        "category": "SHORT_BREAK",
         "title": "Breeze of the Meadow (Chillstep Pulse)",
         "meme_reference": "Meadow Breeze Ambient Lo-Fi",
         "original_artist_reference": "Chadodoro Originals",
@@ -315,10 +315,10 @@
         "description": "Tranquil ambient chillstep rhythm with soft piano harmonics and soothing outdoor resonance."
       }
     ],
-    "long_break": [
+    "LONG_BREAK": [
       {
         "id": "theme_long_break_01",
-        "category": "long_break",
+        "category": "LONG_BREAK",
         "title": "Titan Outdoor Walk & Hydration",
         "meme_reference": "Open Sky March & Nature Reverie",
         "original_artist_reference": "Chadodoro Originals",
@@ -339,7 +339,7 @@
       },
       {
         "id": "theme_long_break_02",
-        "category": "long_break",
+        "category": "LONG_BREAK",
         "title": "Forest Canopy Reverie (Lush Lo-Fi)",
         "meme_reference": "Forest Lo-Fi Girl / Sunlight Walk",
         "original_artist_reference": "Chadodoro Originals",
@@ -359,10 +359,10 @@
         "description": "Ultra-relaxed 86 BPM lo-fi beats with organic heartbeat rhythm for deep recovery before your next work block."
       }
     ],
-    "motivation": [
+    "CHAD_MOTIVATION": [
       {
         "id": "theme_motivation_01",
-        "category": "motivation",
+        "category": "CHAD_MOTIVATION",
         "title": "Warrior Ascendance - Pure GigaChad Phonk",
         "meme_reference": "g3ox_em & Hensonn - Sahara / Warrior Gym Edit",
         "original_artist_reference": "g3ox_em / Hensonn",
@@ -383,7 +383,7 @@
       },
       {
         "id": "theme_motivation_02",
-        "category": "motivation",
+        "category": "CHAD_MOTIVATION",
         "title": "Iron Discipline Apex (Titan War Stabs)",
         "meme_reference": "Ghostface Playa - Why Not / Chad Drift Meme",
         "original_artist_reference": "Ghostface Playa",
