@@ -17,7 +17,7 @@ class ChadodoroController {
     this.ytPlayer = null;
     this.ytReady = false;
     this.bgmStopTimer = null;
-    
+
     // Default Settings
     this.settings = {
       focusMinutes: 25,
@@ -29,7 +29,7 @@ class ChadodoroController {
       bgmEnabled: true,
       bgmVolume: 35,
       keepSongRunning: false,
-      anthemSource: 'hybrid', // 'vault_only' | 'youtube_only' | 'hybrid'
+      anthemSource: 'youtube_only', // 'vault_only' | 'youtube_only' | 'hybrid'
       avoidAdsMode: false,
       repeatTheme: false,
       autoStartBreak: false,
@@ -394,7 +394,7 @@ class ChadodoroController {
     const durationMins = this.getDurationForMode(newMode);
     this.timeRemaining = durationMins * 60;
     this.totalDuration = this.timeRemaining;
-    
+
     // Update active tab styles
     if (this.domTabFocus) this.domTabFocus.classList.toggle('active', newMode === 'focus');
     if (this.domTabBreak) this.domTabBreak.classList.toggle('active', newMode === 'break');
@@ -419,7 +419,7 @@ class ChadodoroController {
     const minutes = Math.floor(this.timeRemaining / 60);
     const seconds = this.timeRemaining % 60;
     const timeStr = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    
+
     if (this.domTime) this.domTime.textContent = timeStr;
 
     // Progress Ring Dashoffset
@@ -815,7 +815,7 @@ class ChadodoroController {
         this.bgmPlayer.src = theme.audio_url;
         this.bgmPlayer.currentTime = 0;
         this.updateBgmVolume();
-        this.bgmPlayer.play().catch(() => {});
+        this.bgmPlayer.play().catch(() => { });
       }
     }
 
@@ -841,7 +841,7 @@ class ChadodoroController {
     } else {
       if (this.bgmPlayer) {
         this.updateBgmVolume();
-        this.bgmPlayer.play().catch(() => {});
+        this.bgmPlayer.play().catch(() => { });
       }
     }
   }
@@ -907,6 +907,7 @@ class ChadodoroController {
     this.domNowPlayingBanner.style.display = 'flex';
     if (this.domNowPlayingTitle) {
       this.domNowPlayingTitle.textContent = theme.title;
+      this.domNowPlayingTitle.title = theme.title;
     }
 
     if (isYT) {
@@ -971,7 +972,7 @@ class ChadodoroController {
 
     // Try to find deep masculine voice
     const voices = window.speechSynthesis.getVoices();
-    const deepMaleVoice = voices.find(v => 
+    const deepMaleVoice = voices.find(v =>
       v.lang.startsWith('en') && (v.name.includes('Male') || v.name.includes('David') || v.name.includes('Daniel') || v.name.includes('George') || v.name.includes('Guy'))
     );
     if (deepMaleVoice) {

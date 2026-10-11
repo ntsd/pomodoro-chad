@@ -64,14 +64,6 @@ const {
             <span>HACKTOBERFEST '26 // WK 1</span>
           </div>
 
-          <!-- Grass Counter Pill -->
-          <div class="chad-stats-pill" title="Grass Touched Count">
-            <span class="grass-stat">
-              <span class="grass-icon">🌱</span>
-              <span id="header-grass-count">0</span>
-            </span>
-          </div>
-
           <!-- GigaChad Voice Quick Toggle -->
           <button class="btn-icon-header btn-audio-toggle btn-voice-toggle active" id="btn-toggle-voice" title="Toggle GigaChad Voice Coach (Shortkey: V)">
             <span class="audio-toggle-icon">🎙️</span>
@@ -227,24 +219,6 @@ const {
     box-shadow: 0 0 8px var(--gold-main);
   }
 
-  .chad-stats-pill {
-    display: flex;
-    align-items: center;
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    padding: 0.35rem 0.75rem;
-    border-radius: 999px;
-  }
-
-  .grass-stat {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 800;
-    color: var(--emerald-bright);
-  }
 
   .btn-icon-header {
     background: var(--bg-card);
@@ -403,13 +377,7 @@ const {
       gap: 0.4rem;
     }
 
-    .chad-stats-pill {
-      padding: 0.3rem 0.55rem;
-    }
 
-    .grass-stat {
-      font-size: 0.75rem;
-    }
 
     .btn-audio-toggle {
       padding: 0;

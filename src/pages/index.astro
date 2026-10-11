@@ -154,11 +154,11 @@ import SettingsModal from '../components/SettingsModal.astro';
 
 <style>
   .hero-section {
-    padding-top: 1.5rem;
-    padding-bottom: 2.5rem;
+    padding-top: 1.15rem;
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.95rem;
   }
 
   /* Challenge Strip */
@@ -215,7 +215,7 @@ import SettingsModal from '../components/SettingsModal.astro';
   .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 1.1rem;
     align-items: start;
   }
 
@@ -229,7 +229,7 @@ import SettingsModal from '../components/SettingsModal.astro';
   .col-stage {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   /* Unified Coach Card */
@@ -449,11 +449,11 @@ import SettingsModal from '../components/SettingsModal.astro';
   .col-timer {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .timer-card {
-    padding: 2rem 1.5rem;
+    padding: 1.75rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -571,26 +571,50 @@ import SettingsModal from '../components/SettingsModal.astro';
 
   @media (max-width: 680px) {
     .hero-section {
-      padding-top: 1rem;
-      padding-bottom: 2rem;
-      gap: 1.15rem;
+      padding-top: 0.75rem;
+      padding-bottom: 1.5rem;
+      gap: 0.85rem;
     }
 
     .challenge-strip {
-      padding: 0.5rem 0.75rem;
-      gap: 0.5rem;
+      padding: 0.45rem 0.75rem;
+      gap: 0.4rem;
+      justify-content: center;
     }
 
     .challenge-tag {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
+      text-align: center;
+    }
+
+    .render-badge {
+      font-size: 0.62rem;
+    }
+
+    .coach-unified-card {
+      padding: 1rem 0.85rem;
+      gap: 0.65rem;
+    }
+
+    .coach-avatar-area {
+      padding: 0.4rem 0 1rem 0;
     }
 
     .timer-card {
-      padding: 1.5rem 0.85rem;
+      padding: 1.25rem 0.85rem;
     }
 
     .rules-card, .vault-info-card {
-      padding: 1.15rem 1rem;
+      padding: 1rem 0.85rem;
+    }
+
+    .rules-grid {
+      gap: 0.55rem;
+    }
+
+    .vault-categories-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.4rem;
     }
 
     .shortcuts-bar {
