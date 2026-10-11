@@ -29,33 +29,8 @@ import SettingsModal from '../components/SettingsModal.astro';
           <Avatar />
         </div>
 
-        <!-- Chad Rules of Discipline -->
-        <div class="rules-card glass-card">
-          <div class="rules-header">
-            <span class="rules-icon">🛡️</span>
-            <h3 class="rules-title">THE CHADODORO CODE</h3>
-          </div>
-          <ul class="rules-list">
-            <li>
-              <span class="rule-num">01</span>
-              <div>
-                <strong>Zero Distractions:</strong> Lock into deep work with tunnel vision.
-              </div>
-            </li>
-            <li>
-              <span class="rule-num">02</span>
-              <div>
-                <strong>Radical Screen Break:</strong> When time is up, step away from monitors.
-              </div>
-            </li>
-            <li>
-              <span class="rule-num">03</span>
-              <div>
-                <strong>Touch Physical Grass:</strong> Reconnect with sunlight, earth, and oxygen.
-              </div>
-            </li>
-          </ul>
-        </div>
+        <!-- Latest Coach Quote Card (Slimmer) -->
+        <QuoteDisplay />
       </div>
 
       <!-- Right Column: Timer & Controls & Provenance -->
@@ -65,8 +40,39 @@ import SettingsModal from '../components/SettingsModal.astro';
           <Timer />
         </div>
 
-        <!-- Latest Coach Quote Card -->
-        <QuoteDisplay />
+        <!-- Chad Rules of Discipline (Wide) -->
+        <div class="rules-card glass-card">
+          <div class="rules-header">
+            <div class="rules-title-wrap">
+              <span class="rules-icon">🛡️</span>
+              <h3 class="rules-title">THE CHADODORO CODE</h3>
+            </div>
+            <span class="badge-chad">3 IRON PRINCIPLES</span>
+          </div>
+          <div class="rules-grid">
+            <div class="rule-item-card">
+              <div class="rule-item-top">
+                <span class="rule-num">01</span>
+                <strong class="rule-name">Zero Distractions</strong>
+              </div>
+              <p class="rule-detail">Lock into deep work with unbroken tunnel vision and extreme focus.</p>
+            </div>
+            <div class="rule-item-card">
+              <div class="rule-item-top">
+                <span class="rule-num">02</span>
+                <strong class="rule-name">Radical Screen Break</strong>
+              </div>
+              <p class="rule-detail">When time is up, immediately step away from all monitors and recharge.</p>
+            </div>
+            <div class="rule-item-card">
+              <div class="rule-item-top">
+                <span class="rule-num">03</span>
+                <strong class="rule-name">Touch Physical Grass</strong>
+              </div>
+              <p class="rule-detail">Reconnect with sunlight, earth, and oxygen to reset your nervous system.</p>
+            </div>
+          </div>
+        </div>
 
         <!-- Git Voice Vault Info Box -->
         <div class="vault-info-card glass-card">
@@ -189,7 +195,7 @@ import SettingsModal from '../components/SettingsModal.astro';
 
   @media (min-width: 900px) {
     .dashboard-grid {
-      grid-template-columns: 340px 1fr;
+      grid-template-columns: 350px 1fr;
     }
   }
 
@@ -207,15 +213,24 @@ import SettingsModal from '../components/SettingsModal.astro';
     justify-content: center;
   }
 
+  /* Wide Chad Rules of Discipline */
   .rules-card {
-    padding: 1.25rem;
+    padding: 1.25rem 1.5rem;
   }
 
   .rules-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .rules-title-wrap {
+    display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 0.85rem;
   }
 
   .rules-icon {
@@ -223,26 +238,39 @@ import SettingsModal from '../components/SettingsModal.astro';
   }
 
   .rules-title {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.08em;
     color: var(--text-main);
   }
 
-  .rules-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.65rem;
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem;
   }
 
-  .rules-list li {
+  .rule-item-card {
+    background: rgba(15, 23, 42, 0.45);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.95rem 1rem;
     display: flex;
-    align-items: flex-start;
-    gap: 0.65rem;
-    font-size: 0.78rem;
-    color: var(--text-sub);
-    line-height: 1.35;
+    flex-direction: column;
+    gap: 0.45rem;
+    transition: all 0.2s ease;
+  }
+
+  .rule-item-card:hover {
+    border-color: rgba(16, 185, 129, 0.35);
+    background: rgba(16, 185, 129, 0.04);
+    transform: translateY(-1px);
+  }
+
+  .rule-item-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .rule-num {
@@ -251,13 +279,30 @@ import SettingsModal from '../components/SettingsModal.astro';
     font-weight: 800;
     color: var(--emerald-bright);
     background: var(--bg-surface);
-    padding: 0.15rem 0.35rem;
+    padding: 0.15rem 0.4rem;
     border-radius: 4px;
     border: 1px solid var(--border-subtle);
   }
 
-  .rules-list strong {
+  .rule-name {
+    font-size: 0.82rem;
+    font-weight: 800;
     color: var(--text-main);
+    letter-spacing: -0.01em;
+  }
+
+  .rule-detail {
+    font-size: 0.74rem;
+    color: var(--text-sub);
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .rules-grid {
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+    }
   }
 
   /* Timer Column */
