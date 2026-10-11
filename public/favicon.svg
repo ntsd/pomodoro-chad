@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="#0a0d12" stroke="#10b981" stroke-width="2.5" />
+  
+  <!-- Outer timer ring arc -->
+  <circle cx="32" cy="32" r="24" fill="none" stroke="#121824" stroke-width="3" />
+  <path d="M 32 8 A 24 24 0 1 1 15 48" fill="none" stroke="url(#emeraldGrad)" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Grass blades -->
+  <path d="M 28 44 C 27 34, 21 27, 18 25 C 23 29, 29 36, 30 44 Z" fill="url(#emeraldGrad)" />
+  <path d="M 32 44 C 32 30, 32 20, 32 16 C 35 22, 35 34, 34 44 Z" fill="#34d399" />
+  <path d="M 34 44 C 36 33, 43 27, 46 25 C 41 29, 36 36, 35 44 Z" fill="url(#emeraldGrad)" />
+  
+  <!-- Crown / Chad Crest -->
+  <polygon points="24,20 28,24 32,18 36,24 40,20 38,26 26,26" fill="url(#goldGrad)" />
+</svg>

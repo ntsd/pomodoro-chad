@@ -1,0 +1,123 @@
+{
+  "version": "1.0.0",
+  "description": "Chadodoro Git Voice Vault - Pre-rendered GigaChad audio coaching clips",
+  "total_clips": 12,
+  "categories": {
+    "START_FOCUS": [
+      {
+        "id": "focus_001",
+        "category": "START_FOCUS",
+        "text": "Time to grind, Champion. The clock is ticking, and greatness waits for no man.",
+        "audio_url": "/vault/audio/focus_001.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "focus_002",
+        "category": "START_FOCUS",
+        "text": "Lock in, King. The world belongs to those who conquer distraction.",
+        "audio_url": "/vault/audio/focus_002.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "focus_003",
+        "category": "START_FOCUS",
+        "text": "Time to grind, Champion. The clock is ticking, and greatness waits for no man.",
+        "audio_url": "/vault/audio/focus_003.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      }
+    ],
+    "TOUCH_GRASS": [
+      {
+        "id": "break_touch_grass_001",
+        "category": "TOUCH_GRASS",
+        "text": "Stand up, Champion! Disconnect from the machine and reconnect with the earth. Touch grass immediately.",
+        "audio_url": "/vault/audio/break_touch_grass_001.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "break_touch_grass_002",
+        "category": "TOUCH_GRASS",
+        "text": "Time is up, Brother. Your eyes need the horizon and your soul needs raw soil. Step outside and touch grass.",
+        "audio_url": "/vault/audio/break_touch_grass_002.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "break_touch_grass_003",
+        "category": "TOUCH_GRASS",
+        "text": "Halt the work, King. A true Chad knows when to step into nature. Go outside and feel the grass beneath your shoes.",
+        "audio_url": "/vault/audio/break_touch_grass_003.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      }
+    ],
+    "LONG_BREAK": [
+      {
+        "id": "long_break_001",
+        "category": "LONG_BREAK",
+        "text": "Step away for an extended recovery, Champion. Walk outside, clear your mind, and let nature restore your focus.",
+        "audio_url": "/vault/audio/long_break_001.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "long_break_002",
+        "category": "LONG_BREAK",
+        "text": "Time to roam, Brother. Leave the digital cave behind, walk outside, and breathe deeply under the open sky.",
+        "audio_url": "/vault/audio/long_break_002.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "long_break_003",
+        "category": "LONG_BREAK",
+        "text": "Time to roam, Brother. Leave the digital cave behind, walk outside, and breathe deeply under the open sky.",
+        "audio_url": "/vault/audio/long_break_003.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      }
+    ],
+    "CHAD_MOTIVATION": [
+      {
+        "id": "motivation_001",
+        "category": "CHAD_MOTIVATION",
+        "text": "Comfort is the enemy of glory, King. Embrace the resistance.",
+        "audio_url": "/vault/audio/motivation_001.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "motivation_002",
+        "category": "CHAD_MOTIVATION",
+        "text": "Pain is temporary, King. Regret is permanent. Stay stoic and keep moving forward.",
+        "audio_url": "/vault/audio/motivation_002.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "motivation_003",
+        "category": "CHAD_MOTIVATION",
+        "text": "Comfort is the enemy of glory, King. Embrace the resistance.",
+        "audio_url": "/vault/audio/motivation_003.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "model": "google/gemma-4-26B-A4B-it"
+      }
+    ]
+  }
+}

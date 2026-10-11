@@ -1,0 +1,327 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Chadodoro (pomodoro-chad) | GigaChad Pomodoro + Touch Grass Audio Vault",
+  description = "Lock in for deep work and violently touch grass when time is up. Powered by google/gemma-4-26B-A4B-it, ElevenLabs Baritone Audio Vault, and Astro static site for Hacktoberfest 2026."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Chadodoro Team" />
+    <meta name="keywords" content="pomodoro, gigachad, touch grass, hacktoberfest 2026, astro, render, elevenlabs, gemma-4-26b, ai voice vault, productivity" />
+
+    <!-- OpenGraph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <div class="container header-container">
+        <!-- Logo -->
+        <a href="/" class="brand-link">
+          <div class="brand-icon-wrap">
+            <svg viewBox="0 0 64 64" width="32" height="32">
+              <circle cx="32" cy="32" r="30" fill="#121824" stroke="#10b981" stroke-width="3" />
+              <path d="M 28 44 C 27 34, 21 27, 18 25 C 23 29, 29 36, 30 44 Z" fill="#10b981" />
+              <path d="M 32 44 C 32 30, 32 20, 32 16 C 35 22, 35 34, 34 44 Z" fill="#34d399" />
+              <polygon points="24,20 28,24 32,18 36,24 40,20 38,26 26,26" fill="#f59e0b" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">CHADODORO</span>
+            <span class="brand-subtitle">TOUCH GRASS EDITION</span>
+          </div>
+        </a>
+
+        <!-- Header Status & Stats -->
+        <div class="header-actions">
+          <!-- Hacktoberfest Badge -->
+          <div class="hacktoberfest-pill" title="Hacktoberfest 2026 Open-Source AI Challenge: Week 1">
+            <span class="pill-dot"></span>
+            <span>HACKTOBERFEST '26 // WK 1</span>
+          </div>
+
+          <!-- Chad Rank & Grass Counter Pill -->
+          <div class="chad-stats-pill" title="Your current Chad Standing">
+            <span class="rank-badge" id="header-chad-rank">Screen Goblin 💻</span>
+            <span class="grass-stat">
+              <span class="grass-icon">🌱</span>
+              <span id="header-grass-count">0</span>
+            </span>
+          </div>
+
+          <!-- Settings Button -->
+          <button class="btn-icon-header" id="btn-open-settings" title="Open Settings (Durations & Audio)">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Slot -->
+    <main class="app-main">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="container footer-container">
+        <div class="footer-left">
+          <div class="footer-badge">
+            <span class="dot-live"></span>
+            <span>ZERO-LATENCY GIT VOICE VAULT ARCHITECTURE</span>
+          </div>
+          <p class="footer-desc">
+            Open-weight AI Brain powered by <code>google/gemma-4-26B-A4B-it</code> at <code>spark.ntsd.dev</code>.
+            Pre-synthesized baritone voice clips committed directly into Git under <code>public/vault/</code>.
+          </p>
+        </div>
+
+        <div class="footer-right">
+          <a href="https://render.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+            🚀 Deployable to Render
+          </a>
+          <span class="footer-sep">•</span>
+          <span class="footer-copy">Hacktoberfest 2026 Week 1 Challenge</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Client Script -->
+    <script src="../scripts/timerController.js"></script>
+  </body>
+</html>
+
+<style>
+  .app-header {
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(10, 13, 18, 0.85);
+    backdrop-filter: blur(16px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-title {
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+    line-height: 1.1;
+  }
+
+  .brand-subtitle {
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--emerald-bright);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .hacktoberfest-pill {
+    display: none;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    color: var(--gold-main);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  .pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold-main);
+    box-shadow: 0 0 8px var(--gold-main);
+  }
+
+  .chad-stats-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  .rank-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-main);
+  }
+
+  .grass-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--emerald-bright);
+    border-left: 1px solid var(--border-subtle);
+    padding-left: 0.5rem;
+  }
+
+  .btn-icon-header {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-sub);
+    padding: 0.55rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-icon-header:hover {
+    color: var(--emerald-bright);
+    border-color: var(--emerald-main);
+  }
+
+  .app-main {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-footer {
+    border-top: 1px solid var(--border-subtle);
+    background: #080a0e;
+    padding: 1.75rem 0;
+    margin-top: auto;
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+
+  .footer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--emerald-bright);
+    margin-bottom: 0.25rem;
+  }
+
+  .dot-live {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--emerald-bright);
+    box-shadow: 0 0 6px var(--emerald-bright);
+  }
+
+  .footer-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.4;
+  }
+
+  .footer-desc code {
+    font-family: var(--font-mono);
+    background: var(--bg-surface);
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    color: var(--text-sub);
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .footer-link {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .footer-link:hover {
+    color: var(--emerald-bright);
+  }
+
+  .footer-sep {
+    color: var(--border-subtle);
+  }
+
+  @media (min-width: 768px) {
+    .hacktoberfest-pill {
+      display: inline-flex;
+    }
+  }
+</style>

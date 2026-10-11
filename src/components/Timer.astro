@@ -1,0 +1,396 @@
+---
+// src/components/Timer.astro
+---
+<div class="timer-component">
+  <!-- Mode Selector Tabs -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" data-mode="focus" id="tab-focus">
+      <span class="tab-dot"></span>
+      <span>LOCK IN</span>
+    </button>
+    <button class="mode-tab" data-mode="break" id="tab-break">
+      <span class="tab-dot"></span>
+      <span>TOUCH GRASS</span>
+    </button>
+    <button class="mode-tab" data-mode="long_break" id="tab-long-break">
+      <span class="tab-dot"></span>
+      <span>LONG RECOVERY</span>
+    </button>
+  </div>
+
+  <!-- Circular Countdown Ring -->
+  <div class="timer-display-wrap">
+    <svg class="progress-ring" viewBox="0 0 280 280">
+      <defs>
+        <linearGradient id="ringEmeraldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#34d399" />
+          <stop offset="100%" stop-color="#10b981" />
+        </linearGradient>
+        <linearGradient id="ringBreakGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fde047" />
+          <stop offset="100%" stop-color="#10b981" />
+        </linearGradient>
+      </defs>
+
+      <!-- Background track -->
+      <circle
+        class="progress-ring-bg"
+        cx="140"
+        cy="140"
+        r="120"
+      />
+      <!-- Animated Progress Circle -->
+      <circle
+        id="timer-progress-circle"
+        class="progress-ring-circle"
+        cx="140"
+        cy="140"
+        r="120"
+        stroke="url(#ringEmeraldGradient)"
+      />
+    </svg>
+
+    <!-- Center Timer Content -->
+    <div class="timer-center-content">
+      <span class="timer-mode-tag" id="timer-mode-tag">DEEP WORK FOCUS</span>
+      <div class="timer-time" id="timer-time-display">25:00</div>
+      
+      <!-- Cycle dots -->
+      <div class="cycle-dots-wrap" title="Pomodoro Cycles">
+        <div class="cycle-dot" id="dot-0"></div>
+        <div class="cycle-dot" id="dot-1"></div>
+        <div class="cycle-dot" id="dot-2"></div>
+        <div class="cycle-dot" id="dot-3"></div>
+      </div>
+      <div class="cycle-text" id="cycle-text-display">ROUND 1 OF 4</div>
+    </div>
+  </div>
+
+  <!-- Action Controls -->
+  <div class="timer-controls">
+    <button class="btn-primary timer-btn-main" id="btn-timer-toggle" title="Press Space to toggle">
+      <svg class="btn-icon" id="icon-play" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+      <svg class="btn-icon hidden" id="icon-pause" viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+      </svg>
+      <span id="btn-toggle-label">LOCK IN NOW</span>
+    </button>
+
+    <div class="timer-sub-controls">
+      <button class="btn-secondary timer-btn-sub" id="btn-timer-reset" title="Reset current session">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+          <path d="M3 3v5h5" />
+        </svg>
+        <span>RESET</span>
+      </button>
+
+      <button class="btn-secondary timer-btn-sub" id="btn-timer-skip" title="Skip to next phase">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 4 15 12 5 20 5 4" fill="currentColor" />
+          <line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" />
+        </svg>
+        <span>SKIP</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Interactive Soundboard & Grass Counter Trigger Section -->
+  <div class="chad-interactive-actions">
+    <!-- Touch Grass Button -->
+    <button class="btn-grass" id="btn-touch-grass" title="Click to log that you touched physical grass!">
+      <span class="btn-grass-icon">🌱</span>
+      <div class="btn-grass-text">
+        <span class="btn-grass-title">I TOUCHED GRASS</span>
+        <span class="btn-grass-meta">EARN CHAD REP</span>
+      </div>
+      <span class="grass-count-badge" id="grass-count-display">0</span>
+    </button>
+
+    <!-- Instant Motivation Soundboard -->
+    <button class="btn-secondary btn-motivation" id="btn-instant-motivation" title="Instant Stoic Chad Motivation">
+      <span class="motivation-icon">⚡</span>
+      <div class="motivation-text">
+        <span class="motivation-title">INSTANT MOTIVATION</span>
+        <span class="motivation-meta">VOICE VAULT CLIP</span>
+      </div>
+    </button>
+  </div>
+</div>
+
+<style>
+  .timer-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+    width: 100%;
+  }
+
+  /* Mode selector tabs */
+  .mode-tabs {
+    display: flex;
+    background: rgba(18, 24, 36, 0.7);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 0.35rem;
+    gap: 0.35rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .mode-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: var(--text-sub);
+    padding: 0.55rem 1.15rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+
+  .mode-tab .tab-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    transition: background-color 0.2s ease;
+  }
+
+  .mode-tab:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .mode-tab.active {
+    background: var(--bg-surface);
+    color: var(--text-main);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .mode-tab.active .tab-dot {
+    background: var(--emerald-bright);
+    box-shadow: 0 0 8px var(--emerald-bright);
+  }
+
+  /* Timer Display Ring */
+  .timer-display-wrap {
+    position: relative;
+    width: 290px;
+    height: 290px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .progress-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .progress-ring-bg {
+    fill: transparent;
+    stroke: var(--bg-card);
+    stroke-width: 12;
+  }
+
+  .progress-ring-circle {
+    fill: transparent;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 753.98; /* 2 * PI * 120 */
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.8s linear, stroke 0.4s ease;
+    filter: drop-shadow(0 0 8px var(--emerald-glow-strong));
+  }
+
+  .timer-center-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .timer-mode-tag {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--emerald-bright);
+    margin-bottom: 0.25rem;
+  }
+
+  .timer-time {
+    font-family: var(--font-mono);
+    font-size: 4.2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(16, 185, 129, 0.25);
+  }
+
+  .cycle-dots-wrap {
+    display: flex;
+    gap: 0.45rem;
+    margin-top: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .cycle-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    transition: all 0.3s ease;
+  }
+
+  .cycle-dot.filled {
+    background: var(--emerald-main);
+    border-color: var(--emerald-bright);
+    box-shadow: 0 0 10px var(--emerald-glow-strong);
+  }
+
+  .cycle-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  /* Timer Controls */
+  .timer-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .timer-btn-main {
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md);
+  }
+
+  .btn-icon.hidden {
+    display: none;
+  }
+
+  .timer-sub-controls {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .timer-btn-sub {
+    flex: 1;
+    font-size: 0.82rem;
+    padding: 0.65rem 1rem;
+    gap: 0.4rem;
+  }
+
+  /* Interactive Soundboard & Grass Counter Trigger Section */
+  .chad-interactive-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    width: 100%;
+    max-width: 520px;
+    margin-top: 0.5rem;
+  }
+
+  .btn-grass {
+    cursor: pointer;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .btn-grass-icon {
+    font-size: 1.5rem;
+  }
+
+  .btn-grass-text, .motivation-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .btn-grass-title, .motivation-title {
+    font-size: 0.82rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+
+  .btn-grass-meta, .motivation-meta {
+    font-size: 0.65rem;
+    font-weight: 700;
+    opacity: 0.8;
+    letter-spacing: 0.05em;
+  }
+
+  .grass-count-badge {
+    background: #032014;
+    color: var(--emerald-bright);
+    font-size: 0.85rem;
+    font-weight: 900;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    box-shadow: inset 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+
+  .btn-motivation {
+    cursor: pointer;
+    justify-content: flex-start;
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    background: rgba(24, 34, 54, 0.8);
+    gap: 0.75rem;
+  }
+
+  .btn-motivation:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+  }
+
+  .motivation-icon {
+    font-size: 1.4rem;
+  }
+
+  .motivation-title {
+    color: var(--gold-main);
+  }
+
+  @media (max-width: 600px) {
+    .chad-interactive-actions {
+      grid-template-columns: 1fr;
+    }
+    .timer-display-wrap {
+      width: 260px;
+      height: 260px;
+    }
+    .timer-time {
+      font-size: 3.6rem;
+    }
+  }
+</style>

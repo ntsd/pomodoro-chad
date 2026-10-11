@@ -1,0 +1,340 @@
+---
+// src/components/SettingsModal.astro
+---
+<div class="modal-overlay" id="settings-modal" aria-hidden="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <span class="modal-icon">⚙️</span>
+        <h2 class="modal-title">CHADODORO SETTINGS</h2>
+      </div>
+      <button class="btn-close-modal" id="btn-close-settings" title="Close settings">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+
+    <form class="settings-form" id="settings-form">
+      <!-- Time Configuration -->
+      <div class="settings-section">
+        <h3 class="section-title">SESSION DURATIONS (MINUTES)</h3>
+        
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label for="setting-focus">Lock-In Focus</label>
+            <input type="number" id="setting-focus" name="focusMinutes" min="1" max="90" value="25" />
+          </div>
+
+          <div class="setting-item">
+            <label for="setting-break">Touch Grass Break</label>
+            <input type="number" id="setting-break" name="breakMinutes" min="1" max="30" value="5" />
+          </div>
+
+          <div class="setting-item">
+            <label for="setting-long-break">Long Recovery</label>
+            <input type="number" id="setting-long-break" name="longBreakMinutes" min="1" max="60" value="15" />
+          </div>
+
+          <div class="setting-item">
+            <label for="setting-interval">Long Break Interval</label>
+            <input type="number" id="setting-interval" name="longBreakInterval" min="1" max="12" value="4" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Audio Configuration -->
+      <div class="settings-section">
+        <h3 class="section-title">VOICE VAULT & AUDIO</h3>
+
+        <div class="setting-slider-item">
+          <div class="slider-label-row">
+            <label for="setting-volume">Coach Voice Volume</label>
+            <span class="slider-val" id="volume-val-display">90%</span>
+          </div>
+          <input type="range" id="setting-volume" name="volume" min="0" max="100" value="90" class="range-slider" />
+        </div>
+
+        <div class="setting-toggle-item">
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-autostart-break" name="autoStartBreak" />
+            <span class="toggle-slider"></span>
+          </label>
+          <div class="toggle-text">
+            <span class="toggle-title">Auto-start Breaks</span>
+            <span class="toggle-desc">Automatically trigger Touch Grass countdown when focus ends</span>
+          </div>
+        </div>
+
+        <div class="setting-toggle-item">
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-autostart-focus" name="autoStartFocus" />
+            <span class="toggle-slider"></span>
+          </label>
+          <div class="toggle-text">
+            <span class="toggle-title">Auto-start Focus</span>
+            <span class="toggle-desc">Automatically restart deep work after grass break</span>
+          </div>
+        </div>
+
+        <div class="setting-toggle-item">
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-speech-fallback" name="speechFallback" checked />
+            <span class="toggle-slider"></span>
+          </label>
+          <div class="toggle-text">
+            <span class="toggle-title">Web Speech API Fallback</span>
+            <span class="toggle-desc">Use browser synthetic baritone voice if audio files are offline</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Stats & Reset -->
+      <div class="settings-section">
+        <h3 class="section-title">REPUTATION & STATS</h3>
+        <div class="stats-row">
+          <span class="stats-label">Grass Touched Counter:</span>
+          <span class="stats-val" id="settings-grass-count">0</span>
+          <button type="button" class="btn-sub-reset" id="btn-reset-grass">Reset Count</button>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="btn-cancel-settings">Cancel</button>
+        <button type="submit" class="btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .modal-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .modal-icon {
+    font-size: 1.3rem;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--text-main);
+  }
+
+  .btn-close-modal {
+    background: transparent;
+    color: var(--text-muted);
+    padding: 0.4rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-close-modal:hover {
+    color: var(--text-main);
+    background: var(--bg-surface);
+  }
+
+  .settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .settings-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--emerald-bright);
+    text-transform: uppercase;
+  }
+
+  .settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .setting-item label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-sub);
+  }
+
+  .setting-item input {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .setting-item input:focus {
+    border-color: var(--emerald-main);
+    box-shadow: 0 0 10px var(--emerald-glow);
+  }
+
+  .setting-slider-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .slider-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-sub);
+  }
+
+  .slider-val {
+    font-family: var(--font-mono);
+    color: var(--emerald-bright);
+  }
+
+  .range-slider {
+    accent-color: var(--emerald-main);
+    cursor: pointer;
+  }
+
+  .setting-toggle-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.4rem 0;
+  }
+
+  /* Toggle Switch */
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    transition: 0.3s;
+    border-radius: 24px;
+  }
+
+  .toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--text-sub);
+    transition: 0.3s;
+    border-radius: 50%;
+  }
+
+  .toggle-switch input:checked + .toggle-slider {
+    background-color: var(--emerald-main);
+    border-color: var(--emerald-bright);
+  }
+
+  .toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+    background-color: #032014;
+  }
+
+  .toggle-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .toggle-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .toggle-desc {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-surface);
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+  }
+
+  .stats-val {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    color: var(--emerald-bright);
+  }
+
+  .btn-sub-reset {
+    background: transparent;
+    color: #ef4444;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  .btn-sub-reset:hover {
+    background: rgba(239, 68, 68, 0.15);
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+</style>

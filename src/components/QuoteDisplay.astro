@@ -1,0 +1,208 @@
+---
+// src/components/QuoteDisplay.astro
+---
+<div class="quote-display-card glass-card" id="quote-display-card">
+  <!-- Card Header -->
+  <div class="quote-header">
+    <div class="quote-header-left">
+      <span class="quote-coach-badge">
+        <span class="coach-avatar-mini">👑</span>
+        <span>CHADODORO COACH</span>
+      </span>
+      <span class="badge-chad" id="quote-category-badge">START_FOCUS</span>
+    </div>
+
+    <div class="quote-header-right">
+      <button class="btn-audio-replay" id="btn-quote-replay" title="Replay voice audio">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0 0 20 13c0-4.42-3.58-8-8-8zm-6 8c0-1.01.25-1.97.7-2.8L5.24 8.74A7.93 7.93 0 0 0 4 13c0 4.42 3.58 8 8 8v4l5-5-5-5v4c-3.31 0-6-2.69-6-6z" />
+        </svg>
+        <span>REPLAY</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Quote Body -->
+  <div class="quote-body">
+    <div class="quote-marks">“</div>
+    <p class="quote-text" id="quote-text-content">
+      Lock in, King. The world belongs to those who conquer distraction.
+    </p>
+    <div class="quote-marks-close">”</div>
+  </div>
+
+  <!-- Card Footer Metadata -->
+  <div class="quote-footer">
+    <div class="vault-source-pill" id="quote-vault-source">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" class="source-icon">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+      </svg>
+      <span class="vault-clip-id" id="quote-clip-id">vault/audio/focus_001.mp3</span>
+    </div>
+
+    <div class="quote-meta-ai">
+      <span class="ai-tag" title="Open-Weight Gemma 4 26B on Spark">🧠 gemma-4-26B</span>
+      <span class="ai-tag" title="ElevenLabs Baritone Synthesis">🎙️ elevenlabs</span>
+      <span class="ai-tag zero-latency" title="Committed in Git Vault (Zero runtime API calls)">⚡ static vault</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quote-display-card {
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid var(--border-subtle);
+  }
+
+  .quote-display-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--emerald-main) 0%, #38bdf8 50%, var(--gold-main) 100%);
+    opacity: 0.8;
+  }
+
+  .quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .quote-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .quote-coach-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--text-main);
+  }
+
+  .coach-avatar-mini {
+    font-size: 1rem;
+  }
+
+  .btn-audio-replay {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--bg-surface);
+    color: var(--text-sub);
+    border: 1px solid var(--border-subtle);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  .btn-audio-replay:hover {
+    color: var(--text-main);
+    background: var(--bg-card-hover);
+    border-color: var(--emerald-main);
+  }
+
+  .quote-body {
+    position: relative;
+    margin: 0.5rem 0 1.25rem 0;
+  }
+
+  .quote-marks {
+    font-family: Georgia, serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--emerald-main);
+    opacity: 0.3;
+    position: absolute;
+    top: -1.2rem;
+    left: -0.5rem;
+    pointer-events: none;
+  }
+
+  .quote-marks-close {
+    font-family: Georgia, serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--emerald-main);
+    opacity: 0.3;
+    display: inline-block;
+    vertical-align: sub;
+    margin-left: 0.25rem;
+    pointer-events: none;
+  }
+
+  .quote-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--text-main);
+    padding-left: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .quote-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .vault-source-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+
+  .source-icon {
+    color: var(--emerald-bright);
+  }
+
+  .quote-meta-ai {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+
+  .ai-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    background: var(--bg-surface);
+    color: var(--text-sub);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .ai-tag.zero-latency {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--emerald-bright);
+  }
+
+  @media (max-width: 600px) {
+    .quote-text {
+      font-size: 1.05rem;
+    }
+  }
+</style>
