@@ -4,8 +4,10 @@
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ntsd/pomodoro-chad)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-chadodoro.ntsd.dev-10b981?style=flat-square&logo=render&logoColor=white)](https://chadodoro.ntsd.dev/)
+[![DEV Submission](https://img.shields.io/badge/DEV%20Challenge-Touch%20Grass%20Week%201-0a0a0a?style=flat-square&logo=devdotto&logoColor=white)](BLOG_POST.md)
 
-🌐 **Live Production App:** [https://chadodoro.ntsd.dev/](https://chadodoro.ntsd.dev/)
+🌐 **Live Production App:** [https://chadodoro.ntsd.dev/](https://chadodoro.ntsd.dev/)  
+📝 **DEV Challenge Write-Up:** [BLOG_POST.md](BLOG_POST.md) (Submission for [Hacktoberfest Week 1: Touch Grass](https://dev.to/challenges/hacktoberfest-week1-2026-10-05))
 
 ---
 
@@ -255,13 +257,15 @@ services:
 
 ## 🏆 8. Hacktoberfest 2026 Week 1 Challenge Summary
 
-| Criterion | Implementation |
+| Criterion / Track | Implementation & Technology |
 |---|---|
-| **Theme: "Touch Grass"** | Core timer forces outdoor long breaks, displays 3 distinct reactive avatars (Focus, Lounge Hydrate, Meadow Grass), tracks real-world grass touched counter |
-| **Open-Source AI Core** | Transcripts created with open-weight `google/gemma-4-26B-A4B-it` via OpenAI-compatible endpoint |
-| **Zero-Latency Static Vault** | ElevenLabs clips committed directly to Git under `public/vault/`, 0 runtime API calls |
-| **Static Framework** | Astro Static Output (`dist`), zero servers required |
-| **Deployment Target** | Render Static Site with immutable edge cache headers |
+| **Theme: "Touch Grass"** | Forces outdoor long breaks, 3 reactive avatars (Focus, Lounge Hydrate, Meadow Grass), tactile "I Touched Grass" soundboard counter & clover confetti |
+| **Open-Source AI Core** | Transcripts created with open-weight `google/gemma-4-26B-A4B-it` via self-hosted OpenAI-compatible inference endpoint |
+| **Partner Track: Best Use of ElevenLabs** | 16 high-impact baritone coach clips synthesized via **ElevenLabs** (Adam, Harry, Brian) and baked into zero-latency Git Voice Vault |
+| **Partner Track: Best Use of Render** | Automated 1-click deployment via [`render.yaml`](render.yaml) with custom immutable edge cache headers (`max-age=31536000, immutable`) |
+| **Partner Track: Best Use of Gemma** | Automated voice script generation pipeline utilizing `google/gemma-4-26B-A4B-it` for stoic motivation prompts |
+| **Architecture** | 100% Client-Side Static Astro app with 0ms runtime API latency, 0 runtime keys, 0 API costs |
+| **Submission Write-Up** | Full DEV post available at [`BLOG_POST.md`](BLOG_POST.md) |
 
 ---
 
