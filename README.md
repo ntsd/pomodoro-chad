@@ -2,12 +2,6 @@
 > **The Uncompromising GigaChad Pomodoro + Zero-Latency Git Voice Vault**  
 > *Hacktoberfest 2026 Open-Source AI Challenge — Week 1: "Touch Grass"*
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-[![Hacktoberfest 2026](https://img.shields.io/badge/Hacktoberfest_2026-Week_1:_Touch_Grass-10b981?style=for-the-badge&logo=hacktoberfest)](https://hacktoberfest.com/)
-[![Astro](https://img.shields.io/badge/Astro_v4-Static_Output-FF5D01?style=for-the-badge&logo=astro)](https://astro.build)
-[![Open Source AI](https://img.shields.io/badge/AI_Brain-google%2Fgemma--4--26B--A4B--it-38bdf8?style=for-the-badge)](https://huggingface.co/google)
-[![Voice Synthesis](https://img.shields.io/badge/Voice_Vault-ElevenLabs_Baritone-f59e0b?style=for-the-badge)](https://elevenlabs.io)
-
 ---
 
 ## 🌿 1. Overview & "Touch Grass" Theme

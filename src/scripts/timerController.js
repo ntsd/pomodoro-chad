@@ -205,12 +205,10 @@ class ChadodoroController {
 
     if (this.domBtnResetGrass) {
       this.domBtnResetGrass.addEventListener('click', () => {
-        if (confirm("Reset your Grass-Touched counter back to zero, King?")) {
-          this.grassCount = 0;
-          this.saveStorage();
-          this.updateRankDisplay();
-          if (this.domSettingsGrassCount) this.domSettingsGrassCount.textContent = '0';
-        }
+        this.grassCount = 0;
+        this.saveStorage();
+        this.updateRankDisplay();
+        if (this.domSettingsGrassCount) this.domSettingsGrassCount.textContent = '0';
       });
     }
 
