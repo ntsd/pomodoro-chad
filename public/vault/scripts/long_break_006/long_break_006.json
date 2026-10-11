@@ -1,0 +1,12 @@
+{
+  "id": "long_break_006",
+  "category": "LONG_BREAK",
+  "prefix": "long_break",
+  "text": "Long break granted, Brother. Go for a brisk walk under the open sky and drink cold water like a champion.",
+  "audio_file": "vault/scripts/long_break_006/long_break_006.mp3",
+  "audio_url": "/vault/scripts/long_break_006/long_break_006.mp3",
+  "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+  "voice_name": "Harry (Fierce Warrior Chad)",
+  "model": "google/gemma-4-26B-A4B-it",
+  "created_at": "2026-10-11T21:18:39.561824Z"
+}

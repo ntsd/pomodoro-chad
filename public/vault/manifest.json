@@ -1,7 +1,7 @@
 {
   "version": "1.1.0",
   "description": "Chadodoro Git Voice Vault - Pre-rendered GigaChad audio coaching clips",
-  "total_clips": 16,
+  "total_clips": 24,
   "voice_ids": [
     "SOYHLrjzK2X1ezoPC6cr",
     "nPczCjzI2devNBz1zQrb",
@@ -53,6 +53,32 @@
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "focus_006",
+        "category": "START_FOCUS",
+        "prefix": "focus",
+        "text": "Shut down all notifications, Brother. Your future self is forged in this work block.",
+        "audio_file": "vault/scripts/focus_006/focus_006.mp3",
+        "audio_url": "/vault/scripts/focus_006/focus_006.mp3",
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:37.828573Z",
+        "has_audio": true
+      },
+      {
+        "id": "focus_007",
+        "category": "START_FOCUS",
+        "prefix": "focus",
+        "text": "Focus, Brother. Weakness seeks excuses, but a Chad executes without hesitation.",
+        "audio_file": "vault/scripts/focus_007/focus_007.mp3",
+        "audio_url": "/vault/scripts/focus_007/focus_007.mp3",
+        "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+        "voice_name": "Harry (Fierce Warrior Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:38.499005Z",
+        "has_audio": true
       }
     ],
     "SHORT_BREAK": [
@@ -95,6 +121,32 @@
         "voice_id": "SOYHLrjzK2X1ezoPC6cr",
         "voice_name": "Harry (Fierce Warrior Chad)",
         "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "break_touch_grass_006",
+        "category": "SHORT_BREAK",
+        "prefix": "break_touch_grass",
+        "text": "Step away from the screen, King. Shake the tension out of your shoulders.",
+        "audio_file": "vault/scripts/break_touch_grass_006/break_touch_grass_006.mp3",
+        "audio_url": "/vault/scripts/break_touch_grass_006/break_touch_grass_006.mp3",
+        "voice_id": "nPczCjzI2devNBz1zQrb",
+        "voice_name": "Brian (Deep Resonant Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:38.872628Z",
+        "has_audio": true
+      },
+      {
+        "id": "break_touch_grass_007",
+        "category": "SHORT_BREAK",
+        "prefix": "break_touch_grass",
+        "text": "Stand up, Champion! Hydrate with clean water and take five deep breaths.",
+        "audio_file": "vault/scripts/break_touch_grass_007/break_touch_grass_007.mp3",
+        "audio_url": "/vault/scripts/break_touch_grass_007/break_touch_grass_007.mp3",
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:39.217894Z",
+        "has_audio": true
       }
     ],
     "LONG_BREAK": [
@@ -137,6 +189,32 @@
         "voice_id": "nPczCjzI2devNBz1zQrb",
         "voice_name": "Brian (Deep Resonant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "long_break_006",
+        "category": "LONG_BREAK",
+        "prefix": "long_break",
+        "text": "Long break granted, Brother. Go for a brisk walk under the open sky and drink cold water like a champion.",
+        "audio_file": "vault/scripts/long_break_006/long_break_006.mp3",
+        "audio_url": "/vault/scripts/long_break_006/long_break_006.mp3",
+        "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+        "voice_name": "Harry (Fierce Warrior Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:39.561824Z",
+        "has_audio": true
+      },
+      {
+        "id": "long_break_007",
+        "category": "LONG_BREAK",
+        "prefix": "long_break",
+        "text": "Long break granted, Brother. Go for a brisk walk under the open sky and drink cold water like a champion.",
+        "audio_file": "vault/scripts/long_break_007/long_break_007.mp3",
+        "audio_url": "/vault/scripts/long_break_007/long_break_007.mp3",
+        "voice_id": "nPczCjzI2devNBz1zQrb",
+        "voice_name": "Brian (Deep Resonant Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:39.979229Z",
+        "has_audio": true
       }
     ],
     "CHAD_MOTIVATION": [
@@ -179,6 +257,32 @@
         "voice_id": "pNInz6obpgDQGcFmaJgB",
         "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "motivation_006",
+        "category": "CHAD_MOTIVATION",
+        "prefix": "motivation",
+        "text": "Pain is temporary, King. Regret is permanent. Stay stoic and keep moving forward.",
+        "audio_file": "vault/scripts/motivation_006/motivation_006.mp3",
+        "audio_url": "/vault/scripts/motivation_006/motivation_006.mp3",
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:40.381087Z",
+        "has_audio": true
+      },
+      {
+        "id": "motivation_007",
+        "category": "CHAD_MOTIVATION",
+        "prefix": "motivation",
+        "text": "Pain is temporary, King. Regret is permanent. Stay stoic and keep moving forward.",
+        "audio_file": "vault/scripts/motivation_007/motivation_007.mp3",
+        "audio_url": "/vault/scripts/motivation_007/motivation_007.mp3",
+        "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+        "voice_name": "Harry (Fierce Warrior Chad)",
+        "model": "google/gemma-4-26B-A4B-it",
+        "created_at": "2026-10-11T21:18:40.743116Z",
+        "has_audio": true
       }
     ]
   },

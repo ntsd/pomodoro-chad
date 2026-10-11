@@ -1,0 +1,12 @@
+{
+  "id": "break_touch_grass_007",
+  "category": "SHORT_BREAK",
+  "prefix": "break_touch_grass",
+  "text": "Stand up, Champion! Hydrate with clean water and take five deep breaths.",
+  "audio_file": "vault/scripts/break_touch_grass_007/break_touch_grass_007.mp3",
+  "audio_url": "/vault/scripts/break_touch_grass_007/break_touch_grass_007.mp3",
+  "voice_id": "pNInz6obpgDQGcFmaJgB",
+  "voice_name": "Adam (Dominant Chad)",
+  "model": "google/gemma-4-26B-A4B-it",
+  "created_at": "2026-10-11T21:18:39.217894Z"
+}

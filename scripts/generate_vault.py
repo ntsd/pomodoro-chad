@@ -63,18 +63,23 @@ CATEGORY_CONFIG = {
             "Eliminate all distractions, Champion. Your empire is built in this exact block of deep work.",
             "Focus, Brother. Weakness seeks excuses, but a Chad executes without hesitation.",
             "Silence the noise, King. Put your head down and let results speak for you.",
-            "Time to grind, Champion. The clock is ticking, and greatness waits for no man."
+            "Time to grind, Champion. The clock is ticking, and greatness waits for no man.",
+            "No hesitation, King. Enter the flow state and dominate your objective.",
+            "The weak seek dopamine; the disciplined build empires. Execute right now, Champion.",
+            "Shut down all notifications, Brother. Your future self is forged in this work block."
         ]
     },
     "SHORT_BREAK": {
-        "prefix": "break",
+        "prefix": "break_touch_grass",
         "description": "Urgent commands to step away from monitors, rest eyes, and hydrate",
         "user_prompt": "Time is up! Order the user urgently to stand up, close their laptop, hydrate with cold water, and take a quick physical reset.",
         "fallback_pool": [
             "Time for a quick reset, Champion. Step away, drink cold water, and stretch your body.",
             "Short break granted, King. Close your eyes, hydrate, and prepare for the next round.",
             "Rest your vision, Brother. A five-minute pause keeps the sword razor sharp.",
-            "Stand up, Champion! Hydrate with clean water and take five deep breaths."
+            "Stand up, Champion! Hydrate with clean water and take five deep breaths.",
+            "Step away from the screen, King. Shake the tension out of your shoulders.",
+            "Recovery is tactical, Brother. Breathe deeply, reset your posture, and get ready."
         ]
     },
     "LONG_BREAK": {
@@ -85,7 +90,9 @@ CATEGORY_CONFIG = {
             "Long break granted, Brother. Go for a brisk walk under the open sky and drink cold water like a champion.",
             "Take the field, King. March outside, let the sun hit your skin, and recharge your vitality for the next war.",
             "Step away for an extended recovery, Champion. Walk outside, clear your mind, and let nature restore your focus.",
-            "Time to roam, Brother. Leave the digital cave behind, walk outside, and breathe deeply under the open sky."
+            "Time to roam, Brother. Leave the digital cave behind, walk outside, and breathe deeply under the open sky.",
+            "Physical grass is waiting, King. Disconnect completely and absorb the sunlight.",
+            "Great warriors honor their rest. Step outdoors, oxygenate your blood, and reset."
         ]
     },
     "CHAD_MOTIVATION": {
@@ -97,7 +104,10 @@ CATEGORY_CONFIG = {
             "Discipline equals freedom, Champion. Do the hard work, especially when you don't feel like it.",
             "You were not born to scroll endlessly, Brother. You were forged to dominate your craft.",
             "Pain is temporary, King. Regret is permanent. Stay stoic and keep moving forward.",
-            "Every second you stay disciplined, you separate yourself from the average man, Champion."
+            "Every second you stay disciplined, you separate yourself from the average man, Champion.",
+            "When you feel like quitting, remember why you started. Finish the mission, King.",
+            "Be the standard, Brother. Show the world what relentless focus looks like.",
+            "Iron sharpens iron. Sharpen your mind with unrelenting discipline."
         ]
     }
 }
@@ -178,16 +188,35 @@ def synthesize_audio_elevenlabs(text: str, output_path: Path, voice_id: str) -> 
 
 def get_next_id(prefix: str) -> str:
     """Find the next available 3-digit index for a prefix."""
-    existing = list(SCRIPTS_DIR.glob(f"{prefix}_*.json"))
     max_idx = 0
-    for p in existing:
-        parts = p.stem.split("_")
+    if SCRIPTS_DIR.exists():
+        for p in SCRIPTS_DIR.iterdir():
+            if p.is_dir() and p.name.startswith(f"{prefix}_"):
+                parts = p.name.split("_")
+                try:
+                    idx = int(parts[-1])
+                    if idx > max_idx:
+                        max_idx = idx
+                except ValueError:
+                    continue
+    manifest_file = VAULT_DIR / "manifest.json"
+    if manifest_file.exists():
         try:
-            idx = int(parts[-1])
-            if idx > max_idx:
-                max_idx = idx
-        except ValueError:
-            continue
+            with open(manifest_file, "r", encoding="utf-8") as f:
+                m_data = json.load(f)
+            for clips in m_data.get("categories", {}).values():
+                for c in clips:
+                    cid = c.get("id", "")
+                    if cid.startswith(f"{prefix}_"):
+                        parts = cid.split("_")
+                        try:
+                            idx = int(parts[-1])
+                            if idx > max_idx:
+                                max_idx = idx
+                        except ValueError:
+                            continue
+        except Exception:
+            pass
     next_idx = max_idx + 1
     return f"{prefix}_{next_idx:03d}"
 
@@ -221,6 +250,13 @@ def generate_clip(category: str, voice_id: str = None, custom_text: str = None, 
     }
 
     if dry_run:
+        print(f"  [DRY RUN] Would synthesize {clip_id} ({voice_name}): {text}")
+        return clip_id
+
+    # Save clip JSON metadata
+    with open(script_file, "w", encoding="utf-8") as f:
+        json.dump(meta, f, indent=2, ensure_ascii=False)
+
     # Synthesize Audio
     synthesize_audio_elevenlabs(text, audio_file, selected_voice_id)
 
