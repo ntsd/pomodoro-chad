@@ -38,15 +38,6 @@ class ChadodoroController {
     this.cyclesCompleted = 0;
     this.grassCount = 0;
 
-    // Rank milestones
-    this.rankMilestones = [
-      { min: 0, title: "Screen Goblin 💻", class: "rank-goblin" },
-      { min: 5, title: "Sprout Wanderer 🌱", class: "rank-sprout" },
-      { min: 15, title: "Sunlight Walker ☀️", class: "rank-sun" },
-      { min: 30, title: "Meadow Chad 🌿", class: "rank-meadow" },
-      { min: 50, title: "Ascended Earth Titan 👑", class: "rank-titan" }
-    ];
-
     this.init();
   }
 
@@ -58,7 +49,7 @@ class ChadodoroController {
     this.applySettingsToUI();
     this.updateDisplay();
     this.updateAvatarState();
-    this.updateRankDisplay();
+    this.updateGrassDisplay();
     this.updateVoiceUI();
     this.updateBgmVolume();
     this.updateBgmUI();
@@ -157,7 +148,6 @@ class ChadodoroController {
     this.domGrassDisplay = document.getElementById('grass-count-display');
     this.domSettingsGrassCount = document.getElementById('settings-grass-count');
     this.domHeaderGrassCount = document.getElementById('header-grass-count');
-    this.domRankBadge = document.getElementById('header-chad-rank');
     this.domBtnMotivation = document.getElementById('btn-instant-motivation');
 
     // Settings Modal DOM
@@ -247,7 +237,7 @@ class ChadodoroController {
       this.domBtnResetGrass.addEventListener('click', () => {
         this.grassCount = 0;
         this.saveStorage();
-        this.updateRankDisplay();
+        this.updateGrassDisplay();
         if (this.domSettingsGrassCount) this.domSettingsGrassCount.textContent = '0';
       });
     }
@@ -721,7 +711,7 @@ class ChadodoroController {
   handleTouchGrass(event) {
     this.grassCount++;
     this.saveStorage();
-    this.updateRankDisplay();
+    this.updateGrassDisplay();
 
     // Spawn floating grass confetti / particles
     this.spawnGrassParticles(event);
@@ -767,22 +757,10 @@ class ChadodoroController {
     }
   }
 
-  updateRankDisplay() {
+  updateGrassDisplay() {
     if (this.domGrassDisplay) this.domGrassDisplay.textContent = this.grassCount;
     if (this.domHeaderGrassCount) this.domHeaderGrassCount.textContent = this.grassCount;
     if (this.domSettingsGrassCount) this.domSettingsGrassCount.textContent = this.grassCount;
-
-    // Calculate rank
-    let activeRank = this.rankMilestones[0];
-    for (const milestone of this.rankMilestones) {
-      if (this.grassCount >= milestone.min) {
-        activeRank = milestone;
-      }
-    }
-
-    if (this.domRankBadge) {
-      this.domRankBadge.textContent = activeRank.title;
-    }
   }
 
   openSettings() {

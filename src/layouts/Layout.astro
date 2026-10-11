@@ -64,9 +64,8 @@ const {
             <span>HACKTOBERFEST '26 // WK 1</span>
           </div>
 
-          <!-- Chad Rank & Grass Counter Pill -->
-          <div class="chad-stats-pill" title="Your current Chad Standing">
-            <span class="rank-badge" id="header-chad-rank">Screen Goblin 💻</span>
+          <!-- Grass Counter Pill -->
+          <div class="chad-stats-pill" title="Grass Touched Count">
             <span class="grass-stat">
               <span class="grass-icon">🌱</span>
               <span id="header-grass-count">0</span>
@@ -213,29 +212,20 @@ const {
   .chad-stats-pill {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     padding: 0.35rem 0.75rem;
     border-radius: 999px;
   }
 
-  .rank-badge {
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--text-main);
-  }
-
   .grass-stat {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.35rem;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     font-weight: 800;
     color: var(--emerald-bright);
-    border-left: 1px solid var(--border-subtle);
-    padding-left: 0.5rem;
   }
 
   .btn-icon-header {
@@ -387,16 +377,9 @@ const {
 
     .chad-stats-pill {
       padding: 0.3rem 0.55rem;
-      gap: 0;
-    }
-
-    .rank-badge {
-      display: none;
     }
 
     .grass-stat {
-      border-left: none;
-      padding-left: 0;
       font-size: 0.75rem;
     }
 

@@ -14,8 +14,7 @@
 Modern developers suffer from infinite screen-lock, chronic desk posture, and doom-scrolling. **Chadodoro** cures this with an unapologetic, stoic GigaChad productivity coach.
 
 - **Lock In for Deep Work:** Focus sessions demand unbroken discipline. No tabs, no distractions, only execution.
-- **Radical Screen Breaks:** When the timer strikes zero, Chadodoro aggressively orders you away from screens. Close the laptop, step outside, breathe oxygen, hydrate with cold water, and **violently touch physical grass**.
-- **Progressive Chad Ranks:** Log each real-world outdoor session with the **"I Touched Grass"** button to ascend from *Screen Goblin* to *Ascended Earth Titan*.
+- **Grass Counter Tracker:** Log each real-world outdoor session with the tactile **"I Touched Grass"** button with haptic chime and floating grass confetti.
 
 ---
 
@@ -73,12 +72,7 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
   - *Focus Mode:* Stoic GigaChad silhouette with laser-focused emerald aura and jawline contours.
   - *Break Mode ("Touch Grass"):* GigaChad standing outdoors in a sunlit meadow touching physical emerald grass blades.
 - **Audio Waveform Visualizer:** Animated speech bars synchronize with coach audio playback.
-- **"I Touched Grass" Soundboard:** Tactile button increments user grass counter, triggers floating grass/clover confetti, and calculates Chad ranks:
-  - `0 - 4`: Screen Goblin 💻
-  - `5 - 14`: Sprout Wanderer 🌱
-  - `15 - 29`: Sunlight Walker ☀️
-  - `30 - 49`: Meadow Chad 🌿
-  - `50+`: Ascended Earth Titan 👑
+- **"I Touched Grass" Soundboard:** Tactile button increments user grass counter, triggers floating grass/clover confetti, and plays audio feedback.
 - **Instant Motivation Button:** Soundboard trigger for stoic motivation one-liners anytime.
 - **Web Speech API Fallback:** If audio files fail to load or offline, browser synthetic baritone voice takes over.
 - **Customizable Settings Modal:** Configurable focus (default 25m), short break (5m), long break (15m), volume slider, auto-start breaks, and stats reset.
