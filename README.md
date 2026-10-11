@@ -2,6 +2,11 @@
 > **The Uncompromising GigaChad Pomodoro + Zero-Latency Git Voice Vault**  
 > *Hacktoberfest 2026 Open-Source AI Challenge — Week 1: "Touch Grass"*
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ntsd/pomodoro-chad)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-chadodoro.ntsd.dev-10b981?style=flat-square&logo=render&logoColor=white)](https://chadodoro.ntsd.dev/)
+
+🌐 **Live Production App:** [https://chadodoro.ntsd.dev/](https://chadodoro.ntsd.dev/)
+
 ---
 
 ## 🌿 1. Overview & "Touch Grass" Theme
@@ -209,6 +214,10 @@ Synthesizes 10 pure instrumental multi-track themes (Phonk, Synthwave, Meadow Lo
 
 ## 🚀 7. Deployment to Render
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ntsd/pomodoro-chad)
+
+🌐 **Live Application:** [https://chadodoro.ntsd.dev/](https://chadodoro.ntsd.dev/)
+
 This repository includes a native [`render.yaml`](render.yaml) blueprint:
 
 ```yaml
@@ -229,10 +238,10 @@ services:
 ```
 
 ### 1-Click Deploy:
-1. Fork or push this repository to GitHub.
-2. In Render, select **Blueprints** and connect your repository (or click the **Deploy to Render** button above).
-3. Render automatically builds with `npm install && npm run build` and serves `dist/`.
-4. Audio clips under `/vault/audio/*` are cached immutably at the edge for instant streaming.
+1. Click the **Deploy to Render** button above or connect your GitHub repository in Render.
+2. Render detects the [`render.yaml`](render.yaml) blueprint automatically.
+3. Render automatically builds with `npm install && npm run build` and serves static assets from `dist/`.
+4. Audio clips under `/vault/audio/*` are cached immutably at the edge with HTTP Cache-Control headers for instant streaming.
 
 ---
 
