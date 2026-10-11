@@ -54,7 +54,7 @@ class ChadodoroController {
     await this.fetchManifest();
     this.cacheDom();
     this.bindEvents();
-    this.initYouTubePlayer();
+    this.setupLazyYouTube();
     this.applySettingsToUI();
     this.updateDisplay();
     this.updateAvatarState();
@@ -800,8 +800,24 @@ class ChadodoroController {
     }
   }
 
+  setupLazyYouTube() {
+    let triggered = false;
+    const triggerInit = () => {
+      if (triggered) return;
+      triggered = true;
+      window.removeEventListener('pointerdown', triggerInit);
+      window.removeEventListener('keydown', triggerInit);
+      window.removeEventListener('touchstart', triggerInit);
+      this.initYouTubePlayer();
+    };
+
+    window.addEventListener('pointerdown', triggerInit, { once: true, passive: true });
+    window.addEventListener('keydown', triggerInit, { once: true, passive: true });
+    window.addEventListener('touchstart', triggerInit, { once: true, passive: true });
+  }
+
   initYouTubePlayer() {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || this.ytPlayer) return;
 
     const setupPlayer = () => {
       const container = document.getElementById('youtube-bgm-player');
@@ -810,6 +826,7 @@ class ChadodoroController {
         this.ytPlayer = new window.YT.Player('youtube-bgm-player', {
           height: '1',
           width: '1',
+          host: 'https://www.youtube-nocookie.com',
           playerVars: {
             autoplay: 0,
             controls: 0,
@@ -824,6 +841,11 @@ class ChadodoroController {
               this.ytReady = true;
               if (this.ytPlayer && typeof this.ytPlayer.setVolume === 'function') {
                 this.ytPlayer.setVolume(this.settings.bgmVolume);
+              }
+              if (this.pendingTheme) {
+                const theme = this.pendingTheme;
+                this.pendingTheme = null;
+                this.startThemeAudio(theme);
               }
             },
             onStateChange: (event) => {
@@ -926,6 +948,12 @@ class ChadodoroController {
     if (isYT) {
       if (this.bgmPlayer) this.bgmPlayer.pause();
 
+      if (!this.ytPlayer) {
+        this.pendingTheme = theme;
+        this.initYouTubePlayer();
+        return;
+      }
+
       const playYT = () => {
         if (this.ytPlayer && typeof this.ytPlayer.loadVideoById === 'function') {
           this.ytPlayer.loadVideoById({
@@ -934,13 +962,15 @@ class ChadodoroController {
           });
           this.ytPlayer.setVolume(this.settings.bgmVolume);
           this.ytPlayer.playVideo();
+        } else {
+          this.pendingTheme = theme;
         }
       };
 
       if (this.ytReady && this.ytPlayer) {
         playYT();
       } else {
-        setTimeout(playYT, 800);
+        this.pendingTheme = theme;
       }
     } else {
       if (this.ytPlayer && typeof this.ytPlayer.pauseVideo === 'function') {
@@ -1181,12 +1211,14 @@ class ChadodoroController {
     if (!this.domSettingsModal) return;
     this.domSettingsModal.classList.add('active');
     this.domSettingsModal.setAttribute('aria-hidden', 'false');
+    this.domSettingsModal.removeAttribute('inert');
   }
 
   closeSettings() {
     if (!this.domSettingsModal) return;
     this.domSettingsModal.classList.remove('active');
     this.domSettingsModal.setAttribute('aria-hidden', 'true');
+    this.domSettingsModal.setAttribute('inert', '');
   }
 
   applySettingsToUI() {
