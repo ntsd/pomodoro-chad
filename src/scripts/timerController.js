@@ -137,6 +137,7 @@ class ChadodoroController {
     this.domQuoteText = document.getElementById('quote-text-content');
     this.domQuoteBadge = document.getElementById('quote-category-badge');
     this.domQuoteClipId = document.getElementById('quote-clip-id');
+    this.domQuoteVoiceTag = document.getElementById('quote-voice-tag');
     this.domBtnReplay = document.getElementById('btn-quote-replay');
 
     // Grass & Motivation
@@ -455,7 +456,7 @@ class ChadodoroController {
     const randomClip = clips[Math.floor(Math.random() * clips.length)];
     this.currentClip = randomClip;
 
-    this.updateQuoteUI(randomClip.text, category, randomClip.audio_url || "vault-audio");
+    this.updateQuoteUI(randomClip.text, category, randomClip.audio_url || "vault-audio", randomClip.voice_name);
 
     if (randomClip.has_audio && randomClip.audio_url) {
       this.audioPlayer.src = randomClip.audio_url;
@@ -498,10 +499,13 @@ class ChadodoroController {
     }
   }
 
-  updateQuoteUI(text, category, audioSrc) {
+  updateQuoteUI(text, category, audioSrc, voiceName) {
     if (this.domQuoteText) this.domQuoteText.textContent = text;
     if (this.domQuoteBadge) this.domQuoteBadge.textContent = category;
     if (this.domQuoteClipId) this.domQuoteClipId.textContent = audioSrc.replace('/vault/', 'vault/');
+    if (this.domQuoteVoiceTag) {
+      this.domQuoteVoiceTag.textContent = voiceName ? `🎙️ ${voiceName}` : '🎙️ elevenlabs';
+    }
   }
 
   setSpeakingState(isSpeaking) {

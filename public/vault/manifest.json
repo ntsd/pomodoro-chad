@@ -1,7 +1,17 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Chadodoro Git Voice Vault - Pre-rendered GigaChad audio coaching clips",
-  "total_clips": 12,
+  "total_clips": 16,
+  "voice_ids": [
+    "SOYHLrjzK2X1ezoPC6cr",
+    "nPczCjzI2devNBz1zQrb",
+    "pNInz6obpgDQGcFmaJgB"
+  ],
+  "voice_names": {
+    "pNInz6obpgDQGcFmaJgB": "Adam (Dominant Chad)",
+    "SOYHLrjzK2X1ezoPC6cr": "Harry (Fierce Warrior Chad)",
+    "nPczCjzI2devNBz1zQrb": "Brian (Deep Resonant Chad)"
+  },
   "categories": {
     "START_FOCUS": [
       {
@@ -11,6 +21,7 @@
         "audio_url": "/vault/audio/focus_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -20,6 +31,7 @@
         "audio_url": "/vault/audio/focus_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -29,6 +41,17 @@
         "audio_url": "/vault/audio/focus_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "focus_004",
+        "category": "START_FOCUS",
+        "text": "Focus, Brother. Weakness seeks excuses, but a Chad executes without hesitation.",
+        "audio_url": "/vault/audio/focus_004.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       }
     ],
@@ -40,6 +63,7 @@
         "audio_url": "/vault/audio/break_touch_grass_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -49,6 +73,7 @@
         "audio_url": "/vault/audio/break_touch_grass_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -58,6 +83,17 @@
         "audio_url": "/vault/audio/break_touch_grass_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "break_touch_grass_004",
+        "category": "TOUCH_GRASS",
+        "text": "Stand up, Champion! Disconnect from the machine and reconnect with the earth. Touch grass immediately.",
+        "audio_url": "/vault/audio/break_touch_grass_004.mp3",
+        "has_audio": true,
+        "voice_id": "SOYHLrjzK2X1ezoPC6cr",
+        "voice_name": "Harry (Fierce Warrior Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       }
     ],
@@ -69,6 +105,7 @@
         "audio_url": "/vault/audio/long_break_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -78,6 +115,7 @@
         "audio_url": "/vault/audio/long_break_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -87,6 +125,17 @@
         "audio_url": "/vault/audio/long_break_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "long_break_004",
+        "category": "LONG_BREAK",
+        "text": "Long break granted, Brother. Go for a brisk walk under the open sky and drink cold water like a champion.",
+        "audio_url": "/vault/audio/long_break_004.mp3",
+        "has_audio": true,
+        "voice_id": "nPczCjzI2devNBz1zQrb",
+        "voice_name": "Brian (Deep Resonant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       }
     ],
@@ -98,6 +147,7 @@
         "audio_url": "/vault/audio/motivation_001.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -107,6 +157,7 @@
         "audio_url": "/vault/audio/motivation_002.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       },
       {
@@ -116,6 +167,17 @@
         "audio_url": "/vault/audio/motivation_003.mp3",
         "has_audio": true,
         "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
+        "model": "google/gemma-4-26B-A4B-it"
+      },
+      {
+        "id": "motivation_004",
+        "category": "CHAD_MOTIVATION",
+        "text": "You were not born to scroll endlessly, Brother. You were forged to dominate your craft.",
+        "audio_url": "/vault/audio/motivation_004.mp3",
+        "has_audio": true,
+        "voice_id": "pNInz6obpgDQGcFmaJgB",
+        "voice_name": "Adam (Dominant Chad)",
         "model": "google/gemma-4-26B-A4B-it"
       }
     ]

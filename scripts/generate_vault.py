@@ -2,7 +2,7 @@
 """
 Chadodoro Git Voice Vault Generator Pipeline
 Generates coaching transcripts via google/gemma-4-26B-A4B-it and synthesizes
-deep masculine baritone audio via ElevenLabs.
+ultra-commanding GigaChad audio via ElevenLabs with multi-voice ID support.
 Outputs committed static assets to public/vault/scripts and public/vault/audio.
 """
 
@@ -26,7 +26,21 @@ OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "https://spark.ntsd.dev:8001/v1")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or "dummy"
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "google/gemma-4-26B-A4B-it")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
-ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "pNInz6obpgDQGcFmaJgB")
+
+# Multi-Voice ID parsing
+raw_voice_ids = os.getenv("ELEVENLABS_VOICE_ID", "pNInz6obpgDQGcFmaJgB")
+VOICE_IDS = [v.strip() for v in raw_voice_ids.split(",") if v.strip()]
+if not VOICE_IDS:
+    VOICE_IDS = ["pNInz6obpgDQGcFmaJgB"]
+
+KNOWN_VOICE_NAMES = {
+    "pNInz6obpgDQGcFmaJgB": "Adam (Dominant Chad)",
+    "SOYHLrjzK2X1ezoPC6cr": "Harry (Fierce Warrior Chad)",
+    "nPczCjzI2devNBz1zQrb": "Brian (Deep Resonant Chad)",
+    "IKne3meq5aSn9XLyUdCD": "Charlie (Energetic Chad)",
+    "N2lVS1w4EtoT3dr4eOWO": "Callum (Husky Chad)",
+    "JBFqnCBsd6RMkjVDRZzb": "George (Storyteller Chad)"
+}
 
 VAULT_DIR = BASE_DIR / "public" / "vault"
 SCRIPTS_DIR = VAULT_DIR / "scripts"
@@ -89,12 +103,15 @@ CATEGORY_CONFIG = {
     }
 }
 
+def get_voice_name(voice_id: str) -> str:
+    """Get clean human-readable name for a voice ID."""
+    return KNOWN_VOICE_NAMES.get(voice_id, f"Voice {voice_id[:8]}")
+
 def generate_script_text(category: str) -> str:
     """Generate script text using OpenAI API with fallback pool."""
     config = CATEGORY_CONFIG[category]
     user_prompt = config["user_prompt"]
     
-    # Try OpenAI compatible endpoint (Gemma 4 26B)
     try:
         from openai import OpenAI
         client = OpenAI(
@@ -116,29 +133,30 @@ def generate_script_text(category: str) -> str:
             print(f"  [LLM Gemma] Generated: {text}")
             return text
     except Exception as e:
-        print(f"  [LLM Notice] ({type(e).__name__}): {e}. Using curated neural fallback pool.")
+        print(f"  [LLM Notice] ({type(e).__name__}): Using curated neural fallback pool.")
 
-    # Graceful fallback to high quality curated Chad line
     return random.choice(config["fallback_pool"])
 
-def synthesize_audio_elevenlabs(text: str, output_path: Path) -> bool:
-    """Synthesize voice using ElevenLabs API."""
+def synthesize_audio_elevenlabs(text: str, output_path: Path, voice_id: str) -> bool:
+    """Synthesize voice using ElevenLabs API with ultra-GigaChad settings."""
     if not ELEVENLABS_API_KEY:
         print("  [ElevenLabs] Error: ELEVENLABS_API_KEY is not set.")
         return False
 
-    url = f"https://api.elevenlabs.io/v1/text-to-speech/{ELEVENLABS_VOICE_ID}"
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
     headers = {
         "xi-api-key": ELEVENLABS_API_KEY,
         "Content-Type": "application/json"
     }
+    
+    # Ultra-GigaChad voice settings: dynamic delivery, resonant deep fidelity, exaggerated style
     payload = {
         "text": text,
         "model_id": "eleven_turbo_v2_5",
         "voice_settings": {
-            "stability": 0.65,
-            "similarity_boost": 0.85,
-            "style": 0.35,
+            "stability": 0.50,
+            "similarity_boost": 0.90,
+            "style": 0.65,
             "use_speaker_boost": True
         }
     }
@@ -149,7 +167,8 @@ def synthesize_audio_elevenlabs(text: str, output_path: Path) -> bool:
             output_path.parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, "wb") as f:
                 f.write(response.content)
-            print(f"  [ElevenLabs] Synthesized: {output_path.name} ({len(response.content)} bytes)")
+            voice_label = get_voice_name(voice_id)
+            print(f"  [ElevenLabs: {voice_label}] Synthesized: {output_path.name} ({len(response.content)} bytes)")
             return True
         else:
             print(f"  [ElevenLabs Error] HTTP {response.status_code}: {response.text[:200]}")
@@ -173,12 +192,16 @@ def get_next_id(prefix: str) -> str:
     next_idx = max_idx + 1
     return f"{prefix}_{next_idx:03d}"
 
-def generate_clip(category: str, custom_text: str = None, dry_run: bool = False) -> str:
-    """Generate a single clip metadata and audio."""
+def generate_clip(category: str, voice_id: str = None, custom_text: str = None, dry_run: bool = False) -> str:
+    """Generate a single clip metadata and audio with chosen GigaChad voice ID."""
     config = CATEGORY_CONFIG[category]
     prefix = config["prefix"]
     clip_id = get_next_id(prefix)
     
+    # Pick voice ID if not specified
+    selected_voice_id = voice_id or random.choice(VOICE_IDS)
+    voice_name = get_voice_name(selected_voice_id)
+
     text = custom_text or generate_script_text(category)
     script_file = SCRIPTS_DIR / f"{clip_id}.json"
     audio_file = AUDIO_DIR / f"{clip_id}.mp3"
@@ -189,13 +212,14 @@ def generate_clip(category: str, custom_text: str = None, dry_run: bool = False)
         "prefix": prefix,
         "text": text,
         "audio_file": f"vault/audio/{clip_id}.mp3",
-        "voice_id": ELEVENLABS_VOICE_ID,
+        "voice_id": selected_voice_id,
+        "voice_name": voice_name,
         "model": OPENAI_MODEL,
         "created_at": datetime.utcnow().isoformat() + "Z"
     }
 
     if dry_run:
-        print(f"  [Dry Run] Would create {script_file.name} and {audio_file.name}")
+        print(f"  [Dry Run] Would create {script_file.name} using {voice_name} ({selected_voice_id})")
         print(f"            Text: {text}")
         return clip_id
 
@@ -203,10 +227,10 @@ def generate_clip(category: str, custom_text: str = None, dry_run: bool = False)
     SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
     with open(script_file, "w", encoding="utf-8") as f:
         json.dump(meta, f, indent=2, ensure_ascii=False)
-    print(f"  [Script Saved] {script_file.name}")
+    print(f"  [Script Saved] {script_file.name} (Voice: {voice_name})")
 
     # Synthesize Audio
-    synthesize_audio_elevenlabs(text, audio_file)
+    synthesize_audio_elevenlabs(text, audio_file, selected_voice_id)
 
     return clip_id
 
@@ -214,7 +238,6 @@ def commit_vault(message: str = "feat(vault): update Chadodoro voice clips"):
     """Stage and commit vault assets to Git."""
     try:
         subprocess.run(["git", "add", "public/vault"], cwd=BASE_DIR, check=True)
-        # Check if there are staged changes
         status = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=BASE_DIR)
         if status.returncode != 0:
             subprocess.run(["git", "commit", "-m", message], cwd=BASE_DIR, check=True)
@@ -228,6 +251,7 @@ def main():
     parser = argparse.ArgumentParser(description="Chadodoro Voice Vault Generator")
     parser.add_argument("--category", choices=["all", "START_FOCUS", "TOUCH_GRASS", "LONG_BREAK", "CHAD_MOTIVATION"], default="all", help="Category to generate")
     parser.add_argument("--count", type=int, default=1, help="Number of clips per category")
+    parser.add_argument("--voice-id", type=str, default=None, help="Explicit ElevenLabs Voice ID override")
     parser.add_argument("--commit", action="store_true", help="Stage and commit generated clips to Git")
     parser.add_argument("--dry-run", action="store_true", help="Preview generation without writing files")
     args = parser.parse_args()
@@ -237,14 +261,20 @@ def main():
 
     print(f"👑 Chadodoro Voice Vault Generator Starting...")
     print(f"   Model: {OPENAI_MODEL} @ {OPENAI_BASE_URL}")
-    print(f"   Voice: ElevenLabs ID {ELEVENLABS_VOICE_ID}")
+    print(f"   GigaChad Voices Configured: {len(VOICE_IDS)}")
+    for vid in VOICE_IDS:
+        print(f"     - {vid} ({get_voice_name(vid)})")
     print(f"   Categories: {', '.join(categories)} (Count: {args.count})")
 
+    # Generate across categories and cycle voices
+    voice_idx = 0
     for cat in categories:
         print(f"\n⚡ Generating category: {cat}")
         for i in range(args.count):
-            clip_id = generate_clip(cat, dry_run=args.dry_run)
+            chosen_voice = args.voice_id or VOICE_IDS[voice_idx % len(VOICE_IDS)]
+            clip_id = generate_clip(cat, voice_id=chosen_voice, dry_run=args.dry_run)
             generated_ids.append(clip_id)
+            voice_idx += 1
 
     # Sync manifest
     if not args.dry_run:
@@ -252,7 +282,7 @@ def main():
         sync_manifest()
 
     if args.commit and not args.dry_run:
-        commit_vault(f"feat(vault): add {len(generated_ids)} Chadodoro clips across {len(categories)} categories")
+        commit_vault(f"feat(vault): add {len(generated_ids)} clips across {len(VOICE_IDS)} GigaChad voices")
 
     print("\n🏆 Vault Generation Complete!")
 
