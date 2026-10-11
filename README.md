@@ -68,9 +68,13 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
 ## 🎨 3. Key Features
 
 - **Circular Countdown Progress Ring:** Athletic SVG ring displaying `MM:SS` with animated stroke dashoffset.
-- **Dual Reactive Avatar States:**
-  - *Focus Mode:* Stoic GigaChad silhouette with laser-focused emerald aura and jawline contours.
-  - *Break Mode ("Touch Grass"):* GigaChad standing outdoors in a sunlit meadow touching physical emerald grass blades.
+- **Three Distinct Reactive Avatar States:**
+  - *Focus Mode (Lock In):* Cyberpunk deep-work GigaChad with neon emerald laser eyes, reticle lines, and focused aura.
+  - *Short Break (Hydrate & Rest):* Indoor warm acoustic lounge GigaChad taking a mindful breath, holding a steaming Chad crown ceramic coffee mug with golden ambient lighting.
+  - *Long Break (Touch Grass):* Outdoor sunny meadow GigaChad wearing aviator sunglasses, gently caressing lush green grass stalks.
+- **GigaChad Theme Songs & Instrumental BGM:**
+  - Independent audio player featuring royalty-free tracks inspired by viral meme anthems (`g3ox_em - GigaChad Theme (Phonk House)`, `DVRST - Close Eyes`, `Kordhell - Murder In My Mind`, `Home - Resonance`, etc.).
+  - Independent Anthem toggle, volume control, and non-repeating shuffle per timer mode.
 - **Audio Waveform Visualizer:** Animated speech bars synchronize with coach audio playback.
 - **"I Touched Grass" Soundboard:** Tactile button increments user grass counter, triggers floating grass/clover confetti, and plays audio feedback.
 - **Instant Motivation Button:** Soundboard trigger for stoic motivation one-liners anytime.
@@ -80,6 +84,8 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
   - <kbd>Space</kbd>: Start / Pause
   - <kbd>R</kbd>: Reset timer
   - <kbd>S</kbd>: Skip phase
+  - <kbd>V</kbd>: Toggle GigaChad Voice Coach
+  - <kbd>B</kbd>: Toggle GigaChad Anthem BGM
   - <kbd>M</kbd>: Instant Motivation
   - <kbd>G</kbd>: I Touched Grass
   - <kbd>Esc</kbd>: Close settings
@@ -99,7 +105,7 @@ pomodoro-chad/
 │   │   └── Layout.astro      # Master layout with header stats & footer
 │   ├── components/
 │   │   ├── Timer.astro       # Circular countdown ring & main controls
-│   │   ├── Avatar.astro      # Dual reactive SVG states (Focus vs Grass)
+│   │   ├── Avatar.astro      # Three distinct reactive SVG avatars (Focus, Lounge, Touch Grass)
 │   │   ├── QuoteDisplay.astro# Coach transcript & audio replay card
 │   │   └── SettingsModal.astro # Durations, volume, and preferences modal
 │   ├── styles/
@@ -117,14 +123,16 @@ pomodoro-chad/
 │   ├── favicon.svg           # Crown & emerald blade SVG favicon
 │   └── vault/
 │       ├── manifest.json     # Compiled audio clip & theme registry
-│       ├── scripts/          # Clip metadata JSON files
-│       └── audio/            # Voice clips and pure instrumental theme MP3s
-│           ├── focus_001.mp3 ... focus_004.mp3
-│           ├── break_touch_grass_001.mp3 ...
-│           ├── theme_focus_01.mp3 ... theme_focus_03.mp3
-│           ├── theme_break_01.mp3 ... theme_break_03.mp3
-│           ├── theme_long_break_01.mp3 ... theme_long_break_02.mp3
-│           └── theme_motivation_01.mp3 ... theme_motivation_02.mp3
+│       ├── scripts/          # Grouped voice coaching folders (<id>/<id>.json & <id>.mp3)
+│       │   ├── focus_001/
+│       │   ├── break_touch_grass_001/
+│       │   ├── long_break_001/
+│       │   └── motivation_001/
+│       └── themes/           # Grouped instrumental meme themes (<id>/<id>.json & <id>.mp3)
+│           ├── theme_focus_01/
+│           ├── theme_break_01/
+│           ├── theme_long_break_01/
+│           └── theme_motivation_01/
 └── README.md
 ```
 
@@ -222,7 +230,7 @@ services:
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     headers:
-      - path: /vault/audio/*
+      - path: /vault/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
     routes:
@@ -235,7 +243,7 @@ services:
 1. Click the **Deploy to Render** button above or connect your GitHub repository in Render.
 2. Render detects the [`render.yaml`](render.yaml) blueprint automatically.
 3. Render automatically builds with `npm install && npm run build` and serves static assets from `dist/`.
-4. Audio clips under `/vault/audio/*` are cached immutably at the edge with HTTP Cache-Control headers for instant streaming.
+4. Vault assets under `/vault/*` are cached immutably at the edge with HTTP Cache-Control headers for instant streaming.
 
 ---
 
@@ -243,7 +251,7 @@ services:
 
 | Criterion | Implementation |
 |---|---|
-| **Theme: "Touch Grass"** | Core timer forces outdoor breaks, displays lush meadow Chad avatar, tracks real-world grass touched counter |
+| **Theme: "Touch Grass"** | Core timer forces outdoor long breaks, displays 3 distinct reactive avatars (Focus, Lounge Hydrate, Meadow Grass), tracks real-world grass touched counter |
 | **Open-Source AI Core** | Transcripts created with open-weight `google/gemma-4-26B-A4B-it` via OpenAI-compatible endpoint |
 | **Zero-Latency Static Vault** | ElevenLabs clips committed directly to Git under `public/vault/`, 0 runtime API calls |
 | **Static Framework** | Astro Static Output (`dist`), zero servers required |
