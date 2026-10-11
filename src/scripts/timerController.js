@@ -9,6 +9,8 @@ class ChadodoroController {
   constructor() {
     this.manifest = null;
     this.audioPlayer = new Audio();
+    this.bgmPlayer = new Audio('/vault/audio/gigachad_theme.mp3');
+    this.bgmPlayer.loop = true;
     this.currentClip = null;
     
     // Default Settings
@@ -17,7 +19,10 @@ class ChadodoroController {
       breakMinutes: 5,
       longBreakMinutes: 15,
       longBreakInterval: 4,
+      voiceEnabled: true,
       volume: 90,
+      bgmEnabled: true,
+      bgmVolume: 35,
       autoStartBreak: false,
       autoStartFocus: false,
       speechFallback: true
@@ -53,6 +58,9 @@ class ChadodoroController {
     this.updateDisplay();
     this.updateAvatarState();
     this.updateRankDisplay();
+    this.updateVoiceUI();
+    this.updateBgmVolume();
+    this.updateBgmUI();
 
     // Set initial audio volume
     this.audioPlayer.volume = this.settings.volume / 100;
@@ -157,6 +165,16 @@ class ChadodoroController {
     this.domInputVolume = document.getElementById('setting-volume');
     this.domVolumeValDisplay = document.getElementById('volume-val-display');
     this.domBtnResetGrass = document.getElementById('btn-reset-grass');
+
+    // BGM & Voice Controls DOM
+    this.domBtnToggleVoice = document.getElementById('btn-toggle-voice');
+    this.domHeaderVoiceStatus = document.getElementById('header-voice-status');
+    this.domInputVoiceEnabled = document.getElementById('setting-voice-enabled');
+    this.domBtnToggleBgm = document.getElementById('btn-toggle-bgm');
+    this.domHeaderBgmStatus = document.getElementById('header-bgm-status');
+    this.domInputBgmEnabled = document.getElementById('setting-bgm-enabled');
+    this.domInputBgmVolume = document.getElementById('setting-bgm-volume');
+    this.domBgmVolumeDisplay = document.getElementById('bgm-volume-val-display');
   }
 
   bindEvents() {
@@ -175,7 +193,11 @@ class ChadodoroController {
 
     // Grass & Motivation
     if (this.domBtnGrass) this.domBtnGrass.addEventListener('click', (e) => this.handleTouchGrass(e));
-    if (this.domBtnMotivation) this.domBtnMotivation.addEventListener('click', () => this.playCategoryClip('CHAD_MOTIVATION'));
+    if (this.domBtnMotivation) this.domBtnMotivation.addEventListener('click', () => this.handleInstantMotivation());
+
+    // Audio Toggles
+    if (this.domBtnToggleVoice) this.domBtnToggleVoice.addEventListener('click', () => this.toggleVoice());
+    if (this.domBtnToggleBgm) this.domBtnToggleBgm.addEventListener('click', () => this.toggleBgm());
 
     // Settings Modal
     if (this.domBtnOpenSettings) this.domBtnOpenSettings.addEventListener('click', () => this.openSettings());
@@ -204,6 +226,19 @@ class ChadodoroController {
       });
     }
 
+    if (this.domBtnToggleBgm) {
+      this.domBtnToggleBgm.addEventListener('click', () => this.toggleBgm());
+    }
+
+    if (this.domInputBgmVolume) {
+      this.domInputBgmVolume.addEventListener('input', (e) => {
+        const val = e.target.value;
+        if (this.domBgmVolumeDisplay) this.domBgmVolumeDisplay.textContent = `${val}%`;
+        this.settings.bgmVolume = parseInt(val, 10);
+        this.updateBgmVolume();
+      });
+    }
+
     if (this.domBtnResetGrass) {
       this.domBtnResetGrass.addEventListener('click', () => {
         this.grassCount = 0;
@@ -226,9 +261,13 @@ class ChadodoroController {
       } else if (e.code === 'KeyS') {
         this.skipPhase();
       } else if (e.code === 'KeyM') {
-        this.playCategoryClip('CHAD_MOTIVATION');
+        this.handleInstantMotivation();
       } else if (e.code === 'KeyG') {
         this.handleTouchGrass();
+      } else if (e.code === 'KeyV') {
+        this.toggleVoice();
+      } else if (e.code === 'KeyB') {
+        this.toggleBgm();
       } else if (e.code === 'Escape') {
         this.closeSettings();
       }
@@ -258,6 +297,7 @@ class ChadodoroController {
   startTimer() {
     this.isRunning = true;
     this.updateToggleBtnUI();
+    this.updateBgmPlayback();
 
     // If starting a fresh phase, play coach directive
     if (this.timeRemaining === this.totalDuration) {
@@ -285,6 +325,7 @@ class ChadodoroController {
     clearInterval(this.timerInterval);
     this.updateToggleBtnUI();
     this.updateDocumentTitle();
+    this.updateBgmPlayback();
   }
 
   resetTimer() {
@@ -347,6 +388,7 @@ class ChadodoroController {
     this.updateAvatarState();
     this.updateDisplay();
     this.updateToggleBtnUI();
+    this.updateBgmPlayback();
   }
 
   getDurationForMode(mode) {
@@ -458,16 +500,56 @@ class ChadodoroController {
 
     this.updateQuoteUI(randomClip.text, category, randomClip.audio_url || "vault-audio", randomClip.voice_name);
 
-    if (randomClip.has_audio && randomClip.audio_url) {
-      this.audioPlayer.src = randomClip.audio_url;
-      this.audioPlayer.play().catch(e => {
-        console.warn("Autoplay audio blocked or failed:", e);
-        if (this.settings.speechFallback) {
-          this.speakFallback(randomClip.text);
-        }
-      });
-    } else if (this.settings.speechFallback) {
-      this.speakFallback(randomClip.text);
+    if (this.settings.voiceEnabled) {
+      if (randomClip.has_audio && randomClip.audio_url) {
+        this.audioPlayer.src = randomClip.audio_url;
+        this.audioPlayer.play().catch(e => {
+          console.warn("Autoplay audio blocked or failed:", e);
+          if (this.settings.speechFallback) {
+            this.speakFallback(randomClip.text);
+          }
+        });
+      } else if (this.settings.speechFallback) {
+        this.speakFallback(randomClip.text);
+      }
+    }
+  }
+
+  handleInstantMotivation() {
+    this.playCategoryClip('CHAD_MOTIVATION');
+    if (this.settings.bgmEnabled) {
+      const motThemes = (this.manifest && this.manifest.themes && this.manifest.themes.motivation) || [];
+      if (motThemes.length > 0) {
+        this.currentTheme = motThemes[Math.floor(Math.random() * motThemes.length)];
+        this.currentThemeCategory = 'motivation';
+        this.bgmPlayer.src = this.currentTheme.audio_url;
+        this.bgmPlayer.play().catch(() => {});
+        this.updateBgmUI();
+      }
+    }
+  }
+
+  toggleVoice() {
+    this.settings.voiceEnabled = !this.settings.voiceEnabled;
+    this.saveStorage();
+    this.updateVoiceUI();
+    if (!this.settings.voiceEnabled) {
+      this.audioPlayer.pause();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      this.setSpeakingState(false);
+    }
+  }
+
+  updateVoiceUI() {
+    if (this.domBtnToggleVoice) {
+      this.domBtnToggleVoice.classList.toggle('active', this.settings.voiceEnabled);
+      this.domBtnToggleVoice.title = `Toggle GigaChad Voice Coach (Shortkey: V) - Currently ${this.settings.voiceEnabled ? 'ON' : 'OFF'}`;
+    }
+    if (this.domHeaderVoiceStatus) {
+      this.domHeaderVoiceStatus.textContent = this.settings.voiceEnabled ? 'VOICE ON' : 'VOICE OFF';
+    }
+    if (this.domInputVoiceEnabled) {
+      this.domInputVoiceEnabled.checked = this.settings.voiceEnabled;
     }
   }
 
@@ -494,7 +576,7 @@ class ChadodoroController {
     const text = defaultLines[category] || "Lock in, King.";
     this.currentClip = { text, category, audio_url: "/vault/audio/focus_001.mp3" };
     this.updateQuoteUI(text, category, "synthetic-fallback");
-    if (this.settings.speechFallback) {
+    if (this.settings.voiceEnabled && this.settings.speechFallback) {
       this.speakFallback(text);
     }
   }
@@ -513,6 +595,72 @@ class ChadodoroController {
       this.domAvatarSpeech.classList.toggle('is-active', isSpeaking);
       const wave = this.domAvatarSpeech.querySelector('.audio-wave');
       if (wave) wave.classList.toggle('is-speaking', isSpeaking);
+    }
+
+    // Duck BGM during speech so the commanding voice is crystal clear
+    if (this.bgmPlayer && this.settings.bgmEnabled) {
+      if (isSpeaking) {
+        this.bgmPlayer.volume = Math.max(0, (this.settings.bgmVolume * 0.2) / 100);
+      } else {
+        this.updateBgmVolume();
+      }
+    }
+  }
+
+  toggleBgm() {
+    this.settings.bgmEnabled = !this.settings.bgmEnabled;
+    this.saveStorage();
+    this.updateBgmUI();
+    this.updateBgmPlayback(true);
+  }
+
+  updateBgmVolume() {
+    if (this.bgmPlayer) {
+      this.bgmPlayer.volume = Math.max(0, Math.min(1, this.settings.bgmVolume / 100));
+    }
+  }
+
+  getRandomThemeForMode(mode) {
+    if (!this.manifest || !this.manifest.themes) {
+      return { audio_url: '/vault/audio/gigachad_theme.mp3', title: 'GigaChad Anthem' };
+    }
+    const cat = mode === 'focus' ? 'focus' : (mode === 'break' ? 'break' : (mode === 'long_break' ? 'long_break' : 'motivation'));
+    const pool = this.manifest.themes[cat] || this.manifest.themes['focus'] || [];
+    if (pool.length === 0) {
+      return { audio_url: '/vault/audio/gigachad_theme.mp3', title: 'GigaChad Anthem' };
+    }
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  updateBgmUI() {
+    if (this.domBtnToggleBgm) {
+      this.domBtnToggleBgm.classList.toggle('active', this.settings.bgmEnabled);
+      if (this.currentTheme) {
+        this.domBtnToggleBgm.title = `Theme: ${this.currentTheme.title} (Shortkey: B) - Currently ${this.settings.bgmEnabled ? 'ON' : 'OFF'}`;
+      }
+    }
+    if (this.domHeaderBgmStatus) {
+      this.domHeaderBgmStatus.textContent = this.settings.bgmEnabled ? 'ANTHEM ON' : 'ANTHEM OFF';
+    }
+    if (this.domInputBgmEnabled) {
+      this.domInputBgmEnabled.checked = this.settings.bgmEnabled;
+    }
+  }
+
+  updateBgmPlayback(forceNew = false) {
+    if (!this.bgmPlayer) return;
+    if (this.isRunning && this.settings.bgmEnabled) {
+      if (forceNew || !this.currentTheme || this.currentThemeCategory !== this.mode) {
+        this.currentTheme = this.getRandomThemeForMode(this.mode);
+        this.currentThemeCategory = this.mode;
+        this.bgmPlayer.src = this.currentTheme.audio_url;
+        this.updateBgmUI();
+      }
+      this.bgmPlayer.play().catch(e => {
+        // Autoplay may be restricted until initial user click
+      });
+    } else {
+      this.bgmPlayer.pause();
     }
   }
 
@@ -635,6 +783,10 @@ class ChadodoroController {
     if (elInterval) elInterval.value = this.settings.longBreakInterval;
     if (elVol) elVol.value = this.settings.volume;
     if (this.domVolumeValDisplay) this.domVolumeValDisplay.textContent = `${this.settings.volume}%`;
+    if (this.domInputVoiceEnabled) this.domInputVoiceEnabled.checked = this.settings.voiceEnabled;
+    if (this.domInputBgmEnabled) this.domInputBgmEnabled.checked = this.settings.bgmEnabled;
+    if (this.domInputBgmVolume) this.domInputBgmVolume.value = this.settings.bgmVolume;
+    if (this.domBgmVolumeDisplay) this.domBgmVolumeDisplay.textContent = `${this.settings.bgmVolume}%`;
     if (elAutoBreak) elAutoBreak.checked = this.settings.autoStartBreak;
     if (elAutoFocus) elAutoFocus.checked = this.settings.autoStartFocus;
     if (elSpeech) elSpeech.checked = this.settings.speechFallback;
@@ -646,12 +798,24 @@ class ChadodoroController {
     this.settings.breakMinutes = parseInt(formData.get('breakMinutes'), 10) || 5;
     this.settings.longBreakMinutes = parseInt(formData.get('longBreakMinutes'), 10) || 15;
     this.settings.longBreakInterval = parseInt(formData.get('longBreakInterval'), 10) || 4;
+    this.settings.voiceEnabled = formData.get('voiceEnabled') === 'on';
     this.settings.volume = parseInt(formData.get('volume'), 10) || 90;
+    this.settings.bgmEnabled = formData.get('bgmEnabled') === 'on';
+    this.settings.bgmVolume = parseInt(formData.get('bgmVolume'), 10) || 35;
     this.settings.autoStartBreak = formData.get('autoStartBreak') === 'on';
     this.settings.autoStartFocus = formData.get('autoStartFocus') === 'on';
     this.settings.speechFallback = formData.get('speechFallback') === 'on';
 
     this.saveStorage();
+    this.updateVoiceUI();
+    if (!this.settings.voiceEnabled) {
+      this.audioPlayer.pause();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      this.setSpeakingState(false);
+    }
+    this.updateBgmVolume();
+    this.updateBgmUI();
+    this.updateBgmPlayback();
 
     // If timer is not running, adjust current remaining
     if (!this.isRunning) {

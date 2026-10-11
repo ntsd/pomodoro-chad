@@ -110,19 +110,22 @@ pomodoro-chad/
 │   └── scripts/
 │       └── timerController.js# Pomodoro engine, audio controller, local storage
 ├── scripts/
-│   ├── requirements.txt      # Python dependencies (openai, requests, dotenv)
-│   ├── generate_vault.py     # LLM + ElevenLabs generation pipeline
+│   ├── requirements.txt      # Python dependencies (openai, requests, dotenv, numpy)
+│   ├── generate_vault.py     # LLM + ElevenLabs multi-voice generation pipeline
+│   ├── generate_themes.py    # Pure instrumental GigaChad anthems generator
 │   └── sync_manifest.py      # Manifest compiler
 ├── public/
 │   ├── favicon.svg           # Crown & emerald blade SVG favicon
 │   └── vault/
-│       ├── manifest.json     # Compiled audio clip registry
+│       ├── manifest.json     # Compiled audio clip & theme registry
 │       ├── scripts/          # Clip metadata JSON files
-│       │   ├── focus_001.json
-│       │   └── break_touch_grass_001.json
-│       └── audio/            # Pre-rendered MP3 voice files
-│           ├── focus_001.mp3
-│           └── break_touch_grass_001.mp3
+│       └── audio/            # Voice clips and pure instrumental theme MP3s
+│           ├── focus_001.mp3 ... focus_004.mp3
+│           ├── break_touch_grass_001.mp3 ...
+│           ├── theme_focus_01.mp3 ... theme_focus_03.mp3
+│           ├── theme_break_01.mp3 ... theme_break_03.mp3
+│           ├── theme_long_break_01.mp3 ... theme_long_break_02.mp3
+│           └── theme_motivation_01.mp3 ... theme_motivation_02.mp3
 └── README.md
 ```
 
@@ -195,6 +198,12 @@ python3 scripts/generate_vault.py --count 1 --commit
 ```bash
 python3 scripts/sync_manifest.py
 ```
+
+### 5. Generate Pure Instrumental Anthems (BGM)
+```bash
+python3 scripts/generate_themes.py
+```
+Synthesizes 10 pure instrumental multi-track themes (Phonk, Synthwave, Meadow Lo-Fi, Chillstep) across `focus`, `break`, `long_break`, and `motivation`. Pure instrumentals are completely decoupled from voice coach lines, allowing separate enabling, disabling, and volume adjustment.
 
 ---
 

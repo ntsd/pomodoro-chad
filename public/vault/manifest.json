@@ -181,5 +181,105 @@
         "model": "google/gemma-4-26B-A4B-it"
       }
     ]
+  },
+  "themes": {
+    "focus": [
+      {
+        "id": "theme_focus_01",
+        "category": "focus",
+        "title": "GigaChad Anthem - Can You Feel My Heart (Phonk Drop)",
+        "audio_url": "/vault/audio/theme_focus_01.mp3",
+        "bpm": 128,
+        "duration": 15.0,
+        "is_instrumental": true
+      },
+      {
+        "id": "theme_focus_02",
+        "category": "focus",
+        "title": "Deep Work Lock-In (Dark Synthwave Pulse)",
+        "audio_url": "/vault/audio/theme_focus_02.mp3",
+        "bpm": 132,
+        "duration": 14.5,
+        "is_instrumental": true
+      },
+      {
+        "id": "theme_focus_03",
+        "category": "focus",
+        "title": "Hyper-Focus Titan Rhythm (Aggressive Phonk)",
+        "audio_url": "/vault/audio/theme_focus_03.mp3",
+        "bpm": 136,
+        "duration": 14.1,
+        "is_instrumental": true
+      }
+    ],
+    "break": [
+      {
+        "id": "theme_break_01",
+        "category": "break",
+        "title": "Sunlit Meadow - Touch Grass Serenade",
+        "audio_url": "/vault/audio/theme_break_01.mp3",
+        "bpm": 96,
+        "duration": 15.0,
+        "is_instrumental": true
+      },
+      {
+        "id": "theme_break_02",
+        "category": "break",
+        "title": "Outdoor Oxygen Lo-Fi Groove",
+        "audio_url": "/vault/audio/theme_break_02.mp3",
+        "bpm": 104,
+        "duration": 13.8,
+        "is_instrumental": true
+      },
+      {
+        "id": "theme_break_03",
+        "category": "break",
+        "title": "Breeze of the Meadow (Chillstep Pulse)",
+        "audio_url": "/vault/audio/theme_break_03.mp3",
+        "bpm": 100,
+        "duration": 14.4,
+        "is_instrumental": true
+      }
+    ],
+    "long_break": [
+      {
+        "id": "theme_long_break_01",
+        "category": "long_break",
+        "title": "Titan Outdoor Walk & Hydration",
+        "audio_url": "/vault/audio/theme_long_break_01.mp3",
+        "bpm": 92,
+        "duration": 15.6,
+        "is_instrumental": true
+      },
+      {
+        "id": "theme_long_break_02",
+        "category": "long_break",
+        "title": "Forest Canopy Reverie (Lush Lo-Fi)",
+        "audio_url": "/vault/audio/theme_long_break_02.mp3",
+        "bpm": 86,
+        "duration": 16.7,
+        "is_instrumental": true
+      }
+    ],
+    "motivation": [
+      {
+        "id": "theme_motivation_01",
+        "category": "motivation",
+        "title": "Warrior Ascendance - Pure GigaChad Phonk",
+        "audio_url": "/vault/audio/theme_motivation_01.mp3",
+        "bpm": 130,
+        "duration": 14.8,
+        "is_instrumental": true
+      },
+      {
+        "id": "theme_motivation_02",
+        "category": "motivation",
+        "title": "Iron Discipline Apex (Titan War Stabs)",
+        "audio_url": "/vault/audio/theme_motivation_02.mp3",
+        "bpm": 134,
+        "duration": 14.3,
+        "is_instrumental": true
+      }
+    ]
   }
 }

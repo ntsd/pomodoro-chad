@@ -48,12 +48,42 @@
       <div class="settings-section">
         <h3 class="section-title">VOICE VAULT & AUDIO</h3>
 
+        <div class="setting-toggle-item">
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-voice-enabled" name="voiceEnabled" checked />
+            <span class="toggle-slider"></span>
+          </label>
+          <div class="toggle-text">
+            <span class="toggle-title">GigaChad Coach Voice</span>
+            <span class="toggle-desc">Play commanding ElevenLabs voice lines on phase changes and motivation</span>
+          </div>
+        </div>
+
         <div class="setting-slider-item">
           <div class="slider-label-row">
             <label for="setting-volume">Coach Voice Volume</label>
             <span class="slider-val" id="volume-val-display">90%</span>
           </div>
           <input type="range" id="setting-volume" name="volume" min="0" max="100" value="90" class="range-slider" />
+        </div>
+
+        <div class="setting-toggle-item">
+          <label class="toggle-switch">
+            <input type="checkbox" id="setting-bgm-enabled" name="bgmEnabled" checked />
+            <span class="toggle-slider"></span>
+          </label>
+          <div class="toggle-text">
+            <span class="toggle-title">GigaChad Theme Music (BGM)</span>
+            <span class="toggle-desc">Loop randomized pure instrumental anthems & phonk beats in background</span>
+          </div>
+        </div>
+
+        <div class="setting-slider-item">
+          <div class="slider-label-row">
+            <label for="setting-bgm-volume">Anthem BGM Volume</label>
+            <span class="slider-val" id="bgm-volume-val-display">35%</span>
+          </div>
+          <input type="range" id="setting-bgm-volume" name="bgmVolume" min="0" max="100" value="35" class="range-slider" />
         </div>
 
         <div class="setting-toggle-item">
