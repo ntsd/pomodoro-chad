@@ -177,6 +177,14 @@ class ChadodoroController {
     this.domInputBgmEnabled = document.getElementById('setting-bgm-enabled');
     this.domInputBgmVolume = document.getElementById('setting-bgm-volume');
     this.domBgmVolumeDisplay = document.getElementById('bgm-volume-val-display');
+
+    // Now Playing Banner DOM
+    this.domNowPlayingBanner = document.getElementById('now-playing-banner');
+    this.domNowPlayingBadge = document.getElementById('now-playing-badge');
+    this.domNowPlayingTitle = document.getElementById('now-playing-title');
+    this.domNowPlayingLink = document.getElementById('now-playing-yt-link');
+    this.domNowPlayingLinkText = document.getElementById('now-playing-link-text');
+    this.domMusicWaveBars = document.getElementById('music-wave-bars');
   }
 
   bindEvents() {
@@ -835,6 +843,7 @@ class ChadodoroController {
     if (this.ytPlayer && typeof this.ytPlayer.pauseVideo === 'function') {
       this.ytPlayer.pauseVideo();
     }
+    this.updateNowPlayingBanner();
   }
 
   playVaultFallbackTheme() {
@@ -863,6 +872,61 @@ class ChadodoroController {
     }
     if (this.domInputBgmEnabled) {
       this.domInputBgmEnabled.checked = this.settings.bgmEnabled;
+    }
+
+    this.updateNowPlayingBanner();
+  }
+
+  updateNowPlayingBanner() {
+    if (!this.domNowPlayingBanner) return;
+
+    const isPlaying = this.isRunning && this.settings.bgmEnabled && this.currentTheme;
+    if (!isPlaying) {
+      this.domNowPlayingBanner.style.display = 'none';
+      return;
+    }
+
+    const theme = this.currentTheme;
+    const isYT = theme.type === 'youtube' || !!theme.video_id;
+
+    this.domNowPlayingBanner.style.display = 'flex';
+    if (this.domNowPlayingTitle) {
+      this.domNowPlayingTitle.textContent = theme.title;
+    }
+
+    if (isYT) {
+      if (this.domNowPlayingBadge) {
+        this.domNowPlayingBadge.textContent = 'PLAYING YOUTUBE SONG';
+        this.domNowPlayingBadge.classList.remove('is-vault');
+      }
+      if (this.domMusicWaveBars) {
+        this.domMusicWaveBars.classList.remove('is-vault');
+      }
+      if (this.domNowPlayingLink) {
+        const startParam = theme.start ? `&t=${theme.start}s` : '';
+        this.domNowPlayingLink.href = `https://www.youtube.com/watch?v=${theme.video_id}${startParam}`;
+        this.domNowPlayingLink.classList.remove('is-vault');
+        this.domNowPlayingLink.title = `Open "${theme.title}" on YouTube`;
+      }
+      if (this.domNowPlayingLinkText) {
+        this.domNowPlayingLinkText.textContent = 'YOUTUBE';
+      }
+    } else {
+      if (this.domNowPlayingBadge) {
+        this.domNowPlayingBadge.textContent = 'PLAYING GIT VAULT ANTHEM';
+        this.domNowPlayingBadge.classList.add('is-vault');
+      }
+      if (this.domMusicWaveBars) {
+        this.domMusicWaveBars.classList.add('is-vault');
+      }
+      if (this.domNowPlayingLink) {
+        this.domNowPlayingLink.href = theme.audio_url || '#';
+        this.domNowPlayingLink.classList.add('is-vault');
+        this.domNowPlayingLink.title = `Play static audio from Git Voice Vault`;
+      }
+      if (this.domNowPlayingLinkText) {
+        this.domNowPlayingLinkText.textContent = 'VAULT MP3';
+      }
     }
   }
 

@@ -432,6 +432,15 @@
         "start": 0,
         "duration": 30,
         "type": "youtube"
+      },
+      {
+        "id": "yt_focus_04",
+        "category": "START_FOCUS",
+        "title": "DIA DELÍCIA - NAKAMA",
+        "video_id": "2cnloO84LA0",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
       }
     ],
     "CHAD_MOTIVATION": [
@@ -578,6 +587,15 @@
         "title": "TWISTED - WORTH NOTHING (ft. Oliver Tree)",
         "video_id": "neOQ8s60sHU",
         "start": 15,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_break_12",
+        "category": "SHORT_BREAK",
+        "title": "PARA COMEÇAR O FINAL DE SEMANA - FORTE FORTE DE LACOSTE",
+        "video_id": "D60K8BU6lsY",
+        "start": 0,
         "duration": 30,
         "type": "youtube"
       }
