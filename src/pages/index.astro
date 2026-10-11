@@ -29,6 +29,9 @@ import SettingsModal from '../components/SettingsModal.astro';
           <Avatar />
         </div>
 
+        <!-- Latest Coach Quote Card -->
+        <QuoteDisplay />
+
         <!-- Chad Rules of Discipline -->
         <div class="rules-card glass-card">
           <div class="rules-header">
@@ -64,9 +67,6 @@ import SettingsModal from '../components/SettingsModal.astro';
         <div class="timer-card glass-card">
           <Timer />
         </div>
-
-        <!-- Latest Coach Quote Card -->
-        <QuoteDisplay />
 
         <!-- Git Voice Vault Info Box -->
         <div class="vault-info-card glass-card">
@@ -189,7 +189,13 @@ import SettingsModal from '../components/SettingsModal.astro';
 
   @media (min-width: 900px) {
     .dashboard-grid {
-      grid-template-columns: 340px 1fr;
+      grid-template-columns: 360px 1fr;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .dashboard-grid {
+      grid-template-columns: 380px 1fr;
     }
   }
 
