@@ -545,6 +545,42 @@
         "start": 0,
         "duration": 30,
         "type": "youtube"
+      },
+      {
+        "id": "yt_focus_05",
+        "category": "START_FOCUS",
+        "title": "sma$her & MXZI - ACELERADA",
+        "video_id": "ADUis5-M15Y",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_focus_06",
+        "category": "START_FOCUS",
+        "title": "TIKI TIKI",
+        "video_id": "xVS4zgb9AuU",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_focus_07",
+        "category": "START_FOCUS",
+        "title": "TWISTED - WORTH NOTHING (ft. Oliver Tree)",
+        "video_id": "neOQ8s60sHU",
+        "start": 15,
+        "duration": 30,
+        "type": "youtube"
+      },
+      {
+        "id": "yt_focus_08",
+        "category": "START_FOCUS",
+        "title": "PARA COMEÇAR O FINAL DE SEMANA - FORTE FORTE DE LACOSTE",
+        "video_id": "D60K8BU6lsY",
+        "start": 0,
+        "duration": 30,
+        "type": "youtube"
       }
     ],
     "CHAD_MOTIVATION": [
@@ -607,15 +643,6 @@
       {
         "id": "yt_break_02",
         "category": "SHORT_BREAK",
-        "title": "sma$her & MXZI - ACELERADA",
-        "video_id": "ADUis5-M15Y",
-        "start": 0,
-        "duration": 30,
-        "type": "youtube"
-      },
-      {
-        "id": "yt_break_03",
-        "category": "SHORT_BREAK",
         "title": "ATLXS - PASSO BEM SOLTO (SLOWED)",
         "video_id": "KgayxOF4Y7E",
         "start": 0,
@@ -623,7 +650,7 @@
         "type": "youtube"
       },
       {
-        "id": "yt_break_04",
+        "id": "yt_break_03",
         "category": "SHORT_BREAK",
         "title": "ANDROMEDA - MONTAGEM COMA",
         "video_id": "icszzYxHuAg",
@@ -632,7 +659,7 @@
         "type": "youtube"
       },
       {
-        "id": "yt_break_05",
+        "id": "yt_break_04",
         "category": "SHORT_BREAK",
         "title": "MONTAGEM MIAU (Slowed)",
         "video_id": "4PSNNk0C5JY",
@@ -641,7 +668,7 @@
         "type": "youtube"
       },
       {
-        "id": "yt_break_06",
+        "id": "yt_break_05",
         "category": "SHORT_BREAK",
         "title": "CLIMA LINDO (SLOWED)",
         "video_id": "P12jBX75B48",
@@ -650,16 +677,7 @@
         "type": "youtube"
       },
       {
-        "id": "yt_break_07",
-        "category": "SHORT_BREAK",
-        "title": "TIKI TIKI",
-        "video_id": "xVS4zgb9AuU",
-        "start": 0,
-        "duration": 30,
-        "type": "youtube"
-      },
-      {
-        "id": "yt_break_08",
+        "id": "yt_break_06",
         "category": "SHORT_BREAK",
         "title": "MXZI - MONTAGEM TOMADA (Slowed + Extended)",
         "video_id": "dmur3cBdUHo",
@@ -668,7 +686,7 @@
         "type": "youtube"
       },
       {
-        "id": "yt_break_09",
+        "id": "yt_break_07",
         "category": "SHORT_BREAK",
         "title": "Ba Fang Lai Cai (八方来财)",
         "video_id": "tq5257HTKdI",
@@ -677,29 +695,11 @@
         "type": "youtube"
       },
       {
-        "id": "yt_break_10",
+        "id": "yt_break_08",
         "category": "SHORT_BREAK",
         "title": "大展鴻圖 (Blueprint Supreme)",
         "video_id": "yWT-UopFlAs",
         "start": 10,
-        "duration": 30,
-        "type": "youtube"
-      },
-      {
-        "id": "yt_break_11",
-        "category": "SHORT_BREAK",
-        "title": "TWISTED - WORTH NOTHING (ft. Oliver Tree)",
-        "video_id": "neOQ8s60sHU",
-        "start": 15,
-        "duration": 30,
-        "type": "youtube"
-      },
-      {
-        "id": "yt_break_12",
-        "category": "SHORT_BREAK",
-        "title": "PARA COMEÇAR O FINAL DE SEMANA - FORTE FORTE DE LACOSTE",
-        "video_id": "D60K8BU6lsY",
-        "start": 0,
         "duration": 30,
         "type": "youtube"
       }
