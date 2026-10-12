@@ -368,9 +368,6 @@ class ChadodoroController {
       });
     }
 
-    if (this.domBtnToggleBgm) {
-      this.domBtnToggleBgm.addEventListener('click', () => this.toggleBgm());
-    }
 
     if (this.domInputBgmVolume) {
       this.domInputBgmVolume.addEventListener('input', (e) => {
