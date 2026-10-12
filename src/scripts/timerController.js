@@ -313,6 +313,7 @@ class ChadodoroController {
     this.domNowPlayingBanner = document.getElementById('now-playing-banner');
     this.domNowPlayingBadge = document.getElementById('now-playing-badge');
     this.domNowPlayingTitle = document.getElementById('now-playing-title');
+    this.domNowPlayingTitleWrap = document.getElementById('now-playing-title-wrap');
     this.domNowPlayingLink = document.getElementById('now-playing-yt-link');
     this.domNowPlayingLinkText = document.getElementById('now-playing-link-text');
     this.domMusicWaveBars = document.getElementById('music-wave-bars');
@@ -425,6 +426,22 @@ class ChadodoroController {
         this.speakFallback(this.currentClip.text);
       }
     });
+
+    // Window resize / orientation change for Now Playing title sliding
+    window.addEventListener('resize', () => {
+      if (this.domNowPlayingBanner && this.domNowPlayingBanner.style.display !== 'none') {
+        this.updateSongTitleSlide();
+      }
+    });
+
+    if (typeof ResizeObserver !== 'undefined' && this.domNowPlayingTitleWrap) {
+      const ro = new ResizeObserver(() => {
+        if (this.domNowPlayingBanner && this.domNowPlayingBanner.style.display !== 'none') {
+          this.updateSongTitleSlide();
+        }
+      });
+      ro.observe(this.domNowPlayingTitleWrap);
+    }
   }
 
   toggleTimer() {
@@ -1064,6 +1081,12 @@ class ChadodoroController {
     const isPlaying = this.isRunning && this.settings.bgmEnabled && this.currentTheme;
     if (!isPlaying) {
       this.domNowPlayingBanner.style.display = 'none';
+      if (this.domNowPlayingTitle) {
+        this.domNowPlayingTitle.classList.remove('is-sliding');
+      }
+      if (this.domNowPlayingTitleWrap) {
+        this.domNowPlayingTitleWrap.classList.remove('is-sliding');
+      }
       return;
     }
 
@@ -1110,6 +1133,66 @@ class ChadodoroController {
         this.domNowPlayingLinkText.textContent = 'VAULT MP3';
       }
     }
+
+    this.updateSongTitleSlide();
+  }
+
+  updateSongTitleSlide() {
+    if (!this.domNowPlayingTitle || !this.domNowPlayingTitleWrap) return;
+    const titleEl = this.domNowPlayingTitle;
+    const wrapEl = this.domNowPlayingTitleWrap;
+
+    // Reset sliding state to clear existing animation and measure naturally
+    titleEl.classList.remove('is-sliding');
+    wrapEl.classList.remove('is-sliding');
+    titleEl.style.removeProperty('--slide-dist');
+    titleEl.style.removeProperty('--slide-dur');
+
+    // Run measurement after layout pass
+    requestAnimationFrame(() => {
+      if (!this.domNowPlayingBanner || this.domNowPlayingBanner.style.display === 'none') {
+        return;
+      }
+
+      const clientW = wrapEl.clientWidth;
+      if (clientW <= 0) {
+        // If layout is not ready yet, retry on next frame
+        requestAnimationFrame(() => {
+          if (this.domNowPlayingTitleWrap && this.domNowPlayingTitleWrap.clientWidth > 0) {
+            this.updateSongTitleSlide();
+          }
+        });
+        return;
+      }
+
+      // Temporarily unconstrain title inline style to measure true intrinsic width
+      const prevDisplay = titleEl.style.display;
+      const prevMaxWidth = titleEl.style.maxWidth;
+      const prevWidth = titleEl.style.width;
+
+      titleEl.style.display = 'inline-block';
+      titleEl.style.maxWidth = 'none';
+      titleEl.style.width = 'max-content';
+
+      const scrollW = titleEl.offsetWidth || titleEl.scrollWidth;
+
+      titleEl.style.display = prevDisplay;
+      titleEl.style.maxWidth = prevMaxWidth;
+      titleEl.style.width = prevWidth;
+
+      const overflow = scrollW - clientW;
+
+      if (overflow > 4) {
+        const slideDist = Math.ceil(overflow + 12);
+        // Calculate smooth duration based on distance (~26-30px/sec)
+        const duration = Math.max(6, Math.min(18, (slideDist / 26) + 4));
+
+        titleEl.style.setProperty('--slide-dist', `${slideDist}px`);
+        titleEl.style.setProperty('--slide-dur', `${duration.toFixed(1)}s`);
+        titleEl.classList.add('is-sliding');
+        wrapEl.classList.add('is-sliding');
+      }
+    });
   }
 
   updateBgmPlayback(forceNew = false) {

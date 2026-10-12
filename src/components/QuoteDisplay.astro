@@ -31,7 +31,9 @@
     </div>
     <div class="now-playing-info">
       <span class="now-playing-badge" id="now-playing-badge">PLAYING YOUTUBE SONG</span>
-      <span class="now-playing-title" id="now-playing-title">—</span>
+      <div class="now-playing-title-wrap" id="now-playing-title-wrap">
+        <span class="now-playing-title" id="now-playing-title">—</span>
+      </div>
     </div>
   </div>
   <a href="#" target="_blank" rel="noopener noreferrer" class="now-playing-yt-link" id="now-playing-yt-link" title="Open song on YouTube">
@@ -222,6 +224,16 @@
     color: var(--emerald-bright);
   }
 
+  .now-playing-title-wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
   .now-playing-title {
     font-size: 0.78rem;
     font-weight: 700;
@@ -233,6 +245,53 @@
     width: 100%;
     max-width: 100%;
     line-height: 1.3;
+  }
+
+  /* When title overflows: smooth hardware-accelerated slide */
+  .now-playing-title.is-sliding {
+    display: inline-block;
+    width: max-content;
+    max-width: none;
+    overflow: visible;
+    text-overflow: clip;
+    will-change: transform;
+    animation: songTitleSlide var(--slide-dur, 8s) cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+
+  .now-playing-title-wrap.is-sliding {
+    mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 14px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 14px), transparent 100%);
+  }
+
+  .now-playing-title-wrap:hover .now-playing-title.is-sliding {
+    animation-play-state: paused;
+  }
+
+  @keyframes songTitleSlide {
+    0%, 18% {
+      transform: translateX(0);
+    }
+    48%, 68% {
+      transform: translateX(calc(-1 * var(--slide-dist, 0px)));
+    }
+    92%, 100% {
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .now-playing-title.is-sliding {
+      animation: none !important;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+      width: 100%;
+      display: block;
+    }
+    .now-playing-title-wrap.is-sliding {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
   }
 
   .now-playing-yt-link {
@@ -304,15 +363,21 @@
     }
   }
 
+  @media (max-width: 440px) {
+    .now-playing-yt-link span {
+      display: none;
+    }
+    .now-playing-yt-link {
+      padding: 0.28rem 0.4rem;
+    }
+  }
+
   @media (max-width: 380px) {
     .now-playing-badge {
       font-size: 0.5rem;
     }
     .now-playing-title {
       font-size: 0.7rem;
-    }
-    .now-playing-yt-link span {
-      display: none;
     }
   }
 </style>
