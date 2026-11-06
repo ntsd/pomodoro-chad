@@ -12,9 +12,9 @@
       <span class="tab-dot"></span>
       <span>SHORT BREAK</span>
     </button>
-    <button class="mode-tab" data-mode="long_break" id="tab-long-break" role="tab" aria-selected="false" aria-label="Touch Grass Long Break mode">
+    <button class="mode-tab" data-mode="long_break" id="tab-long-break" role="tab" aria-selected="false" aria-label="Long Break mode">
       <span class="tab-dot"></span>
-      <span>TOUCH GRASS</span>
+      <span>LONG BREAK</span>
     </button>
   </div>
 
@@ -97,24 +97,14 @@
     </div>
   </div>
 
-  <!-- Interactive Soundboard & Grass Counter Trigger Section -->
+  <!-- Interactive Soundboard -->
   <div class="chad-interactive-actions">
-    <!-- Touch Grass Button -->
-    <button class="btn-grass" id="btn-touch-grass" title="Click to log that you touched physical grass!" aria-label="Log that you touched physical grass">
-      <span class="btn-grass-icon">🌱</span>
-      <div class="btn-grass-text">
-        <span class="btn-grass-title">I TOUCHED GRASS</span>
-        <span class="btn-grass-meta">EARN CHAD REP</span>
-      </div>
-      <span class="grass-count-badge" id="grass-count-display">0</span>
-    </button>
-
     <!-- Instant Motivation Soundboard -->
-    <button class="btn-secondary btn-motivation" id="btn-instant-motivation" title="Instant Stoic Chad Motivation" aria-label="Play instant GigaChad stoic motivation voice line">
+    <button class="btn-secondary btn-motivation" id="btn-instant-motivation" title="Instant Stoic Chad Motivation (Shortkey: M)" aria-label="Play instant GigaChad stoic motivation voice line">
       <span class="motivation-icon">⚡</span>
       <div class="motivation-text">
         <span class="motivation-title">INSTANT MOTIVATION</span>
-        <span class="motivation-meta">VOICE VAULT CLIP</span>
+        <span class="motivation-meta">VOICE VAULT CLIP (KEY: M)</span>
       </div>
     </button>
   </div>
@@ -306,56 +296,34 @@
     gap: 0.4rem;
   }
 
-  /* Interactive Soundboard & Grass Counter Trigger Section */
+  /* Interactive Soundboard Section */
   .chad-interactive-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0.85rem;
     width: 100%;
     max-width: 520px;
     margin-top: 0.5rem;
   }
 
-  .btn-grass {
-    cursor: pointer;
-    justify-content: space-between;
-    padding: 0.85rem 1rem;
-    border-radius: var(--radius-md);
-  }
-
-  .btn-grass-icon {
-    font-size: 1.5rem;
-  }
-
-  .btn-grass-text, .motivation-text {
+  .motivation-text {
     display: flex;
     flex-direction: column;
     text-align: left;
   }
 
-  .btn-grass-title, .motivation-title {
+  .motivation-title {
     font-size: 0.82rem;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: 0.04em;
   }
 
-  .btn-grass-meta, .motivation-meta {
+  .motivation-meta {
     font-size: 0.65rem;
     font-weight: 700;
     opacity: 0.8;
     letter-spacing: 0.05em;
-  }
-
-  .grass-count-badge {
-    background: #032014;
-    color: var(--emerald-bright);
-    font-size: 0.85rem;
-    font-weight: 900;
-    padding: 0.25rem 0.65rem;
-    border-radius: 999px;
-    border: 1px solid rgba(52, 211, 153, 0.4);
-    box-shadow: inset 0 0 8px rgba(16, 185, 129, 0.4);
   }
 
   .btn-motivation {
@@ -402,7 +370,7 @@
       gap: 0.65rem;
     }
 
-    .btn-grass, .btn-motivation {
+    .btn-motivation {
       padding: 0.75rem 0.85rem;
     }
 

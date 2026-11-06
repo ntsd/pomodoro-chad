@@ -1,13 +1,13 @@
 {
-  "name": "Chadodoro WebMCP",
+  "name": "Chadmodoro WebMCP",
   "version": "1.0.0",
-  "description": "Browser-native Model Context Protocol tools for Chadodoro Pomodoro and Touch Grass app",
+  "description": "Browser-native Model Context Protocol tools for Chadmodoro Pomodoro app",
   "homepage_url": "https://chadodoro.ntsd.dev/",
   "documentation_url": "https://chadodoro.ntsd.dev/llms.txt",
   "tools": [
     {
       "name": "getTimerState",
-      "description": "Returns the current status of Chadodoro: mode, remaining seconds, running state, and grass counter",
+      "description": "Returns the current status of Chadmodoro: mode, remaining seconds, running state, and cycles completed",
       "parameters": {
         "type": "object",
         "properties": {}
@@ -58,14 +58,6 @@
           }
         },
         "required": ["mode"]
-      }
-    },
-    {
-      "name": "touchGrass",
-      "description": "Logs that the user stepped outside and touched physical grass, incrementing the counter and triggering celebratory effects",
-      "parameters": {
-        "type": "object",
-        "properties": {}
       }
     },
     {

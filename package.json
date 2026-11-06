@@ -2,7 +2,7 @@
   "name": "pomodoro-chad",
   "type": "module",
   "version": "1.0.0",
-  "description": "Chadodoro (pomodoro-chad) - GigaChad Pomodoro with Git Voice Vault & Touch Grass Theme",
+  "description": "Chadmodoro (pomodoro-chad) - GigaChad Pomodoro with Git Voice Vault",
   "scripts": {
     "dev": "astro dev --host",
     "start": "astro dev",

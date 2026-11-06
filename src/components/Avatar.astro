@@ -194,7 +194,7 @@
       </svg>
     </div>
 
-    <!-- State 3: Touch Grass Mode ("Touch Grass" Outdoors In Sunny Meadow) -->
+    <!-- State 3: Long Break Mode (Chad Outdoor Deep Recovery) -->
     <div class="avatar-state state-long-break" id="avatar-long-break">
       <svg class="avatar-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -204,7 +204,7 @@
             <stop offset="70%" stop-color="#bae6fd" />
             <stop offset="100%" stop-color="#d9f99d" />
           </linearGradient>
-          <linearGradient id="grassHills" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id="outdoorHills" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#10b981" />
             <stop offset="50%" stop-color="#059669" />
             <stop offset="100%" stop-color="#047857" />
@@ -227,11 +227,11 @@
         <path d="M 40 70 C 40 60, 55 50, 70 55 C 80 45, 105 45, 115 58 C 130 55, 145 65, 140 75 Z" fill="#ffffff" opacity="0.85" />
         <path d="M 180 90 C 180 82, 195 76, 205 80 C 215 72, 235 74, 240 84 C 250 82, 260 90, 255 96 Z" fill="#ffffff" opacity="0.75" />
 
-        <!-- Lush Green Meadow Hills -->
+        <!-- Rolling Mountain & Horizon Hills -->
         <path d="M 0 200 Q 120 170 320 210 L 320 320 L 0 320 Z" fill="#34d399" opacity="0.6" />
-        <path d="M 0 225 Q 160 195 320 235 L 320 320 L 0 320 Z" fill="url(#grassHills)" />
+        <path d="M 0 225 Q 160 195 320 235 L 320 320 L 0 320 Z" fill="url(#outdoorHills)" />
 
-        <!-- Chad Torso in Outdoor Shirtless / Athletic Tank -->
+        <!-- Chad Torso in Outdoor Athletic Tank -->
         <path d="M 60 320 C 65 260, 95 235, 125 225 C 145 220, 175 220, 195 225 C 225 235, 255 260, 260 320 Z" fill="#d97706" opacity="0.2" />
         <path d="M 75 320 C 80 270, 105 245, 130 235 L 190 235 C 215 245, 240 270, 245 320 Z" fill="#0f172a" />
 
@@ -258,35 +258,21 @@
         <line x1="127" y1="116" x2="142" y2="130" stroke="#fef08a" stroke-width="2" opacity="0.8" />
         <line x1="173" y1="116" x2="188" y2="130" stroke="#fef08a" stroke-width="2" opacity="0.8" />
 
-        <!-- Chad's Hand Touching Real Physical Grass In Foreground -->
-        <!-- Blades of Grass -->
-        <g stroke="#059669" stroke-width="3" stroke-linecap="round">
-          <path d="M 30 320 Q 40 260 25 230" />
-          <path d="M 45 320 Q 60 250 80 220" stroke="#10b981" stroke-width="4" />
-          <path d="M 65 320 Q 85 270 70 235" />
-          <path d="M 90 320 Q 110 260 135 240" stroke="#34d399" stroke-width="3" />
-          <path d="M 180 320 Q 200 270 230 245" stroke="#10b981" stroke-width="4" />
-          <path d="M 210 320 Q 230 255 260 225" stroke="#34d399" stroke-width="3" />
-          <path d="M 245 320 Q 270 265 295 235" />
-          <path d="M 275 320 Q 295 260 305 240" stroke="#059669" stroke-width="4" />
-        </g>
-        
-        <!-- Chad Hand gently caressing physical grass -->
-        <path d="M 120 320 C 120 280, 140 260, 165 265 C 175 270, 180 285, 175 320 Z" fill="#fcd34d" stroke="#b45309" stroke-width="2" />
-        <!-- Fingers caressing grass blade -->
-        <path d="M 150 265 Q 165 245 170 255" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" />
-        <path d="M 158 268 Q 175 250 178 260" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Outdoor Terrace Balcony Rail -->
+        <line x1="0" y1="260" x2="320" y2="260" stroke="#047857" stroke-width="3" opacity="0.8" />
+        <line x1="40" y1="260" x2="40" y2="320" stroke="#065f46" stroke-width="2.5" opacity="0.7" />
+        <line x1="100" y1="260" x2="100" y2="320" stroke="#065f46" stroke-width="2.5" opacity="0.7" />
+        <line x1="220" y1="260" x2="220" y2="320" stroke="#065f46" stroke-width="2.5" opacity="0.7" />
+        <line x1="280" y1="260" x2="280" y2="320" stroke="#065f46" stroke-width="2.5" opacity="0.7" />
 
-        <!-- Floating 4-Leaf Clover / Grass Seeds -->
-        <circle cx="85" cy="205" r="4" fill="#10b981" />
-        <circle cx="92" cy="202" r="4" fill="#34d399" />
-        <circle cx="88" cy="198" r="4" fill="#10b981" />
-        <circle cx="235" cy="210" r="3" fill="#fef08a" />
-        <circle cx="250" cy="195" r="2.5" fill="#fef08a" />
+        <!-- Sunlight motes -->
+        <circle cx="85" cy="180" r="3" fill="#fef08a" opacity="0.6" />
+        <circle cx="235" cy="170" r="2.5" fill="#fef08a" opacity="0.7" />
+        <circle cx="250" cy="195" r="2" fill="#fef08a" opacity="0.5" />
 
         <!-- Status watermark -->
-        <rect x="65" y="275" width="190" height="28" rx="14" fill="#047857" stroke="#34d399" stroke-width="1.5" />
-        <text x="160" y="293" fill="#ffffff" font-size="11" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle" letter-spacing="2">TOUCHING GRASS 🌿</text>
+        <rect x="55" y="275" width="210" height="28" rx="14" fill="#065f46" stroke="#10b981" stroke-width="1.5" />
+        <text x="160" y="293" fill="#ffffff" font-size="11" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle" letter-spacing="2">LONG BREAK // RECOVERY 👑</text>
       </svg>
     </div>
   </div>

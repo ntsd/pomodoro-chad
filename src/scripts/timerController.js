@@ -1,11 +1,11 @@
 // src/scripts/timerController.js
 /**
- * Chadodoro Client Controller
+ * Chadmodoro Client Controller
  * Manages Pomodoro countdown, Git Voice Vault playback, Avatar reactive states,
- * Grass-touched tracker, and Web Speech API baritone fallback.
+ * and Web Speech API baritone fallback.
  */
 
-class ChadodoroController {
+class ChadmodoroController {
   constructor() {
     this.manifest = null;
     this.audioPlayer = new Audio();
@@ -44,7 +44,6 @@ class ChadodoroController {
     this.totalDuration = this.timeRemaining;
     this.timerInterval = null;
     this.cyclesCompleted = 0;
-    this.grassCount = 0;
 
     this.init();
   }
@@ -58,7 +57,7 @@ class ChadodoroController {
     this.applySettingsToUI();
     this.updateDisplay();
     this.updateAvatarState();
-    this.updateGrassDisplay();
+    this.updateCyclesDisplay();
     this.updateVoiceUI();
     this.updateBgmVolume();
     this.updateBgmUI();
@@ -75,13 +74,12 @@ class ChadodoroController {
     const tools = [
       {
         name: 'getTimerState',
-        description: 'Returns the current state of Chadodoro: mode, remaining seconds, isRunning, cyclesCompleted, and grassCount.',
+        description: 'Returns the current state of Chadmodoro: mode, remaining seconds, isRunning, and cyclesCompleted.',
         handler: () => ({
           mode: this.mode,
           remainingSeconds: this.timeRemaining,
           formattedTime: this.formatTime(this.timeRemaining),
           isRunning: this.isRunning,
-          grassCount: this.grassCount,
           cyclesCompleted: this.cyclesCompleted,
           voiceEnabled: this.settings.voiceEnabled,
           bgmEnabled: this.settings.bgmEnabled,
@@ -130,14 +128,6 @@ class ChadodoroController {
             return { success: true, mode: this.mode };
           }
           return { success: false, error: 'Invalid mode. Use focus, break, or long_break.' };
-        }
-      },
-      {
-        name: 'touchGrass',
-        description: 'Increments the real-world grass counter and triggers reward sound and confetti.',
-        handler: () => {
-          this.handleTouchGrass();
-          return { success: true, grassCount: this.grassCount };
         }
       },
       {
@@ -205,10 +195,6 @@ class ChadodoroController {
           this.settings.anthemSource = 'vault_only';
         }
       }
-      const savedGrass = localStorage.getItem('chad_grass_touched');
-      if (savedGrass) {
-        this.grassCount = parseInt(savedGrass, 10) || 0;
-      }
       const savedCycles = localStorage.getItem('chad_cycles');
       if (savedCycles) {
         this.cyclesCompleted = parseInt(savedCycles, 10) || 0;
@@ -221,7 +207,6 @@ class ChadodoroController {
   saveStorage() {
     try {
       localStorage.setItem('chad_settings', JSON.stringify(this.settings));
-      localStorage.setItem('chad_grass_touched', this.grassCount.toString());
       localStorage.setItem('chad_cycles', this.cyclesCompleted.toString());
     } catch (e) {
       console.warn("Storage save error:", e);
@@ -282,11 +267,7 @@ class ChadodoroController {
     this.domQuoteVoiceTag = document.getElementById('quote-voice-tag');
     this.domBtnReplay = document.getElementById('btn-quote-replay');
 
-    // Grass & Motivation
-    this.domBtnGrass = document.getElementById('btn-touch-grass');
-    this.domGrassDisplay = document.getElementById('grass-count-display');
-    this.domSettingsGrassCount = document.getElementById('settings-grass-count');
-    this.domHeaderGrassCount = document.getElementById('header-grass-count');
+    // Soundboard & Motivation
     this.domBtnMotivation = document.getElementById('btn-instant-motivation');
 
     // Settings Modal DOM
@@ -297,7 +278,8 @@ class ChadodoroController {
     this.domSettingsForm = document.getElementById('settings-form');
     this.domInputVolume = document.getElementById('setting-volume');
     this.domVolumeValDisplay = document.getElementById('volume-val-display');
-    this.domBtnResetGrass = document.getElementById('btn-reset-grass');
+    this.domSettingsCyclesCount = document.getElementById('settings-cycles-count');
+    this.domBtnResetCycles = document.getElementById('btn-reset-cycles');
 
     // BGM & Voice Controls DOM
     this.domBtnToggleVoice = document.getElementById('btn-toggle-voice');
@@ -333,8 +315,7 @@ class ChadodoroController {
     // Replay Voice
     if (this.domBtnReplay) this.domBtnReplay.addEventListener('click', () => this.replayCurrentClip());
 
-    // Grass & Motivation
-    if (this.domBtnGrass) this.domBtnGrass.addEventListener('click', (e) => this.handleTouchGrass(e));
+    // Instant Motivation Soundboard
     if (this.domBtnMotivation) this.domBtnMotivation.addEventListener('click', () => this.handleInstantMotivation());
 
     // Audio Toggles
@@ -378,12 +359,12 @@ class ChadodoroController {
       });
     }
 
-    if (this.domBtnResetGrass) {
-      this.domBtnResetGrass.addEventListener('click', () => {
-        this.grassCount = 0;
+    if (this.domBtnResetCycles) {
+      this.domBtnResetCycles.addEventListener('click', () => {
+        this.cyclesCompleted = 0;
         this.saveStorage();
-        this.updateGrassDisplay();
-        if (this.domSettingsGrassCount) this.domSettingsGrassCount.textContent = '0';
+        this.updateDisplay();
+        this.updateCyclesDisplay();
       });
     }
 
@@ -401,8 +382,6 @@ class ChadodoroController {
         this.skipPhase();
       } else if (e.code === 'KeyM') {
         this.handleInstantMotivation();
-      } else if (e.code === 'KeyG') {
-        this.handleTouchGrass();
       } else if (e.code === 'KeyV') {
         this.toggleVoice();
       } else if (e.code === 'KeyB') {
@@ -596,7 +575,7 @@ class ChadodoroController {
         this.domModeTag.textContent = 'SHORT BREAK // QUICK RESET';
         this.domModeTag.style.color = '#fde047';
       } else {
-        this.domModeTag.textContent = 'TOUCH GRASS // RADICAL RECOVERY';
+        this.domModeTag.textContent = 'LONG BREAK // DEEP RECOVERY';
         this.domModeTag.style.color = 'var(--emerald-bright)';
       }
     }
@@ -625,10 +604,10 @@ class ChadodoroController {
     if (this.mode === 'break') {
       modeLabel = 'Short Break ☕';
     } else if (this.mode === 'long_break') {
-      modeLabel = 'Touch Grass 🌿';
+      modeLabel = 'Long Break 👑';
     }
     const stateIcon = this.isRunning ? '▶' : '⏸';
-    document.title = `${stateIcon} (${timeStr}) Chadodoro - ${modeLabel}`;
+    document.title = `${stateIcon} (${timeStr}) Chadmodoro - ${modeLabel}`;
   }
 
   updateToggleBtnUI() {
@@ -643,7 +622,7 @@ class ChadodoroController {
         if (this.mode === 'focus') {
           this.domToggleLabel.textContent = 'LOCK IN NOW';
         } else if (this.mode === 'long_break') {
-          this.domToggleLabel.textContent = 'TOUCH GRASS NOW';
+          this.domToggleLabel.textContent = 'START LONG BREAK';
         } else {
           this.domToggleLabel.textContent = 'START BREAK';
         }
@@ -752,7 +731,7 @@ class ChadodoroController {
     const defaultLines = {
       START_FOCUS: "Lock in, King. The world belongs to those who conquer distraction.",
       SHORT_BREAK: "Take five, Champion. Hydrate with cold water and reset your vision.",
-      LONG_BREAK: "Step away and touch physical grass, Brother. Walk outside under the open sky.",
+      LONG_BREAK: "Step away and recover, Champion. Rest your mind, honor your recovery.",
       CHAD_MOTIVATION: "Discipline equals freedom, Champion. Embrace the grind."
     };
     const text = defaultLines[category] || "Lock in, King.";
@@ -773,7 +752,7 @@ class ChadodoroController {
   }
 
   updateQuoteAudioSourceUI() {
-    // quote-vault-source was removed from CHADODORO COACH card; anthem status is displayed in Now Playing banner
+    // quote-vault-source was removed from CHADMODORO COACH card; anthem status is displayed in Now Playing banner
   }
 
   setSpeakingState(isSpeaking) {
@@ -1232,59 +1211,10 @@ class ChadodoroController {
     window.speechSynthesis.speak(utterance);
   }
 
-  handleTouchGrass(event) {
-    this.grassCount++;
-    this.saveStorage();
-    this.updateGrassDisplay();
-
-    // Spawn floating grass confetti / particles
-    this.spawnGrassParticles(event);
-
-    // Audio cue / haptic feedback
-    this.playGrassChime();
-  }
-
-  spawnGrassParticles(event) {
-    const originX = event ? event.clientX : window.innerWidth / 2;
-    const originY = event ? event.clientY : window.innerHeight / 2;
-    const particles = ['🌱', '🌿', '🍀', '✨', '☀️'];
-
-    for (let i = 0; i < 8; i++) {
-      const el = document.createElement('span');
-      el.className = 'floating-grass-particle';
-      el.textContent = particles[Math.floor(Math.random() * particles.length)];
-      el.style.left = `${originX + (Math.random() * 80 - 40)}px`;
-      el.style.top = `${originY + (Math.random() * 40 - 20)}px`;
-      el.style.fontSize = `${1.2 + Math.random() * 0.8}rem`;
-      document.body.appendChild(el);
-
-      setTimeout(() => el.remove(), 1800);
+  updateCyclesDisplay() {
+    if (this.domSettingsCyclesCount) {
+      this.domSettingsCyclesCount.textContent = this.cyclesCompleted;
     }
-  }
-
-  playGrassChime() {
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-      osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.15); // E5
-      gain.gain.setValueAtTime(0.15, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.35);
-    } catch (e) {
-      // AudioContext not allowed or not supported
-    }
-  }
-
-  updateGrassDisplay() {
-    if (this.domGrassDisplay) this.domGrassDisplay.textContent = this.grassCount;
-    if (this.domHeaderGrassCount) this.domHeaderGrassCount.textContent = this.grassCount;
-    if (this.domSettingsGrassCount) this.domSettingsGrassCount.textContent = this.grassCount;
   }
 
   openSettings() {
@@ -1374,6 +1304,7 @@ class ChadodoroController {
 // Instantiate on DOM load
 if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', () => {
-    window.chadodoro = new ChadodoroController();
+    window.chadmodoro = new ChadmodoroController();
+    window.chadodoro = window.chadmodoro;
   });
 }

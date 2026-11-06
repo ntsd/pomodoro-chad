@@ -7,7 +7,7 @@ Synthesizes high-energy, royalty-free instrumental loops inspired by viral meme 
 - Focus 03: Kordhell - Murder In My Mind (Aggressive Workout Phonk)
 - Break 01: Home - Resonance (Sunlit Meadow Sunset Chillwave)
 - Break 02: Kevin MacLeod - Carefree / Elevator Meme (Outdoor Oxygen Lo-Fi)
-- Break 03: Chillstep Grass Serenade (Peaceful Ambient Lo-Fi)
+- Break 03: Chillstep Meadow Serenade (Peaceful Ambient Lo-Fi)
 - Long Break 01: Titan Outdoor Walk & Hydration (Ambient Earth Drone)
 - Long Break 02: Forest Canopy Reverie (Lush Nature Lo-Fi)
 - Motivation 01: g3ox_em & Hensonn - Warrior Ascendance Phonk
@@ -103,7 +103,7 @@ THEME_SPECS = [
         "description": "Relentless 136 BPM aggressive gym phonk beat engineered for deep focus tunnel vision and PR crushing sessions."
     },
 
-    # --- BREAK THEMES (TOUCH GRASS) ---
+    # --- BREAK THEMES (RECOVERY) ---
     {
         "id": "theme_break_01",
         "category": "break",
@@ -122,7 +122,7 @@ THEME_SPECS = [
         ],
         "style": "home_resonance",
         "license": "Royalty-Free Procedural Parody / Public Domain Tribute",
-        "description": "Nostalgic, warm chillwave pads inspired by Home's Resonance, providing a calming sonic backdrop to step outside and touch physical grass."
+        "description": "Nostalgic, warm chillwave pads inspired by Home's Resonance, providing a calming sonic backdrop to step away and recharge like a champion."
     },
     {
         "id": "theme_break_02",
@@ -149,7 +149,7 @@ THEME_SPECS = [
         "category": "break",
         "title": "Breeze of the Meadow (Chillstep Pulse)",
         "meme_reference": "Meadow Breeze Ambient Lo-Fi",
-        "original_artist_reference": "Chadodoro Originals",
+        "original_artist_reference": "Chadmodoro Originals",
         "bpm": 100,
         "duration": 14.4,
         "key": "D major",
@@ -171,7 +171,7 @@ THEME_SPECS = [
         "category": "long_break",
         "title": "Titan Outdoor Walk & Hydration",
         "meme_reference": "Open Sky March & Nature Reverie",
-        "original_artist_reference": "Chadodoro Originals",
+        "original_artist_reference": "Chadmodoro Originals",
         "bpm": 92,
         "duration": 15.6,
         "key": "A minor",
@@ -191,7 +191,7 @@ THEME_SPECS = [
         "category": "long_break",
         "title": "Forest Canopy Reverie (Lush Lo-Fi)",
         "meme_reference": "Forest Lo-Fi Girl / Sunlight Walk",
-        "original_artist_reference": "Chadodoro Originals",
+        "original_artist_reference": "Chadmodoro Originals",
         "bpm": 86,
         "duration": 16.7,
         "key": "G major",

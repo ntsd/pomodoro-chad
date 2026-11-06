@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = "Chadodoro (pomodoro-chad) | GigaChad Pomodoro + Touch Grass Audio Vault",
-  description = "Lock in for deep work and violently touch grass when time is up. Powered by google/gemma-4-26B-A4B-it, ElevenLabs Baritone Audio Vault, and Astro static site for Hacktoberfest 2026."
+  title = "Chadmodoro (pomodoro-chad) | The Uncompromising GigaChad Pomodoro",
+  description = "Lock in for deep work and recover like a champion. Powered by google/gemma-4-26B-A4B-it, ElevenLabs Baritone Audio Vault, and Astro static site."
 } = Astro.props;
 ---
 
@@ -32,7 +32,7 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="ntsd" />
-    <meta name="keywords" content="pomodoro, gigachad, touch grass, hacktoberfest 2026, astro, render, elevenlabs, gemma-4-26b, ai voice vault, productivity" />
+    <meta name="keywords" content="pomodoro, gigachad, chadmodoro, productivity, focus timer, elevenlabs, gemma-4-26b, ai voice vault, deep work" />
 
     <!-- AI Agentic Browsing & WebMCP Discovery Standards -->
     <link rel="describedby" href="/llms.txt" type="text/plain" title="Guidance for AI agents" />
@@ -55,7 +55,7 @@ const {
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Chadodoro",
+        "name": "Chadmodoro",
         "url": "https://chadodoro.ntsd.dev/",
         "description": "The Uncompromising GigaChad Pomodoro + Zero-Latency Git Voice Vault",
         "applicationCategory": "ProductivityApplication",
@@ -77,25 +77,23 @@ const {
         <a href="/" class="brand-link">
           <div class="brand-icon-wrap">
             <svg viewBox="0 0 64 64" width="32" height="32">
-              <circle cx="32" cy="32" r="30" fill="#121824" stroke="#10b981" stroke-width="3" />
-              <path d="M 28 44 C 27 34, 21 27, 18 25 C 23 29, 29 36, 30 44 Z" fill="#10b981" />
-              <path d="M 32 44 C 32 30, 32 20, 32 16 C 35 22, 35 34, 34 44 Z" fill="#34d399" />
-              <polygon points="24,20 28,24 32,18 36,24 40,20 38,26 26,26" fill="#f59e0b" />
+              <circle cx="32" cy="32" r="30" fill="#121824" stroke="#10b981" stroke-width="2.5" />
+              <circle cx="32" cy="32" r="23" fill="none" stroke="#1f293d" stroke-width="3" />
+              <path d="M 32 9 A 23 23 0 1 1 15 48" fill="none" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" />
+              <rect x="29" y="3" width="6" height="4" rx="1.5" fill="#f59e0b" />
+              <path d="M 18 38 L 20 25 L 26 31 L 32 20 L 38 31 L 44 25 L 46 38 Z" fill="#f59e0b" stroke="#b45309" stroke-width="1" stroke-linejoin="round" />
+              <rect x="18" y="38" width="28" height="5" rx="1.5" fill="#d97706" />
+              <circle cx="32" cy="40.5" r="1.5" fill="#34d399" />
             </svg>
           </div>
           <div class="brand-text">
-            <span class="brand-title">CHADODORO</span>
-            <span class="brand-subtitle">TOUCH GRASS EDITION</span>
+            <span class="brand-title">CHADMODORO</span>
+            <span class="brand-subtitle">GIGACHAD EDITION</span>
           </div>
         </a>
 
         <!-- Header Status & Stats -->
         <div class="header-actions">
-          <!-- Hacktoberfest Badge -->
-          <div class="hacktoberfest-pill" title="Hacktoberfest 2026 Open-Source AI Challenge: Week 1">
-            <span class="pill-dot"></span>
-            <span>HACKTOBERFEST '26 // WK 1</span>
-          </div>
 
           <!-- GigaChad Voice Quick Toggle -->
           <button class="btn-icon-header btn-audio-toggle btn-voice-toggle active" id="btn-toggle-voice" title="Toggle GigaChad Voice Coach (Shortkey: V)" aria-label="Toggle GigaChad Voice Coach">
@@ -157,7 +155,7 @@ const {
         </div>
 
         <div class="footer-right">
-          <span class="footer-copy">Hacktoberfest 2026 Week 1 Challenge</span>
+          <span class="footer-copy">Chadmodoro • Discipline Equals Freedom</span>
         </div>
       </div>
     </footer>
@@ -229,29 +227,6 @@ const {
     align-items: center;
     gap: 0.85rem;
   }
-
-  .hacktoberfest-pill {
-    display: none;
-    align-items: center;
-    gap: 0.45rem;
-    background: rgba(245, 158, 11, 0.1);
-    border: 1px solid rgba(245, 158, 11, 0.25);
-    color: var(--gold-main);
-    padding: 0.35rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-  }
-
-  .pill-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gold-main);
-    box-shadow: 0 0 8px var(--gold-main);
-  }
-
 
   .btn-icon-header {
     background: var(--bg-card);
@@ -378,12 +353,6 @@ const {
 
   .footer-sep {
     color: var(--border-subtle);
-  }
-
-  @media (min-width: 768px) {
-    .hacktoberfest-pill {
-      display: inline-flex;
-    }
   }
 
   @media (max-width: 680px) {

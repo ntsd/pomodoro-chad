@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Chadodoro Git Voice Vault Generator Pipeline
+Chadmodoro Git Voice Vault Generator Pipeline
 Generates coaching transcripts via google/gemma-4-26B-A4B-it and synthesizes
 ultra-commanding GigaChad audio via ElevenLabs with multi-voice ID support.
 Outputs committed static assets to public/vault/scripts and public/vault/audio.
@@ -47,9 +47,9 @@ SCRIPTS_DIR = VAULT_DIR / "scripts"
 AUDIO_DIR = VAULT_DIR / "audio"
 
 SYSTEM_PROMPT = (
-    "You are Chadodoro, an uncompromising, stoic GigaChad productivity and fitness coach. "
+    "You are Chadmodoro, an uncompromising, stoic GigaChad productivity and fitness coach. "
     "Deliver 1 to 2 punchy, commanding sentences. Address the user as 'King', 'Champion', or 'Brother'. "
-    "Focus on discipline, stoicism, and radical outdoor screen breaks ('touch grass'). "
+    "Focus on discipline, stoicism, and intentional recovery breaks. "
     "Keep it purely in-character without mentioning AI models or hardware."
 )
 
@@ -70,7 +70,7 @@ CATEGORY_CONFIG = {
         ]
     },
     "SHORT_BREAK": {
-        "prefix": "break_touch_grass",
+        "prefix": "short_break",
         "description": "Urgent commands to step away from monitors, rest eyes, and hydrate",
         "user_prompt": "Time is up! Order the user urgently to stand up, close their laptop, hydrate with cold water, and take a quick physical reset.",
         "fallback_pool": [
@@ -91,7 +91,7 @@ CATEGORY_CONFIG = {
             "Take the field, King. March outside, let the sun hit your skin, and recharge your vitality for the next war.",
             "Step away for an extended recovery, Champion. Walk outside, clear your mind, and let nature restore your focus.",
             "Time to roam, Brother. Leave the digital cave behind, walk outside, and breathe deeply under the open sky.",
-            "Physical grass is waiting, King. Disconnect completely and absorb the sunlight.",
+            "Outdoor recovery is waiting, King. Disconnect completely and absorb the sunlight.",
             "Great warriors honor their rest. Step outdoors, oxygenate your blood, and reset."
         ]
     },
@@ -277,7 +277,7 @@ def generate_clip(category: str, voice_id: str = None, custom_text: str = None, 
 
     return clip_id
 
-def commit_vault(message: str = "feat(vault): update Chadodoro voice clips"):
+def commit_vault(message: str = "feat(vault): update Chadmodoro voice clips"):
     """Stage and commit vault assets to Git."""
     try:
         subprocess.run(["git", "add", "public/vault"], cwd=BASE_DIR, check=True)
@@ -291,7 +291,7 @@ def commit_vault(message: str = "feat(vault): update Chadodoro voice clips"):
         print(f"❌ Git commit failed: {e}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Chadodoro Voice Vault Generator")
+    parser = argparse.ArgumentParser(description="Chadmodoro Voice Vault Generator")
     parser.add_argument("--category", choices=["all", "START_FOCUS", "SHORT_BREAK", "LONG_BREAK", "CHAD_MOTIVATION"], default="all", help="Category to generate")
     parser.add_argument("--count", type=int, default=1, help="Number of clips per category")
     parser.add_argument("--voice-id", type=str, default=None, help="Explicit ElevenLabs Voice ID override")
@@ -302,7 +302,7 @@ def main():
     categories = [args.category] if args.category != "all" else list(CATEGORY_CONFIG.keys())
     generated_ids = []
 
-    print(f"👑 Chadodoro Voice Vault Generator Starting...")
+    print(f"👑 Chadmodoro Voice Vault Generator Starting...")
     print(f"   Model: {OPENAI_MODEL} @ {OPENAI_BASE_URL}")
     print(f"   GigaChad Voices Configured: {len(VOICE_IDS)}")
     for vid in VOICE_IDS:

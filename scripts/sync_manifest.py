@@ -36,7 +36,7 @@ def sync_manifest():
     else:
         manifest_data = {
             "version": "1.2.0",
-            "description": "Chadodoro Git Voice Vault - Pre-rendered GigaChad audio coaching clips and instrumental themes",
+            "description": "Chadmodoro Git Voice Vault - Pre-rendered GigaChad audio coaching clips and instrumental themes",
             "total_clips": 0,
             "voice_ids": [],
             "voice_names": {},

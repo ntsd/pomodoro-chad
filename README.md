@@ -1,28 +1,25 @@
-# 👑 Chadodoro (`pomodoro-chad`)
+# 👑 Chadmodoro (`pomodoro-chad`)
 > **The Uncompromising GigaChad Pomodoro + Zero-Latency Git Voice Vault**  
-> *Hacktoberfest 2026 Open-Source AI Challenge — Week 1: "Touch Grass"*
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ntsd/pomodoro-chad)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-chadodoro.ntsd.dev-10b981?style=flat-square&logo=render&logoColor=white)](https://chadodoro.ntsd.dev/)
-[![DEV Submission](https://img.shields.io/badge/DEV%20Challenge-Touch%20Grass%20Week%201-0a0a0a?style=flat-square&logo=devdotto&logoColor=white)](BLOG_POST.md)
 
 🌐 **Live Production App:** [https://chadodoro.ntsd.dev/](https://chadodoro.ntsd.dev/)  
-📝 **DEV Challenge Write-Up:** [BLOG_POST.md](BLOG_POST.md) (Submission for [Hacktoberfest Week 1: Touch Grass](https://dev.to/challenges/hacktoberfest-week1-2026-10-05))
 
 ---
 
-## 🌿 1. Overview & "Touch Grass" Theme
+## 👑 1. Overview
 
-Modern developers suffer from infinite screen-lock, chronic desk posture, and doom-scrolling. **Chadodoro** cures this with an unapologetic, stoic GigaChad productivity coach.
+Modern developers suffer from infinite screen-lock, chronic desk posture, and doom-scrolling. **Chadmodoro** cures this with an unapologetic, stoic GigaChad productivity coach.
 
 - **Lock In for Deep Work:** Focus sessions demand unbroken discipline. No tabs, no distractions, only execution.
-- **Grass Counter Tracker:** Log each real-world outdoor session with the tactile **"I Touched Grass"** button with haptic chime and floating grass confetti.
+- **Strategic Recovery:** Tactical breaks to hydrate, breathe, and reset your nervous system like a champion.
 
 ---
 
 ## ⚡ 2. Architecture: Zero-Latency Static Git Voice Vault
 
-Traditional AI applications make expensive, high-latency API calls whenever an event triggers. **Chadodoro completely decouples AI generation from user runtime:**
+Traditional AI applications make expensive, high-latency API calls whenever an event triggers. **Chadmodoro completely decouples AI generation from user runtime:**
 
 ```
                   ┌────────────────────────────────────────────────────────┐
@@ -73,18 +70,17 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
 - **Three Distinct Reactive Avatar States:**
   - *Focus Mode (Lock In):* Cyberpunk deep-work GigaChad with neon emerald laser eyes, reticle lines, and focused aura.
   - *Short Break (Hydrate & Rest):* Indoor warm acoustic lounge GigaChad taking a mindful breath, holding a steaming Chad crown ceramic coffee mug with golden ambient lighting.
-  - *Long Break (Touch Grass):* Outdoor sunny meadow GigaChad wearing aviator sunglasses, gently caressing lush green grass stalks.
+  - *Long Break (Deep Recovery):* Majestic outdoor GigaChad wearing aviator sunglasses, recharging under the open sky.
 - **Voice Coach Pre-Synthesized by ElevenLabs:**
   - 16 high-impact coaching lines across `START_FOCUS`, `SHORT_BREAK`, `LONG_BREAK`, and `CHAD_MOTIVATION`.
-  - Replayable on-demand via the **CHADODORO COACH** card.
+  - Replayable on-demand via the **CHADMODORO COACH** card.
 - **Hybrid Anthem BGM Engine (YouTube + Git Vault):**
   - Curated library of 27 viral phonk and motivation tracks on YouTube (including *REVENGE*, *MONTAGEM PEGADORA*, *GigaChad Theme Phonk House*, *MOTIVATION FUNK*, *METAMORPHOSIS*, *DIA DELÍCIA*, *PARA COMEÇAR O FINAL DE SEMANA*, *AURA*, etc.) with precise start timestamps.
-  - **Live Song Attribution & Direct Link:** Both the *Now Playing* banner and the *CHADODORO COACH* card display the active song title with direct links to the YouTube video.
+  - **Live Song Attribution & Direct Link:** Both the *Now Playing* banner and the *CHADMODORO COACH* card display the active song title with direct links to the YouTube video.
   - **30s Burst or Continuous Play:** By default, anthems play for 30s as a high-intensity phase transition, with a **"Keep Song Running"** toggle in Settings for continuous background music.
   - **Anthem Audio Source Selector (Dropdown):** Choose between **Vault Audio Only** (100% ad-free static Git Vault `.mp3` tracks), **Youtube Only** (curated viral phonk & meme tracks), or **Hybrid** (prioritizes YouTube tracks with Git Vault themes as backup).
   - Independent Anthem toggle, volume control, and shuffle per timer phase.
 - **Audio Waveform Visualizer:** Animated speech bars synchronize with coach audio and anthem playback.
-- **"I Touched Grass" Soundboard:** Tactile button increments user grass counter, triggers floating grass/clover confetti, and plays audio feedback.
 - **Instant Motivation Button:** Soundboard trigger for stoic motivation one-liners anytime.
 - **Web Speech API Fallback:** If audio files fail to load or offline, browser synthetic baritone voice takes over.
 - **Customizable Settings Modal:** Configurable focus (default 25m), short break (5m), long break (15m), volume slider, auto-start breaks, keep song running, anthem audio source selector (Vault Only / YouTube Only / Hybrid), and stats reset.
@@ -95,7 +91,6 @@ Traditional AI applications make expensive, high-latency API calls whenever an e
   - <kbd>V</kbd>: Toggle GigaChad Voice Coach
   - <kbd>B</kbd>: Toggle GigaChad Anthem BGM
   - <kbd>M</kbd>: Instant Motivation
-  - <kbd>G</kbd>: I Touched Grass
   - <kbd>Esc</kbd>: Close settings
 
 ---
@@ -113,7 +108,7 @@ pomodoro-chad/
 │   │   └── Layout.astro      # Master layout with header stats & footer
 │   ├── components/
 │   │   ├── Timer.astro       # Circular countdown ring & main controls
-│   │   ├── Avatar.astro      # Three distinct reactive SVG avatars (Focus, Lounge, Touch Grass)
+│   │   ├── Avatar.astro      # Three distinct reactive SVG avatars (Focus, Lounge, Long Break)
 │   │   ├── QuoteDisplay.astro# Coach transcript & audio replay card
 │   │   └── SettingsModal.astro # Durations, volume, and preferences modal
 │   ├── styles/
@@ -128,12 +123,12 @@ pomodoro-chad/
 │   ├── generate_themes.py    # Pure instrumental GigaChad anthems generator
 │   └── sync_manifest.py      # Manifest compiler
 ├── public/
-│   ├── favicon.svg           # Crown & emerald blade SVG favicon
+│   ├── favicon.svg           # Crown & timer ring SVG favicon
 │   └── vault/
 │       ├── manifest.json     # Compiled audio clip & theme registry
 │       ├── scripts/          # Grouped voice coaching folders (<id>/<id>.json & <id>.mp3)
 │       │   ├── focus_001/
-│       │   ├── break_touch_grass_001/
+│       │   ├── short_break_001/
 │       │   ├── long_break_001/
 │       │   └── motivation_001/
 │       └── themes/           # Grouped instrumental meme themes (<id>/<id>.json & <id>.mp3)
@@ -255,18 +250,17 @@ services:
 
 ---
 
-## 🏆 8. Hacktoberfest 2026 Week 1 Challenge Summary
+## 🏆 8. Architecture & Design Principles
 
-| Criterion / Track | Implementation & Technology |
+| Pillar | Implementation & Technology |
 |---|---|
-| **Theme: "Touch Grass"** | Forces outdoor long breaks, 3 reactive avatars (Focus, Lounge Hydrate, Meadow Grass), tactile "I Touched Grass" soundboard counter & clover confetti |
-| **Open-Source AI Core** | Transcripts created with open-weight `google/gemma-4-26B-A4B-it` via self-hosted OpenAI-compatible inference endpoint |
-| **Partner Track: Best Use of ElevenLabs** | 16 high-impact baritone coach clips synthesized via **ElevenLabs** (Adam, Harry, Brian) and baked into zero-latency Git Voice Vault |
-| **Partner Track: Best Use of Render** | Automated 1-click deployment via [`render.yaml`](render.yaml) with custom immutable edge cache headers (`max-age=31536000, immutable`) |
-| **Partner Track: Best Use of Gemma** | Automated voice script generation pipeline utilizing `google/gemma-4-26B-A4B-it` for stoic motivation prompts |
-| **Architecture** | 100% Client-Side Static Astro app with 0ms runtime API latency, 0 runtime keys, 0 API costs |
-| **Submission Write-Up** | Full DEV post available at [`BLOG_POST.md`](BLOG_POST.md) |
+| **Zero-Latency Git Voice Vault** | 24 high-impact baritone coach clips and instrumental anthems committed directly to Git under `public/vault/`, served with 0ms runtime API latency |
+| **Open-Weight AI Pipeline** | Offline voice script synthesis powered by `google/gemma-4-26B-A4B-it` via self-hosted inference cluster |
+| **Voice Synthesis** | Studio-grade baritone voice lines synthesized via **ElevenLabs** (Adam, Harry, Brian) |
+| **Edge-Cached Delivery** | Automated 1-click deployment via [`render.yaml`](render.yaml) with custom immutable edge cache headers (`max-age=31536000, immutable`) |
+| **Autonomous Agent Ready** | Fully standards-compliant Agentic Resource Discovery (`llms.txt`, ARD `ard.json`, WebMCP `webmcp.json`) for AI agent pairing |
+| **Privacy & Self-Sovereignty** | 100% Client-Side Static Astro app; all timer data and user settings live in browser `localStorage` with zero telemetry |
 
 ---
 
-*“Discipline equals freedom, King. Step outside and touch physical grass.”* 👑🌱
+*“Discipline equals freedom, King. Conquer your distractions and dominate your craft.”* 👑⚡
