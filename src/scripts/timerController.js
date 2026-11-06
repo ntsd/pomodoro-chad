@@ -637,11 +637,11 @@ class ChadmodoroController {
 
     if (this.domAvatarGlow) {
       if (this.mode === 'focus') {
-        this.domAvatarGlow.style.background = 'radial-gradient(circle, var(--emerald-glow-strong) 0%, rgba(16, 185, 129, 0) 70%)';
+        this.domAvatarGlow.style.borderColor = 'rgba(16, 185, 129, 0.4)';
       } else if (this.mode === 'break') {
-        this.domAvatarGlow.style.background = 'radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(245, 158, 11, 0) 70%)';
+        this.domAvatarGlow.style.borderColor = 'rgba(245, 158, 11, 0.4)';
       } else {
-        this.domAvatarGlow.style.background = 'radial-gradient(circle, rgba(52, 211, 153, 0.55) 0%, rgba(16, 185, 129, 0) 70%)';
+        this.domAvatarGlow.style.borderColor = 'rgba(56, 189, 248, 0.4)';
       }
     }
   }

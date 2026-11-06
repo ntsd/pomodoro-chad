@@ -121,9 +121,9 @@
   }
 
   .ai-tag {
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.18rem 0.42rem;
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
     background: var(--bg-surface);
     color: var(--text-sub);
@@ -183,7 +183,8 @@
     height: 100%;
     background: #ef4444;
     border-radius: 2px;
-    animation: waveBounce 1.2s ease-in-out infinite;
+    transform-origin: bottom;
+    animation: wavePulse 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
   }
 
   .m-bar:nth-child(1) { animation-delay: 0s; height: 40%; }
@@ -195,7 +196,7 @@
     background: var(--emerald-bright);
   }
 
-  @keyframes waveBounce {
+  @keyframes wavePulse {
     0%, 100% { transform: scaleY(0.35); }
     50% { transform: scaleY(1); }
   }
@@ -209,7 +210,7 @@
   }
 
   .now-playing-badge {
-    font-size: 0.58rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.08em;
     color: #f87171;
@@ -301,9 +302,9 @@
     background: rgba(239, 68, 68, 0.14);
     border: 1px solid rgba(239, 68, 68, 0.35);
     color: #fca5a5;
-    padding: 0.3rem 0.55rem;
+    padding: 0.35rem 0.65rem;
     border-radius: var(--radius-sm);
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-decoration: none;
@@ -335,7 +336,7 @@
       padding: 0.85rem 0.8rem;
     }
     .quote-text {
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       padding-left: 0.7rem;
     }
     .quote-footer {
@@ -343,22 +344,22 @@
       gap: 0.4rem;
     }
     .now-playing-banner {
-      padding: 0.45rem 0.65rem;
-      gap: 0.45rem;
+      padding: 0.5rem 0.7rem;
+      gap: 0.5rem;
       margin-top: 0.5rem;
     }
     .now-playing-left {
-      gap: 0.45rem;
+      gap: 0.5rem;
     }
     .now-playing-badge {
-      font-size: 0.54rem;
+      font-size: 0.75rem;
     }
     .now-playing-title {
-      font-size: 0.74rem;
+      font-size: 0.8rem;
     }
     .now-playing-yt-link {
-      padding: 0.25rem 0.45rem;
-      font-size: 0.62rem;
+      padding: 0.3rem 0.55rem;
+      font-size: 0.75rem;
       gap: 0.25rem;
     }
   }
@@ -368,16 +369,16 @@
       display: none;
     }
     .now-playing-yt-link {
-      padding: 0.28rem 0.4rem;
+      padding: 0.3rem 0.45rem;
     }
   }
 
   @media (max-width: 380px) {
     .now-playing-badge {
-      font-size: 0.5rem;
+      font-size: 0.75rem;
     }
     .now-playing-title {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
     }
   }
 </style>

@@ -167,7 +167,6 @@
 
   .mode-tab.active .tab-dot {
     background: var(--emerald-bright);
-    box-shadow: 0 0 8px var(--emerald-bright);
   }
 
   /* Timer Display Ring */
@@ -200,7 +199,6 @@
     stroke-dasharray: 753.98; /* 2 * PI * 120 */
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 0.8s linear, stroke 0.4s ease;
-    filter: drop-shadow(0 0 8px var(--emerald-glow-strong));
   }
 
   .timer-center-content {
@@ -214,7 +212,7 @@
   }
 
   .timer-mode-tag {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -226,10 +224,10 @@
     font-family: var(--font-mono);
     font-size: 4.2rem;
     font-weight: 800;
+    font-variant-numeric: tabular-nums;
     color: var(--text-main);
     letter-spacing: -0.04em;
     line-height: 1;
-    text-shadow: 0 0 30px rgba(16, 185, 129, 0.25);
   }
 
   .cycle-dots-wrap {
@@ -251,11 +249,10 @@
   .cycle-dot.filled {
     background: var(--emerald-main);
     border-color: var(--emerald-bright);
-    box-shadow: 0 0 10px var(--emerald-glow-strong);
   }
 
   .cycle-text {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: var(--text-muted);
@@ -320,7 +317,7 @@
   }
 
   .motivation-meta {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
     font-weight: 700;
     opacity: 0.8;
     letter-spacing: 0.05em;
@@ -338,7 +335,7 @@
 
   .btn-motivation:hover {
     border-color: rgba(245, 158, 11, 0.5);
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   }
 
   .motivation-icon {
@@ -360,7 +357,7 @@
 
     .mode-tab {
       padding: 0.45rem 0.65rem;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       letter-spacing: 0.03em;
       gap: 0.35rem;
     }
@@ -405,7 +402,7 @@
 
     .mode-tab {
       padding: 0.4rem 0.5rem;
-      font-size: 0.66rem;
+      font-size: 0.75rem;
     }
 
     .timer-display-wrap {
